@@ -25,6 +25,7 @@ import langTr from './tr';
 import langGe from './ge';
 import langKz from './kz';
 import langMn from './mn';
+import langUz from './uz';
 
 const messages = {
 	// 'tw': langTw,
@@ -33,23 +34,24 @@ const messages = {
 	'ar': langAr,
 	'es': langEs,
 	'pt': langPt,
-	'in':langIn,
-	'az':langAz,
-	
-	'bd':langBd,
-	'de':langDe,
-	'fr':langFr,
-	'he':langHe,
-	'it':langIt,
-	'jp':langJp,
-	'kh':langKh,
-	'pl':langPl,
-	'th':langTh,
-	'tr':langTr,
-	
-	'ge':langGe,
-	'kz':langKz,
-	'mn':langMn,
+	'in': langIn,
+	'az': langAz,
+
+	'bd': langBd,
+	'de': langDe,
+	'fr': langFr,
+	'he': langHe,
+	'it': langIt,
+	'jp': langJp,
+	'kh': langKh,
+	'pl': langPl,
+	'th': langTh,
+	'tr': langTr,
+
+	'ge': langGe,
+	'kz': langKz,
+	'mn': langMn,
+	'uz': langUz,
 }
 
 let cur_lang = uni.getStorageSync('lang')
@@ -62,7 +64,7 @@ if (cur_lang == 'ar') {
 
 const i18n = createI18n({
 	globalInjection: true, //全局$t 生效
-	locale: uni.getStorageSync('lang') ||"en" ,
+	locale: uni.getStorageSync('lang') || "en",
 	messages,
 	legacy: false
 })
