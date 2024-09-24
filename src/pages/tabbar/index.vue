@@ -50,7 +50,7 @@
 					</view>
 					<!-- "is_active": 1,  //是否解锁 0.未解锁 1.已解锁 -->
 					<view class="goodsMask center flex-col" :class="!showMask?'animate__animated animate__fadeInUp':''"
-						v-if="item.is_active == 0">
+						v-if="item.is_active == 0" @click="goMask(item)">
 						<view class="center flex-col "
 							:class="!showMask?' animate__animated animate__backInDown   ':''">
 							<image src="../../static/themeNum1/index/locked.png" mode="widthFix"
@@ -143,6 +143,9 @@
 	import request from '../../../comm/request.ts';
 	import FullMask from "@/components/fullMask/fullMask";
 	import COUNTRY from "../../../setting.js"
+	import {
+		Toast
+	} from '@nutui/nutui';
 	import {
 		useI18n
 	} from "vue-i18n";
@@ -336,6 +339,30 @@
 				url: "../mine/article?id=" + item.id
 			})
 		}
+	}
+	const goMask= (item) =>{
+		uni.showModal({
+			// title: 'Tips',
+			content: 'Balansni ochishni tanlash kerakmi?',
+			confirmText: 'Tasdiqlang',
+			cancelText: 'Bekor qilish',
+			success: e => {
+				if (e.confirm) {
+					request({
+						url: 'home/vipUnlock',
+						methods: 'post',
+						data:  {
+							vipId: item.id
+						}
+					}).then(res => {
+						getData()
+					}).catch(err => {
+						Toast.text(err.message)
+					})
+
+				}
+			}
+		});
 	}
 	// 终于可以用了
 	onLoad((e) => {
