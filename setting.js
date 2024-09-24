@@ -4,7 +4,7 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-const dev = 1
+const dev = 2
 let COUNTRY = {}
 
 const countryList = [{
@@ -12,13 +12,16 @@ const countryList = [{
 		themeNum: 1,
 		lang: "en",
 	},
-
 	{
 		url: 'api.u-savdo.com',
 		themeNum: 1,
 		lang: "en",
 		title: "",
 		icon: "/static/logo.jpg"
+	}, {
+		url: 'grab.task678.com',
+		themeNum: 1,
+		lang: "en",
 	},
 
 ]
