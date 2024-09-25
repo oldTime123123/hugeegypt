@@ -21,11 +21,8 @@ import langKh from './kh';
 import langPl from './pl';
 import langTh from './th';
 import langTr from './tr';
-
-import langGe from './ge';
 import langKz from './kz';
 import langMn from './mn';
-import langUz from './uz';
 
 const messages = {
 	// 'tw': langTw,
@@ -34,59 +31,57 @@ const messages = {
 	'ar': langAr,
 	'es': langEs,
 	'pt': langPt,
-	'in': langIn,
-	'az': langAz,
-
-	'bd': langBd,
-	'de': langDe,
-	'fr': langFr,
-	'he': langHe,
-	'it': langIt,
-	'jp': langJp,
-	'kh': langKh,
-	'pl': langPl,
-	'th': langTh,
-	'tr': langTr,
-
-	'ge': langGe,
-	'kz': langKz,
-	'mn': langMn,
-	'uz': langUz,
+	'in':langIn,
+	'az':langAz,
+	
+	'bd':langBd,
+	'de':langDe,
+	'fr':langFr,
+	'he':langHe,
+	'it':langIt,
+	'jp':langJp,
+	'kh':langKh,
+	'pl':langPl,
+	'th':langTh,
+	'tr':langTr,
+	'kz':langKz,
+	'mn':langMn
 }
 
 let cur_lang = uni.getStorageSync('lang')
 
 if (cur_lang == 'ar') {
-	let eles = document.querySelector("html")
-	document.querySelector("html").setAttribute("dir", 'rtl')
+	// let eles = document.querySelector("html")
+	// document.querySelector("html").setAttribute("dir", 'rtl')
 }
 
 
 const i18n = createI18n({
 	globalInjection: true, //全局$t 生效
-	locale: uni.getStorageSync('lang') || "en",
+	locale: uni.getStorageSync('lang') || localStorage.getItem('lang')  || "ar" ,
 	messages,
 	legacy: false
 })
 
-uni.setTabBarItem({
-	index: 0,
-	text: i18n.global.t('tabbar.t_t1')
-})
-uni.setTabBarItem({
-	index: 1,
-	text: i18n.global.t('tabbar.t_t4')
-})
-uni.setTabBarItem({
-	index: 2,
-	text: i18n.global.t('tabbar.t_t3')
-})
-uni.setTabBarItem({
-	index: 3,
-	text: i18n.global.t('tabbar.t_t2')
-})
-uni.setTabBarItem({
-	index: 4,
-	text: i18n.global.t('tabbar.t_t5')
-})
+// uni.setTabBarItem({
+// 	index: 0,
+// 	text: i18n.global.t('tabbar.t_t1')
+// })
+
+// uni.setTabBarItem({
+// 	index: 1,
+// 	text: i18n.global.t('tabbar.t_t3')
+// })
+// uni.setTabBarItem({
+// 	index: 2,
+// 	text: i18n.global.t('add2.a_a1')
+// })
+// uni.setTabBarItem({
+// 	index: 3,
+// 	text: i18n.global.t('add2.a_a2')
+// })
+// uni.setTabBarItem({
+// 	index: 4,
+// 	text: i18n.global.t('tabbar.t_t5')
+// })
 export default i18n

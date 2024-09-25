@@ -1,23 +1,18 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="share">
 
-		<view class="pdlr37 pt33">
+		<view class="pdlr37 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold mglr17" :style="{color:store.$state.thirdColor}">{{t('index.i_a9')}}</view>
-			<view class="mt81 f50 text_center" :style="{color:store.$state.secondColor}">
+			<view class="f50 mt60 text_bold mglr17" style="color: #fff">{{t('index.i_a9')}}</view>
+			<view class="mt81 f50 text_center" :style="{color:'#fff'}">
 					{{t('mine.m_s1')}}
 			</view>
-		<view class="center" v-if="COUNTRY.url == 'aimccann.com'">
-			<view class="mt28 f24 topB" :style="{color:store.$state.thirdColor}">
-				Invite subordinates to get 13% commission income
-			</view>
-		</view>
-		<view class="center" v-else>
-			<view class="mt28 f24 topB" :style="{color:store.$state.thirdColor}">
+		<view class="center">
+			<view class="mt28 f24 topB" :style="{color:'#DE3824',background:'#fff'}">
 				{{t('mine.m_s2')}}
 			</view>
 		</view>
@@ -31,17 +26,13 @@
 				<view class="mt37 f36" :style="{color:store.$state.contentColor}">
 					{{inviteCode}}
 				</view>
-				<!-- <image src="../../static/mine/erweima.png" mode="widthFix" style="width: 400rpx;"></image> -->
+				<!-- <image src="../../static/mine/erweima.png" #1D1D1D mode="widthFix" style="width: 400rpx;"></image> -->
 			</view>
 
-			<view class="btns" @click="copyHandle" :style="{background:store.$state.contentColor}">
+			<view class="btns" @click="copyHandle">
 				{{t('all.a_d1')}}
 			</view>
-			<view class="center">
-				<!-- <image src="../../static/themeNum1/shareB.png"  style="width: 402rpx;height: 341rpx;">
-				</image> -->
-				 <!-- <nut-image src="//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg" width="100" height="100"></nut-image> -->
-			</view>
+		
 			<!-- <view style="height: 50rpx;"></view> -->
 		</view>
 	</view>
@@ -50,7 +41,6 @@
 <script setup>
 	import request from '../../../comm/request.ts';
 	// import clipboardfrom from "/comm/copy.js"
-	import COUNTRY from '../../../setting.js'
 	import useClipboard from 'vue-clipboard3'
 	import {
 		userStore
@@ -74,7 +64,7 @@
 		toClipboard
 	} = useClipboard()
 	const modal_qr = ref(false)
-	// 　const { t } = useI18n()
+
 	const methods = {
 		back() {
 			history.back()
@@ -98,7 +88,7 @@
 			res.country_code = res.country_code.replace("+","")
 			
 			inviteCode.value = res.invite_code
-			codeUrl.value = window.location.protocol + "//"+window.location.host+"/\#/\?code=" +res.invite_code +"&country="+res.country_code
+			codeUrl.value = window.location.protocol + "//"+window.location.host+"/\#/\?code=" +res.invite_code +'&country='+res.country_code
 		})
 	}
 	// 终于可以用了
@@ -106,15 +96,19 @@
 		getData()
 	})
 	
-	const inviteCode = ref({})
+	const inviteCode = ref("")
 	const codeUrl = ref("")
 
 </script>
 
 <style lang="scss">
+	.share{
+		height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
 	.topB {
 		// color: ;
-		background-color: #314539;
+		background-color: #FEF3DE;
 		text-align: center;
 		padding: 19rpx 40rpx;
 		border-radius: 30rpx;
@@ -139,10 +133,12 @@
 	.btns {
 		width: 570rpx;
 		height: 110rpx;
+	
 		border-radius: 30rpx;
 		margin: 10rpx auto;
 		text-align: center;
 		line-height: 110rpx;
 		color: #000;
+		background: #fff;
 	}
 </style>

@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="notice">
 
-		<view class="pdlr30 pt33">
+		<view class="pdlr30 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('add1.a_d2')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('add1.a_d2')}}</view>
 			<z-paging class="mt54" ref="paging" v-model="recordsList" @query="getData" width="100%" :fixed="false"
 				:use-page-scroll="true" :refresher-enabled="false" :to-bottom-loading-more-enabled="true"
 				:auto-show-back-to-top="true" :safe-area-inset-bottom="true" :empty-view-text="t('record.r_r1')"
@@ -113,18 +113,21 @@
 </script>
 
 <style lang="scss">
+	.notice{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
 	page {
 		font-family: PingFangSC;
 	}
 
 	.listItem {
-		background: #fff;
+		background: #1D1D1D;
 		border-radius: 20rpx;
 		padding: 34rpx 45rpx;
 		margin-bottom: 25rpx;
 		font-size: 28rpx;
 		display: flex;
-
-
+		color:#fff ;
 	}
 </style>

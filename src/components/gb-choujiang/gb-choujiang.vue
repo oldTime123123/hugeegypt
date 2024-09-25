@@ -21,7 +21,6 @@
 			<view class="center f50 mb30">
 				Lottery rules
 			</view>
-		
 			<view v-html="desc">
 
 			</view>
@@ -168,7 +167,7 @@
 		grid-gap: 0.5rpx;
 		height: 554rpx;
 		width: 750rpx;
-		padding: 200rpx 80rpx 80rpx 110rpx;
+		padding: 180rpx 70rpx 80rpx 100rpx;
 		/* 		height: 794rpx;
 		width: 750rpx;
 			padding: 180rpx 104rpx 80rpx 104rpx;

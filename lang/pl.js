@@ -1,5 +1,103 @@
 const skyPay = 'skyPay'
 export default {
+	ss1:{
+		a_a1:"Saldo funduszu",
+		a_a2:"Fundusz",
+		a_a3:"Minim",
+		a_a4:"Cykl",
+		a_a5:"Dzienny dochód",
+		a_a6:"Całkowity dochód",
+		a_a7:"Przetwarzanie",
+		a_a8:"Kup",
+		
+		a_a9:"Liczba zakupów",
+		a_a10:"podwyżka dzienna",
+		a_a11:"Przedział kwotowy",
+		s_s1:'Nie jesteś jeszcze formalnym pracownikiem i nie możesz podpisać umowy o pracę.',
+		s_s2:"Do podpisania",
+		s_s3:"Umowa o pracę",
+		s_s4:"Otrzymana kwota",
+		s_s5:"Szczegóły finansowe",
+		s_s6:"Zarządzanie zespołem",
+		s_s7:"Zarządzanie hasłami",
+		s_s8:"Zarządzanie portfelem",
+		s_s9:"Wyloguj się z konta",
+		s_s10:"Rekordy funduszy",
+		s_s11:"Zapamiętaj hasło",
+		s_s12:"Er is momenteel een onvoltooide bestelling, wil je doorgaan met de laatste opwaardering?",
+		l_l1:"Loteria",
+		l_l2:"Dostępne",
+		l_l3:"Ukończone",
+		l_l6:"Nazwa nagrody",
+		l_l7:"Cena nagrody",
+		l_l8:"Dostępne",
+		l_l9:"Ukończone",
+		l_l10:"Mój prezent",
+		l_l11:"Zasady wydarzenia",
+		l_l12:'Gratuluję zdobycia'
+	},
+	team:{
+		t1:'Wielkość zespołu',
+		t2:"Korzyści zespołowe",
+		t3: "Drużyna A",
+		t4:'Nagrody za stanowisko promocyjne',
+		t5:'Suma zrealizowanych zamówień',
+		t6:'Prowizja od przychodów zespołu',
+		t7:'Prowizja zespołowa',
+		t8:'Wielkość zespołu',
+		t9: "Drużyna B",
+		t10: "Drużyna C",
+		t11: 'Cały',
+		t12:"Dzisiaj",
+		t13:'W tym tygodniu',
+		t14:'W tym miesiącu',
+		t15:"Wielkość drużyny",
+		t16:'Telefon',
+		t17:"Liczba podwładnych",
+		t18:'Całkowita prowizja',
+		t19:'Saldo',
+		t20:'Czas rejestracji'
+	},
+	back:{
+		a_c2:'Potwierdzić',
+		r_o2:"Nr katalogowy",
+		r_o3:'Kwota zamówienia',
+		r_o4: "Status zamówienia",
+		r_o5: "Do zapłaty",
+		r_o6: "Adres doładowania",
+		r_o7: "Anuluj zamówienie",
+		r_o8: "Czy anulować zamówienie",
+		a_c1: "Anuluj",
+		a_c2: "Potwierdzić",
+		a_c4: "Kopiowanie powiodło się",
+		a_c5: "Anuluj powodzenie",
+		r_r11:"Przesyłanie poświadczeń",
+		r_r6:"Wyślij doładowanie",
+		b1:'Posiadacz banku',
+		b2:'Nazwa banku',
+		b3:'Numer banku',
+		a_t1: "Porady",
+		r_r8:"Ładowania"
+	},
+	add2:{
+		a_a1:"Serwis",
+		a_a2:"Uwaga",
+		a_a3:"Proszę podać legalny zakres wypłat",
+		a_a4:"Masz już konto, aby się zalogować",
+		a_a5: "Proszę wybrać portfel płatniczy",
+		a_a6: "Portfel płatniczy",
+		a_a7: "Portfel salda",
+		a_a8: "Portfel prowizji",
+		a_a9: "idź", 
+		a_a10: "INR", 
+		a_a11: "Na zamówienie", 
+		a_a12: "Praca dzienna", 
+		a_a13: "depozyt",
+		a_a14: "Saldo prowizji",
+		a_a15: "Główny portfel",
+		a_a16: "Portfel zysku",
+		a_a17: "Proszę wybrać kwotę wypłaty"
+	},
 	//波兰语
 	add1: {
 		b_b1: "Proszę wybrać nazwę banku",
@@ -9,7 +107,19 @@ export default {
 		b_b5: "Proszę wprowadzić",
 		a_d1:'Pobierz',
 		a_d2:"Centrum wiadomości",
-		a_d3:"Konfiguracja"
+		a_d3:"Konfiguracja",
+		a_d4:"Drużyna",
+		a_d5:"Lista doładowań",
+		a_d6:"ładowanie się powiodło",
+		a_d7:"opis wynagrodzenia",
+		a_d8:"Zablokuj depozyt",
+		a_d9:"Depozyt gotówkowy",
+		
+		a_c1:'Dom',
+		a_c2:'Zadanie',
+		a_c3:'Usługa',
+		a_c4:'Aktywność',
+		a_c5:'Mój'
 	},
 	act: {
 		a_s1: "Zaloguj się",
@@ -58,6 +168,7 @@ export default {
 		e_e18: "utwórzCzas",
 
 		m_m1: "Kod zaproszenia",
+		m_m2:'Po 360 dniach ciągłej pracy stałe saldo konta zwracane jest na rachunek pieniężny'
 
 	},
 	all: {
@@ -92,7 +203,10 @@ export default {
 		l_l9: "Proszę podać poprawny numer telefonu",
 		l_l10: "Proszę podać hasło",
 		l_l11: "Zaloguj się pomyślnie",
-
+		l_l12: "Witamy w Dandelionie",
+		l_l13:"Rozpocznij swoją szczęśliwą podróż",
+		
+		
 		l_r1: "Zarejestruj się",
 		l_r2: "Potwierdź hasło",
 		l_r3: "Wprowadź hasło ponownie",
@@ -231,7 +345,8 @@ export default {
 		m_m11: "Wyloguj się",
 		m_m12: "Centrum serwisowe",
 		m_m13: "Czy wylogować się, zalogować ponownie?",
-		m_m14: "Związać"
+		m_m14: "Związać",
+		m_m15:"Wycofaj"
 	},
 	wr: {
 		w_a1: "Wycofanie",
@@ -310,6 +425,43 @@ export default {
 		a_c4: "Adres",
 		a_c5: "Proszę podać adres",
 		a_c6: "Najpierw powiąż hasło do funduszu"
+	},
+	movie:{
+		m_a1:'Rekordy',
+		m_a2:"Zarobki za ten miesiąc",
+		m_a3:'Całkowite przychody',
+		m_a4:'Wykonaj zadanie dzisiaj',
+		m_a5:'Zapis zadania',
+		m_a6:'Moje zadanie',
+		m_a7:'czas zadania',
+		m_a8:'numer zadania',
+		m_a9:'prowizja',
+		m_b1:'Moje stanowisko',
+		m_b2:'Mój zespół',
+		m_b3:'Kliknij, żeby zobaczyć wprowadzenie',
+		m_b4:'wprowadzenie do zadania',
+		m_b5:'Odblokuj kwotę',
+		m_b6:'Dzienna liczba zleceń',
+		m_b7:'Dzienny dochód',
+		m_b8:'Eamingi co roku',
+		m_b8d:'dzień',
+		m_b9:'uczestniczy',
+		m_c1:'Wskazówki',
+		m_c2:'Anuluj',
+		m_c3:'zweryfikuj',
+		m_c4:'Wprowadzenie do filmu',
+		m_c5:'Wymagania zadania',
+		m_c6:'Uważaj na',
+		m_c7:'sekundy',
+		m_c8:'znak',
+		m_c9:'Oceń to',
+		m_d1:'Stawka',
+		m_d2:"Nie oglądałeś wystarczająco długo",
+		m_d3:'Proszę obejrzeć film dłużej niż 10 sekund po zakończeniu oceny przed przesłaniem zadania',
+		m_d4:'Udana operacja',
+		m_d5:'O nas',
+		m_d6:'Wyślij ukończone zadanie',
+		m_d7:'Wykonałeś wszystkie zadania, skontaktuj się z kierownikiem obszaru'
 	}
 
 }

@@ -1,84 +1,81 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg2">
+	<view class="regist">
 		<view class="pdlr35 pt33">
-			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
-					@click="methods.back"></image>
+			<view class="flex between" >
+				<view class="f60 text_bold red">
+					{{t('login.l_r1')}}
+				</view>
 				<image :src="store.$state.imgObj.langSetting" mode="widthFix" style="width: 70rpx;height: 70rpx;"
-					@click="methods.changePage('../mine/langSetting')">
+					@click="methods.changePage">
 				</image>
 			</view>
 
-			<view class="" :style="{color:store.$state.secondColor}">
-				
+			<view :style="{color:store.$state.secondColor}">
+
 				<!-- 登录 -->
-				<view class=" loginBox " style="margin-top: 200rpx;">
-					<view class="f50 pt40 text_bold text_center" :style="{color:store.$state.thirdColor}">
-						{{t('login.l_r1')}}
-					</view>
-					<view class="mt80">
+				<view class="mt54">
+					<view class="pl14">
 						{{t('login.l_l2')}}
 					</view>
-					<view class="mt34 loginInp">
-						<view class="center" @click="openPicker" style="color: #1ADB95; ">
+					<view class="mt34 phoneEl inp">
+						<view class="phoneLabel flex  center" @click="showPicker = true" style="color:#DE3824">
 							{{country_code.country_code}}
-							<view class="ml10 center" style="width: 40rpx;">
-								<image src="../../static/themeNum1/icon/downSel.png"
-									style="width: 30rpx;height: 20rpx;"></image>
-							</view>
+							<image src="../../static/themeNum1/icon/Polygon.png " mode="widthFix"
+								style="width: 30rpx;margin-left: 10rpx; margin-top: 5rpx;"></image>
 						</view>
-						<input type="number" class="ml20" v-model="regisForm.phone" :placeholder="t('login.l_l3')">
+						<input class="pl20" type="number" v-model="regisForm.phone" :placeholder="t('login.l_l3')"
+							style="margin-left: 50rpx;">
 						<nut-icon name="Check" size="20" v-if="phoneRegFlag"
-							class="phoneCheck animate__animated animate__fadeIn " color="#1ADB95"></nut-icon>
+							class="phoneCheck animate__animated animate__fadeIn " color="gold"></nut-icon>
 					</view>
 
 					<view class="mt38">
-						<view class="">
+						<view class="pl14">
 							{{t('login.l_l4')}}
 						</view>
 						<view class="mt34 passwordInp">
-							<input class="loginInp " type="safe-password" password="true" v-model="regisForm.password"
+							<input class="inp " type="safe-password" password="true" v-model="regisForm.password"
 								:placeholder="t('login.l_l5')" v-if="openPwd">
-							<input class="loginInp " type="safe-password" v-model="regisForm.password"
+							<input class="inp " type="safe-password" v-model="regisForm.password"
 								:placeholder="t('login.l_l5')" v-else>
 
 
-							<image src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-								style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('first')"
+							<image src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+								style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('first')"
 								v-if="!openPwd"></image>
 
-							<image src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-								style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('first')" v-else>
+							<image src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+								style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('first')" v-else>
 							</image>
 						</view>
 					</view>
 
 					<view class="mt38">
-						<view class="">
+						<view class="pl14">
 							{{t('login.l_r2')}}
 						</view>
 						<view class="mt34  passwordInp">
-							<input class="loginInp " type="safe-password" password="true" v-model="regisForm.password2"
+							<input class="inp " type="safe-password" password="true" v-model="regisForm.password2"
 								:placeholder="t('login.l_r3')" v-if="openCpwd">
-							<input class="loginInp " type="safe-password" v-model="regisForm.password2"
+							<input class="inp " type="safe-password" v-model="regisForm.password2"
 								:placeholder="t('login.l_r3')" v-else>
 
-							<image src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-								style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('second')"
+							<image src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+								style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('second')"
 								v-if="!openCpwd"></image>
-							<image src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-								style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('second')" v-else>
+							<image src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+								style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('second')" v-else>
 							</image>
 						</view>
 					</view>
-					<view class="mt38" v-if="smsFlag" >
-						<view class="">
+					<view class="mt38" v-if="smsFlag">
+						<view class="pl14">
 							{{t('login.l_r4')}}
 						</view>
-						<view class=" loginInp ">
-							<input class="" v-model="regisForm.sms_code" :placeholder="t('login.l_r5')">
+						<view class="mt34 otpEl">
+							<input class="inp" v-model="regisForm.sms_code" :placeholder="t('login.l_r5')">
 
-							<view class="otp" v-if="!hasSend" @click="sendHandle" :style="choStyle">
+							<view class="otp" v-if="!hasSend" @click="sendHandle">
 								OTP
 							</view>
 							<view class="countdown center" v-else>
@@ -87,36 +84,34 @@
 						</view>
 					</view>
 					<view class="mt38">
-						<view class="">
+						<view class="pl14">
 							{{t('login.l_r6')}}
 						</view>
 						<view class="mt34">
-							<input class="loginInp" v-model="regisForm.invite_code" :placeholder="t('login.l_r7')"
+							<input class="inp" v-model="regisForm.invite_code" :placeholder="t('login.l_r7')"
 								:disabled="!canInpCode" />
 						</view>
 					</view>
 
-				
-				</view>
-				
-				<!-- 登录按钮 -->
-				<view class="loginBtn f36" :style="regFlag?choStyle:noCho"
-					@click="methods.regisHandle(methods.regisHandle1)">
-					{{t('login.l_r8')}}
-				</view>
-				<!-- 登录按钮 -->
-				<view class="text_center mt34 f26 pb10 color0" @click="methods.changePage('./login')">
-					Already have an account? <text class="pb5" :style="{color:store.$state.thirdColor} "
-						style="border-bottom: 2rpx solid ;"> {{t('login.l_l1')}}</text>
+					<!-- 登录按钮 -->
+					<view class="mt71 f36" :class="[regFlag?'choStyle1':'noCho']"
+						@click="methods.regisHandle(methods.regisHandle1)">
+						{{t('login.l_r8')}}
+					</view>
 				</view>
 			</view>
-			<view style="height: 50rpx;"></view>
+			<view class="center">
+				<view
+					style="height: 50rpx;color:#fff;text-align: center;margin-top: 10px;border-bottom: 1rpx solid rgb(234, 201, 117);font-size: 16px;"
+					@click="getLogin">{{t('add2.a_a4')}}
+				</view>
+			</view>
 
 
-			<nut-popup position="left" :style="{ width: '40%', height: '100%' }" v-model:visible="showPicker">
-				<view class="listItem1" v-for="(item,index) in countryList" :style="index == currentInd?choStyle:''"
+			<nut-popup position="left" :style="{ width: '50%', height: '100%' }" v-model:visible="showPicker">
+				<view class="listItem" v-for="(item,index) in countryList" :style="index == currentInd?choStyle:''"
 					@click="confirm(item,index)">
-					{{item.text}}  {{item.name}}
+					{{item.text}} {{item.name}}
 				</view>
 			</nut-popup>
 
@@ -139,6 +134,7 @@
 		onHide
 	} from "@dcloudio/uni-app";
 	import {
+		onMounted,
 		watch
 	} from 'vue';
 	import {
@@ -151,6 +147,7 @@
 
 	const store = userStore();
 
+	const actInd = ref(0); //0 登录  1 注册  2 找回密码
 
 	const openPwd = ref(true) // 密码可见
 	const openCpwd = ref(true) // 第二次密码可见
@@ -164,9 +161,17 @@
 		sms_code: '',
 	})
 	const btnDis = ref(false)
-	// 　const { t } = useI18n()
+	
 	const country_code = ref('')
 	const showPicker = ref(false)
+
+
+	//getLogin
+	const getLogin = () => {
+		uni.navigateTo({
+			url: './login'
+		})
+	}
 
 	const regFlag = ref(false)
 	const phoneRegFlag = ref(false)
@@ -207,13 +212,12 @@
 	})
 
 	const choStyle = {
-		background: store.$state.contentColor,
-		color: '#000',
-		transition: '.3s linear all'
+		background: "#DE3824",
+		color: '#fff',
 	}
 	const noCho = {
 		background: store.$state.btnDis,
-		color: '#000',
+		color: '#fff'
 	}
 
 	const hasSecond = ref(60)
@@ -248,9 +252,9 @@
 		})
 	}
 	const openPicker = () => {
-		// if (canChoCountry.value) {
-		// }
+		if (canChoCountry.value) {
 			showPicker.value = true
+		}
 	}
 	const timer = ref(null)
 	const startTimer = () => {
@@ -269,33 +273,34 @@
 	const showLoading = ref(null)
 
 	const confirm = (item, index) => {
+		console.log(item, index, 22)
 		country_code.value = item
 		currentInd.value = index
 		showPicker.value = false
 		regFlag.value = false
 		country_code.value.sms_status == 1 ? smsFlag.value = true : smsFlag.value = false
-		
-		
+
+
 		if (country_code.value.preg) {
 			let tempReg = country_code.value.preg.replace('/', '').replace('/', '')
 			let phoneReg = new RegExp(tempReg);
 			if (!phoneReg.test(regisForm.value.phone)) {
 				phoneRegFlag.value = false
-				regFlag.value =false
+				regFlag.value = false
 				return false
 			} else {
 				phoneRegFlag.value = true
 			}
 		}
-		
+
 	}
 	const methods = {
 		back() {
 			history.back()
 		},
-		changePage(url) {
+		changePage() {
 			uni.navigateTo({
-				url
+				url: '../mine/langSetting'
 			})
 		},
 		regisHandle(fn) {
@@ -342,20 +347,20 @@
 			}).then(res => {
 				showLoading.value.loading = false
 				Toast.text(t('login.l_r12'))
-				
-				if(sessionStorage.getItem('link')){
+
+				if (sessionStorage.getItem('link')) {
 					let key = sessionStorage.getItem('link')
 					uni.clearStorage()
 					uni.setStorageSync('token', res.accessToken)
 					uni.navigateTo({
-						url:'../linkEgg/linkEgg?key='+key
+						url: '../linkEgg/linkEgg?key=' + key
 					})
-					return false
+					return
 				}
 				uni.setStorageSync('token', res.accessToken)
 				setTimeout(() => {
 					uni.switchTab({
-						url: '../tabbar/index'
+						url: '../tabbar/my'
 					})
 				}, 1000)
 
@@ -380,6 +385,8 @@
 	const codeFlag = ref(false)
 	const countryList = ref([])
 	const getSetting = () => {
+		// console.log(countryList.value)
+
 		request({
 			url: 'setting/register',
 			methods: 'get'
@@ -387,8 +394,11 @@
 
 			// 邀请码 状态 1.必填 0.选填
 			res.registerInviteCode.status == 1 ? codeFlag.value = true : codeFlag.value = false
+
 		})
+
 		if (store.$state.countryCode.length > 0) {
+
 			countryList.value = store.$state.countryCode
 			country_code.value = countryList.value[0]
 
@@ -408,9 +418,11 @@
 				}
 				store.setCountryCode(tempArr)
 				countryList.value = store.$state.countryCode
+				console.log(store.$state.countryCode)
 				if (canChoCountry.value) {
 					country_code.value = store.$state.countryCode[0]
 				} else {
+
 					store.$state.countryCode.forEach(item => {
 						let str = "+" + countryVal.value
 						if (item.country_code == str) {
@@ -436,15 +448,15 @@
 			clearInterval(timer.value)
 		}
 	})
-	onLoad(()=>{
-		if(!uni.getStorageSync('setLang')){
+	onLoad(() => {
+		if (!uni.getStorageSync('setLang')) {
 			request({
 				url: 'setting/lang',
 				methods: 'get',
 			}).then(res => {
-				uni.setStorageSync('lang',res[0].lang)
-				uni.setStorageSync('setLang',true)
-				history.go(0)
+				uni.setStorageSync('lang', res[0].lang)
+				uni.setStorageSync('setLang', true)
+				window.location.reload()
 			})
 		}
 	})
@@ -452,6 +464,21 @@
 	const canChoCountry = ref(true)
 	const countryVal = ref(0)
 	onLoad((e) => {
+
+		if (e.country) {
+			country_code.vlaue = e.country
+			request({
+				url: 'setting/country',
+				methods: 'get',
+			}).then(res => {
+				res.forEach((item, index) => {
+					if (item.country_code.split('+')[1] == e.country) {
+						currentInd.value = index
+					}
+
+				})
+			})
+		}
 		if (e.code) {
 			regisForm.value.invite_code = e.code
 			canInpCode.value = false
@@ -460,20 +487,61 @@
 		if (e.country) {
 			canChoCountry.value = false
 			countryVal.value = e.country
+
 		}
+	})
+	onMounted(() => {
+		getSetting()
 	})
 </script>
 
-<style lang="scss">
-	// .loginBtn {
-	// 	text-align: center;
-	// 	height: 120rpx;
-	// 	border-radius: 80rpx;
-	// 	color: #fff;
-	// 	line-height: 120rpx;
-	// 	transition: .3s linear all;
-	// }
+<style lang="scss" scoped>
+	.regist{
+		height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
+	.inp{
+		background: #fff;
+		// box-shadow: 0 0 18px 0 #F5F5F5;
+		border: 1px solid #F5F5F5;
+	}
+	.red{
+		color: #fff;
+	}
+	.f60{
+		font-size: 2.25rem;
+	}
+	.f24{
+		font-size: 13px;
+	}
+	.f26{
+		font-size: 16px;
+	}
+	.pl14{
+		font-size: 20px;
+		color: #fff;
+	}
+	::v-deep .uni-input-input{
+		color: #999999;
+	}
+	.mt71 {
+		text-align: center;
+		height: 120rpx;
+		border-radius: 35rpx;
+		color: #fff;
+		line-height: 120rpx;
+		transition: .3s linear all;
+	}
+	.choStyle1 {
+		background: url(../../static/themeNum1/index/loginBtn.png);
+		color: #fff !important;
+		background-size: 100% 100%;
 
+	}
+	.noCho{
+		background: rgb(216, 216, 216);
+		color: #fff !important;
+	}
 	.passwordInp {
 		position: relative;
 
@@ -485,7 +553,7 @@
 		}
 	}
 
-	.loginInp {
+	.otpEl {
 		position: relative;
 
 		.otp {
@@ -495,12 +563,13 @@
 			top: 50%;
 			font-size: 20rpx;
 			transform: translateY(-50%);
-			width: 80rpx;
-			height: 80rpx;
+			width: 60rpx;
+			height: 60rpx;
+			background: linear-gradient(-43deg, #e67f74 0%, #DE3824 100%);
 			border-radius: 10rpx;
 			color: #fff;
 			text-align: center;
-			line-height: 80rpx;
+			line-height: 60rpx;
 		}
 
 		.countdown {
@@ -524,13 +593,12 @@
 		position: relative;
 		padding-left: 100rpx;
 		// background-color: #fff;
-		border-radius: 80rpx;
+		border-radius: 30rpx;
 
 		.phoneLabel {
 			position: absolute;
 			left: 40rpx;
 			top: 50%;
-			font-size: 30rpx;
 			transform: translateY(-50%);
 		}
 
@@ -543,7 +611,7 @@
 		}
 	}
 
-	.listItem1 {
+	.listItem {
 		font-size: 30rpx;
 		padding: 10rpx 20rpx;
 		margin: 10rpx 0;
@@ -556,8 +624,5 @@
 
 	.actItem {
 		color: #fff;
-	}
-	page{
-		background: #e7edea;
 	}
 </style>

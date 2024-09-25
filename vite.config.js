@@ -21,8 +21,17 @@ export default defineConfig({
 		AutoImport({
 			imports: ['vue', 'vue-router'] //自动导入vue 和vue-router相关的函数 
 		}),
-		// 'transform-remove-console'
 	],
+	build: {
+		minify: 'terser',
+		terserOptions: {
+			compress: {
+				//生产环境时移除console
+				drop_console: true,
+				drop_debugger: true,
+			},
+		},
+	},
 	lintOnSave: true,
 	css: {
 		loaderOptions: {

@@ -1,5 +1,5 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg2">
+	<view :style="store.$state.imgObj.loginBg">
 		<view class="pdlr35 pt33">
 			<view class="flex between">
 				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
@@ -10,54 +10,55 @@
 			</view>
 
 			<view class="mt73" :style="{color:store.$state.secondColor}">
-				
+				<view class="f60 text_bold" :style="{color:store.$state.thirdColor}">
+					{{t('act.l_f')}}
+				</view>
 				<!-- 登录 -->
-				<view class="mt54 loginBox">
-					
-					<view class="f50 text_bold text_center" :style="{color:store.$state.thirdColor}">
-						{{t('act.l_f')}}
-					</view>
-					<view class="mt80">
+				<view class="mt54">
+					<view class="pl14">
 						{{t('login.l_l2')}}
 					</view>
-					<view class="  loginInp">
-						<view class="phoneLabel" style="color: #1ADB95; ">
-							{{regisForm.country_code}}
+					<view class="mt34 phoneEl inp">
+						<view class="phoneLabel  flex  between" @click="showPicker = true">
+							<view :style="{color:store.$state.thirdColor}">{{regisForm.country_code}}</view>
+							<!-- <view>
+								<image src="../../static/themeNum1/icon/l_down.png"  style="width: 30rpx;height: 20rpx;"></image>
+							</view> -->
 						</view>
-						<input class="pl20" type="number" v-model="regisForm.phone" :placeholder="t('login.l_l3')">
+						<input class="pl80" type="number" v-model="regisForm.phone" :placeholder="t('login.l_l3')">
 						<nut-icon name="Check" size="20" v-if="phoneRegFlag"
-							class="phoneCheck animate__animated animate__fadeIn " color="#1ADB95"></nut-icon>
+							class="phoneCheck animate__animated animate__fadeIn " color="green"></nut-icon>
 					</view>
 
 					<view class="mt38">
-						<view class="">
+						<view class="pl14">
 							{{t('login.l_l4')}}
 						</view>
 						<view class="mt34 passwordInp">
-							<input class="loginInp " type="safe-password" password="true" v-model="regisForm.password"
+							<input class="inp " type="safe-password" password="true" v-model="regisForm.password"
 								:placeholder="t('login.l_l5')" v-if="openPwd">
-							<input class="loginInp " type="safe-password" v-model="regisForm.password"
+							<input class="inp " type="safe-password" v-model="regisForm.password"
 								:placeholder="t('login.l_l5')" v-else>
 
 
-							<image src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-								style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('first')"
+							<image src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+								style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('first')"
 								v-if="!openPwd"></image>
 
-							<image src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-								style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('first')" v-else>
+							<image src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+								style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('first')" v-else>
 							</image>
 						</view>
 					</view>
 
 					<view class="mt38">
-						<view class="">
+						<view class="pl14">
 							{{t('login.l_r4')}}
 						</view>
 						<view class="mt34 otpEl">
-							<input class="loginInp" v-model="regisForm.sms_code" :placeholder="t('login.l_r5')">
+							<input class="inp" v-model="regisForm.sms_code" :placeholder="t('login.l_r5')">
 
-							<view class="otp" v-if="!hasSend" @click="sendHandle" :style="choStyle">
+							<view class="otp" v-if="!hasSend" @click="sendHandle">
 								OTP
 							</view>
 							<view class="countdown center" v-else>
@@ -73,8 +74,6 @@
 				</view>
 			</view>
 			<view style="height: 50rpx;"></view>
-
-
 
 			<Loading ref="showLoading"></Loading>
 		</view>
@@ -120,7 +119,7 @@
 		country_code: ""
 	})
 	const btnDis = ref(false)
-	// 　const { t } = useI18n()
+	
 	const country_code = ref('')
 	const showPicker = ref(false)
 
@@ -128,6 +127,8 @@
 	const phoneRegFlag = ref(false)
 	// 监听
 	watch(regisForm, (newVal, oldVal) => {
+
+
 		if (regisForm.value.password.length < 6 || regisForm.value.password.length > 24) {
 			return false
 		}
@@ -142,11 +143,10 @@
 	const choStyle = {
 		background: store.$state.contentColor,
 		color: '#000',
-		
 	}
 	const noCho = {
 		background: store.$state.btnDis,
-		color: '#000'
+		color: '#fff'
 	}
 
 	const hasSecond = ref(60)
@@ -248,15 +248,15 @@
 	.mt71 {
 		text-align: center;
 		height: 120rpx;
-		border-radius: 80rpx;
+		border-radius: 35rpx;
 		color: #fff;
 		line-height: 120rpx;
 		transition: .3s linear all;
 	}
-	
+
 	.passwordInp {
 		position: relative;
-	
+
 		.pwdEye {
 			position: absolute;
 			// left: 20rpx;
@@ -264,24 +264,26 @@
 			top: 50%;
 		}
 	}
-	
+
 	.otpEl {
 		position: relative;
-	
+
 		.otp {
 			position: absolute;
 			// left: 20rpx;
 			right: 40rpx;
 			top: 50%;
-			font-size: 26rpx;
+			font-size: 20rpx;
 			transform: translateY(-50%);
-			width: 80rpx;
-			height: 80rpx;
+			width: 60rpx;
+			height: 60rpx;
+			background: linear-gradient(-43deg, #e67f74 0%, #DE3824 100%);
 			border-radius: 10rpx;
+			color: #000;
 			text-align: center;
-			line-height: 80rpx;
+			line-height: 60rpx;
 		}
-	
+
 		.countdown {
 			position: absolute;
 			// left: 20rpx;
@@ -295,11 +297,37 @@
 			color: #ccc;
 			text-align: center;
 			line-height: 60rpx;
-	
+
 		}
 	}
-	
-	
+
+	.phoneEl {
+		position: relative;
+		padding-left: 100rpx;
+		// background-color: #fff;
+		border-radius: 30rpx;
+
+		.phoneLabel {
+			position: absolute;
+			left: 40rpx;
+			top: 50%;
+			width: 90rpx;
+			font-size: 30rpx;
+			transform: translateY(-50%);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.phoneCheck {
+			position: absolute;
+			right: 30rpx;
+			top: 50%;
+			transform: translateY(-50%);
+
+		}
+	}
+
 	.listItem {
 		font-size: 30rpx;
 		padding: 10rpx 20rpx;
@@ -310,12 +338,8 @@
 		justify-content: center;
 		border-bottom: 1rpx solid #eee;
 	}
-	
+
 	.actItem {
 		color: #fff;
-	}
-	
-	page{
-		background: #e7edea;
 	}
 </style>

@@ -1,32 +1,57 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="withdraw">
 
-		<view class="pdlr50 pt33 pb50 ">
+		<view class="pdlr50 pt53 pb50 ">
 
-			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+			<view class="between">
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('wr.w_a1')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('wr.w_a1')}}</view>
+			<view class="pay">{{ $t('add2.a_a6') }}</view>
 			<view class="mt55">
-				<view class="topBox center flex-col" :style="store.$state.wr.reBox">
+				<!-- <view class="topBox center flex-col" :style="store.$state.wr.reBox">
 					<view class="topItem f26">{{t('wr.w_a2')}}</view>
 
-					<view class="mt35 f55"> {{pageData.balance_max}} {{currency}}</view>
+					<view class="mt35 f55" style="color: #000;"> {{pageData.balance_max}} {{currency}}</view>
+				</view> -->
 
-					<!-- <view class="mt28 f26 withdrawAll" :style="{color:store.$state.contentColor}"
-						@click="inputNum = pageData.balance_max">{{t('wr.w_a3')}}</view> -->
+				<view class="topBox  flex-col" style="border-radius: 30rpx;">
+					<view class="topBoxTab">
+						<view class="tabItem" @click="tabChange(1)" :class="[tabClick==1?'active1':'gray1']">
+							{{ $t('add2.a_a7') }}
+						</view>
+						<view class="tabItem" @click="tabChange(2)" :class="[tabClick==2?'active2':'gray2']">
+							{{ $t('add2.a_a8') }}
+						</view>
+					</view>
+					<view class="topBoxItem" >
+						<view style="display: flex;align-items: center;">
+							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg"></image>
+							<image v-else src="../../static/themeNum1/my/commission.png" class="tabImg"></image>
+							<view class="topItem f26">{{ tabText }}</view>
+						</view>
+						<view class="mt35 f55" style="color: #000;"> {{pageData.balance_max}} {{currency}}</view>
+					</view>
 				</view>
-
-
-				<view class="mt40 inputItem">
+				<view v-if="pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.input_type==2" class="inputBut">
+					<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+						<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+					</view>
+				</view>
+				<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
+					<view class="short">≈USDT:</view>
+					<text style="margin-left: 10px;">{{(inputNum * pageData.u_rate).toFixed(2)}}</text>
+				</view>		
+				<view class="mt40 inputItem" v-if="pageData.input_type==1">
 					{{currency}}
 					<view class="pl15">
 						<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo"
-							v-model="inputNum">
+						:disabled="pageData.input_type==2"	v-model="inputNum">
 					</view>
 				</view>
-				<view class="f20 mt30 text_center" :style="{color:store.$state.thirdColor}">
+				<view class="f20 mt30 text_center" style="color: #fff;">
 					* {{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
 				</view>
 
@@ -56,23 +81,23 @@
 					</view>
 				</view>
 				<view class="mt38">
-					<view class="f34  text_bold f30" :style="{color:store.$state.thirdColor}">{{t('wr.w_a10')}}</view>
+					<view class="f34  text_bold f30" style="color: #fff;">{{t('wr.w_a10')}}</view>
 					<view class="mt34  passwordInp" v-if="!showPwd">
 						<input class="inp " type="safe-password" password="true" v-model="fundPwd"
 							:placeholder="t('wr.w_a10')" v-if="showNewPwd1">
 						<input class="inp " type="safe-password" v-model="fundPwd" :placeholder="t('wr.w_a10')" v-else>
-						<image v-if="showNewPwd1" src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-							style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+						<image v-if="showNewPwd1" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+							style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 
-						<image v-else src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-							style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+						<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+							style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 					</view>
 
 					<view class="mt34  passwordInp otpEl" v-else>
 
 						<input class="inp " placeholder-class="plo" type="safe-password" password="true"
 							:disabled="true" :placeholder="t('login.l_l5')" v-if="showNewPwd1">
-						<view class="otp" v-if="!pageData.user_link" @click="changePage('../setting/set4')" :style="{background:store.$state.contentColor}">
+						<view class="otp" v-if="!pageData.user_link" @click="changePage('../setting/set4')">
 							{{t('mine.m_m14')}}
 						</view>
 					</view>
@@ -85,7 +110,7 @@
 
 
 			</view>
-			<view class="mt70" v-html="pageData.description" style="color: #fff;"></view>
+			<view class="mt70" style="color: #fff;" v-html="pageData.description"></view>
 		</view>
 	</view>
 </template>
@@ -126,7 +151,7 @@
 		}
 	};
 	const choStyle = {
-		background: store.$state.contentColor,
+		background: "#fff",
 		color: '#000'
 	}
 	const noStyle = {
@@ -137,9 +162,9 @@
 	const inputNum = ref("")
 	const pageData = ref({})
 	const showPwd = ref(true)
-	const getData = () => {
+	const getData = (tabClick) => {
 		request({
-			url: '/finance/bank/withdraw/index',
+			url: `/finance/bank/withdraw/index?balance_type=${tabClick?tabClick:1}`,
 			methods: 'get',
 		}).then(res => {
 			pageData.value = res
@@ -179,31 +204,127 @@
 			getData();
 			Toast.text(t('wr.w_u8'))
 			inputNum.value = ""
+			
+			uni.navigateTo({
+				url:'../record/withdrawRecord'
+			})
 		}).catch(err => {
 			Toast.text(err.message)
 		})
 		locked.value = false
 	}
-
+	const titckIndex = ref(undefined)
+	const selectBut = (item,index)=>{
+		titckIndex.value = index;
+		inputNum.value = Number(item)
+	}
 	const changePage = (url) => {
 		uni.navigateTo({
 			url: url
 		})
 	}
+	const tabClick = ref(1)
+	const tabText = ref('')
+
 	const currency = ref("")
 
+	const tabChange = (index)=>{
+		tabClick.value = index;
+		tabText.value = index==1?t('mine.m_t4'):t('add2.a_a14');
+		getData(index)
+	}
 	// 终于可以用了
 	onShow(() => {
+		tabText.value = t('mine.m_t4');
 		getData();
 		currency.value = uni.getStorageSync('currency')
 	})
 </script>
 
 <style lang="scss">
+	.withdraw{
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
+	.inp{
+		background: #fff;
+		color: #000 !important;
+	}
 	.topBox {
 		width: 100%;
-		height: 328rpx;
+		height: 328rpx
+	}
+	.topBoxTab{
+		width: 100%;
+		height: 45px;
+		display: flex;
+		.tabItem{
+			width: 50%;
+			height: 100%;
+		}
+	}
+	.ml10{
+		margin-left: 10px;
+	}
+	.pay{
+		color: #fff;
+		margin-top: 10px;
+	}
+	.topBoxItem {
+		height: calc(100% - 45px);
+		border-bottom-left-radius: 12px;
+		border-bottom-right-radius: 12px;
+		border: none;
+		background: url(../../static/themeNum1/my/orBottom.png);
+		background-size: 100% 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.active1{
+		border-top-right-radius: 12px;
 		color: #000;
+		background: url(../../static/themeNum1/my/orLeft.png);
+		background-size: 100% 100%;
+	}
+	.active2{
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		color: #000;
+		background: url(../../static/themeNum1/my/orRight.png);
+		background-size: 100% 100%;
+	}
+	.gray1{
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		background: #fff;
+		color: #000;
+	}
+	.gray2{
+		background: #fff;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		color: #000;
+	}
+	.tabItem{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.tabImg{
+		width: 24px;
+		height: 24px;
+		margin-right: 10px;
+	}
+	.flex{
+		display: flex;
+		// flex-direction: column;
+		align-items: center;
+		justify-content: left;
+	}
+	.topBox {
+		width: 100%;
+		height: 328rpx
 	}
 
 	.withdrawAll {
@@ -222,27 +343,26 @@
 
 	.inputItem {
 		height: 115rpx;
-		background: #314539;
-		
+		background: #fff;
+		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
 		border-radius: 20rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 50rpx;
-		color: #fff;
+		color: #DE3824;
 		padding-left: 40rpx;
 	}
 
 	.info {
-		background-color: #314539;
+		background-color: #fff;
 		border-radius: 30rpx;
 		padding: 30rpx 28rpx;
-		color: #fff;
+		color: #000;
 	}
 
 	.btns {
 		margin-top: 100rpx;
-		
 		height: 120rpx;
 		line-height: 120rpx;
 		text-align: center;
@@ -250,9 +370,6 @@
 	}
 
 
-	.inp {
-		background-color: #314539;
-	}
 
 	.passwordInp {
 		position: relative;
@@ -265,23 +382,6 @@
 		}
 	}
 
-	// .mainBox {
-	// 	display: grid;
-	// 	grid-template-columns: repeat(3, 1fr);
-	// 	// grid-template-rows: repeat(3, 1fr);
-	// 	grid-column-gap: 0px;
-	// 	grid-row-gap: 0px;
-
-	// 	.chooseItem {
-	// 		width: 90%;
-	// 		background-color: #fff;
-	// 		height: 100rpx;
-	// 		border-radius: 20rpx;
-	// 		margin-bottom: 20rpx;
-	// 		text-align: center;
-	// 		line-height: 100rpx;
-	// 	}
-	// }
 
 
 	.otpEl {
@@ -297,11 +397,31 @@
 			// width: 60rpx;
 			padding: 0 10rpx;
 			height: 60rpx;
-			
+			background: linear-gradient(-43deg, #e67f74 0%, #DE3824 100%);
 			border-radius: 10rpx;
-			color: #000;
+			color: #fff;
 			text-align: center;
 			line-height: 60rpx;
+		}
+	}
+	.inputBut{
+		display: flex;
+		color: #000;
+		flex-wrap: wrap;
+		margin-top: 32rpx;
+		.inputItem{
+			border-radius: 8px;
+			margin: 0 15px 15px 0;
+			padding: 5px;
+			box-sizing: border-box;
+			background: rgb(255, 234, 177);
+		}
+		.activeItem{
+			border-radius: 8px;
+			margin: 0 15px 15px 0;
+			padding: 5px;
+			box-sizing: border-box;
+			background: rgb(223, 184, 87);
 		}
 	}
 </style>

@@ -1,71 +1,72 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg2">
+	<!--:style="store.$state.imgObj.loginBg"  -->
+	<!--  -->
+	<view class="login">
 
 		<view class="pdlr35 pt33">
 
-			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
-					@click="methods.back"></image>
+			<view class="flex between" style='justify-content: right;'>
+				<!-- <image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+					@click="methods.back"></image> -->
 				<image :src="store.$state.imgObj.langSetting" mode="widthFix" style="width: 70rpx;height: 70rpx;"
 					@click="methods.changePage('../mine/langSetting')">
 				</image>
 			</view>
 
-			<view class="mt73">
-				<!-- <view class="f60 text_bold" :style="{color:store.$state.thirdColor}">
+			<view class="mt73" :style="{color:store.$state.secondColor}">
+				<view class="f60 text_bold" style="color:#fff">
 					{{t('login.l_l1')}}
-				</view> -->
+				</view>
 				<!-- 登录 -->
-				<view class="mt173 loginBox ">
-					<view class="f50  text_bold text_center" :style="{color:store.$state.thirdColor}">
-						{{t('login.l_l1')}}
-					</view>
-					<view class=" mt80">
+				<view class="mt173">
+					<view class="pl14 red">
 						{{t('login.l_l2')}}
 					</view>
-					<view class="mt34  loginInp">
-						<view class="  center" @click="showPicker = true" style="color: #1ADB95; ">
+					<view class="mt34 phoneEl inp">
+						<view class="phoneLabel flex  center" @click="showPicker = true" style="color:#DE3824">
 							{{country_code.country_code}}
-							<view class="ml10 center" style="width: 40rpx;">
-								<image src="../../static/themeNum1/icon/downSel.png"
-									style="width: 30rpx;height: 20rpx;"></image>
-							</view>
+							<image src="../../static/themeNum1/icon/Polygon.png " mode="widthFix" style="width: 30rpx;margin-left: 10rpx; margin-top: 5rpx;"></image>
 						</view>
-						<input class="pl20" type="number" v-model="loginForm.phone" :placeholder="t('login.l_l3')">
+						<input class="pl80" type="number" v-model="loginForm.phone" :placeholder="t('login.l_l3')"  >
 						<nut-icon name="Check" size="20" v-if="phoneRegFlag"
-							class="phoneCheck animate__animated animate__fadeIn " color="#1ADB95"></nut-icon>
+							class="phoneCheck animate__animated animate__fadeIn " color="#FF0000"></nut-icon>
 					</view>
 
 					<view class="mt38">
-						<view class="">
+						<view class="pl14 red">
 							{{t('login.l_l4')}}
 						</view>
 						<view class="mt34 passwordInp">
-							<input class="loginInp" type="safe-password" password="true" v-model="loginForm.password"
+							<input class="inp" type="safe-password" password="true" v-model="loginForm.password"
 								:placeholder="t('login.l_l5')" v-if="openCpwd">
-							<input class="loginInp" v-model="loginForm.password" :placeholder="t('login.l_l5')" v-else>
-							<image src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-								style="width: 29rpx;height: 25rpx;" @click="openCpwd = !openCpwd" v-if="!openCpwd">
+							<input class="inp" v-model="loginForm.password" :placeholder="t('login.l_l5')" v-else>
+							<image src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+								style="width: 50rpx;height: 45rpx;" @click="openCpwd = !openCpwd" v-if="!openCpwd">
 							</image>
-							<image src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-								style="width: 29rpx;height: 16rpx;" @click="openCpwd = !openCpwd" v-else>
+							<image src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+								style="width: 50rpx;height: 45rpx;" @click="openCpwd = !openCpwd" v-else>
 							</image>
 						</view>
 					</view>
-					<view class="mt34 f24 pr10" style="text-align: right;" :style="{color:store.$state.thirdColor}"
-						@click="forgetHandle">
-						{{t('act.l_f2')}}
-						<!-- methods.goResetPwd -->
+					<view class="xuan mt24">
+						<nut-radiogroup v-model="radioVal">
+						    <nut-radio label="1">{{t('ss1.s_s11')}}</nut-radio>
+						</nut-radiogroup>
+						<view class=" f24 pr10 red"  :style="{color:store.$state.contentColor}"
+							@click="forgetHandle">
+							{{t('act.l_f2')}}
+						</view>
+						
 					</view>
-				
-				</view>
-				<!-- 登录按钮 -->
-				<view class="loginBtn f36" :style="regFlag?choStyle:noCho" @click="methods.loginHandle">
-					{{t('login.l_l6')}}
-				</view>
-				<view class="text_center mt34 f26 pb10" @click="methods.changePage('./register')">
-					{{t('login.l_l7')}} <text class="pb5" :style="{color:store.$state.thirdColor} "
-						style="border-bottom: 2rpx solid ;"> {{t('login.l_l8')}}</text>
+					
+					
+					<!-- 登录按钮 -->
+					<view class="mt204 pl14 mar" :class="[regFlag?'choStyle1':'noCho']" @click="methods.loginHandle">
+						{{t('login.l_l6')}}
+					</view>
+					<view class="text_center mt34 f26 pb10 red" @click="methods.changePage('./register')">
+						{{t('login.l_l7')}} <text class="pb5" style="border-bottom: 2rpx solid ;color:#fff"> {{t('login.l_l8')}}</text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -78,10 +79,10 @@
 			</image>
 		</nut-drag>
 
-		<nut-popup position="left" :style="{ width: '40%', height: '100%' }" v-model:visible="showPicker">
-			<view class="listItem1" v-for="(item,index) in countryList" :style="index == currentInd?choStyle:''"
+		<nut-popup position="left" :style="{ width: '50%', height: '100%' }" v-model:visible="showPicker">
+			<view class="listItem" v-for="(item,index) in countryList" :style="index == currentInd?choStyle:''"
 				@click="confirm(item,index)">
-				{{item.text}} {{item.name}}
+				{{item.text}}  {{item.name}}
 			</view>
 		</nut-popup>
 		<Loading ref="showLoading"></Loading>
@@ -108,11 +109,11 @@
 
 	const {
 		t
-	} = useI18n();
+	} = useI18n()
 	const store = userStore();
 	const showService = ref(false)
 	const actInd = ref(0); //0 登录  1 注册  2 找回密码
-
+	const radioVal = ref()
 
 	// 登录表单
 	const loginForm = ref({
@@ -128,7 +129,7 @@
 		let tempReg = country_code.value.preg.replace('/', '').replace('/', '')
 		let phoneReg = new RegExp(tempReg);
 		if (phoneReg.test(loginForm.value.phone)) {
-
+			
 			phoneRegFlag.value = true
 		} else {
 			regFlag.value = false
@@ -137,7 +138,7 @@
 
 		if (phoneReg.test(loginForm.value.phone) && loginForm.value.password.length > 5 && loginForm.value.password
 			.length < 25) {
-
+				
 			regFlag.value = true
 		} else {
 			regFlag.value = false
@@ -148,13 +149,13 @@
 	})
 
 	const choStyle = {
-		background: store.$state.contentColor,
-		color: '#000',
+		background: '#DE3824',
+		color: '#fff',
 
 	}
 	const noCho = {
 		background: store.$state.btnDis,
-		color: '#000'
+		color: '#fff'
 	}
 
 	const country_code = ref("")
@@ -175,16 +176,16 @@
 		country_code.value = item
 		currentInd.value = index
 		showPicker.value = false
-
+		
 		let tempReg = country_code.value.preg.replace('/', '').replace('/', '')
 		let phoneReg = new RegExp(tempReg);
 		if (phoneReg.test(loginForm.value.phone)) {
 			phoneRegFlag.value = true
 		} else {
-			regFlag.value = false
+			regFlag.value =false
 			phoneRegFlag.value = false
 		}
-
+		
 	}
 	watch(showPicker, (newVal, oldVal) => {
 		if (!newVal) {
@@ -194,11 +195,14 @@
 		deep: true
 	})
 	const forgetHandle = () => {
-		isGoForgetPwd.value = true
-		showPicker.value = true
+		uni.navigateTo({
+			url:'../tabbar/service'
+		})
+		// isGoForgetPwd.value = true
+		// showPicker.value = true
 	}
 	const showLoading = ref(null)
-	// 　const { t } = useI18n()
+	
 	const methods = {
 		back() {
 			uni.switchTab({
@@ -234,10 +238,15 @@
 				methods: 'post',
 				data: loginForm.value
 			}).then(res => {
-
 				showLoading.value.loading = false
 				Toast.text(t('login.l_l11'))
-
+				console.log(radioVal.value,'sss')
+				if(radioVal.value){
+					uni.setStorageSync('user',loginForm.value)
+					
+				}else{
+					uni.removeStorageSync('user')
+				}
 				if (sessionStorage.getItem('link')) {
 					let key = sessionStorage.getItem('link')
 					uni.clearStorage()
@@ -245,6 +254,7 @@
 					uni.navigateTo({
 						url: '../linkEgg/linkEgg?key=' + key
 					})
+					
 					return false
 				}
 				uni.setStorageSync('token', res.accessToken)
@@ -312,38 +322,150 @@
 		})
 	}
 	// 终于可以用了
-	onLoad(() => {
+	onLoad((e) => {
+		if(uni.getStorageSync('user')){
+			loginForm.value.phone = uni.getStorageSync('user').phone
+			loginForm.value.password = uni.getStorageSync('user').password
+		}
+		if (e.code) {
+			if(e.country){
+				uni.navigateTo({
+					url: "../login/register?code=" + e.code  + "&country=" + e.country
+				})
+			}else{
+				uni.navigateTo({
+					url: "../login/register?code=" + e.code  
+				})
+			}
+			
+		}
 		let curLang = uni.getStorageSync('lang')
-		uni.clearStorage()
-		if (curLang) {
-			uni.setStorageSync('lang', curLang)
-			uni.setStorageSync('setLang', true)
-		} else {
+		// uni.clearStorage()
+		uni.removeStorageSync('token')
+		uni.removeStorageSync('localVersion')
+		uni.removeStorageSync('setLang')
+		uni.removeStorageSync('currency')
+		uni.removeStorageSync('lang')
+		uni.removeStorageSync('setLang')
+		
+		
+		
+		if(curLang){
+			uni.setStorageSync('lang',curLang)
+			uni.setStorageSync('setLang',true)
+		}else{
 			request({
 				url: 'setting/lang',
 				methods: 'get',
 			}).then(res => {
-				uni.setStorageSync('lang', res[0].lang)
-				uni.setStorageSync('setLang', true)
-				history.go(0)
+				uni.setStorageSync('lang',res[0].lang)
+				uni.setStorageSync('setLang',true)
+				window.location.reload()
 			})
 		}
 		getData()
 	})
 </script>
 
-<style lang="scss">
-	.mt173 {
-		margin-top: 253rpx;
+<style lang="scss" scoped>
+	.login{
+		height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
 	}
-	.listItem1 {
+	.inp{
+		background: #fff;
+		// box-shadow: 0 0 18px 0 #F5F5F5;
+		border: 1px solid #F5F5F5;
+	}
+	.red{
+		color: #fff;
+	}
+	.f60{
+		font-size: 2.25rem;
+	}
+	.pl14{
+		font-size: 20px;
+	}
+	.f24{
+		font-size: 13px;
+	}
+	.f26{
+		font-size: 16px;
+	}
+	::v-deep .uni-input-input{
+		color: #999999;
+		font-size: 16px;
+	}
+	.choStyle1 {
+		background: url(../../static/themeNum1/index/loginBtn.png);
+		color: #fff !important;
+		background-size: 100% 100%;
+
+	}
+	.noCho{
+		background: rgb(216, 216, 216);
+		color: #fff !important;
+	}
+	.xuan{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	::v-deep.xuan .nut-radiogroup .nut-radio .nut-radio__label{
+		font-size: 16px;
+	}
+	.mt173 {
+		margin-top: 70rpx;
+	}
+
+	.mt204 {
+		margin-top: 50rpx;
+		text-align: center;
+		height: 120rpx;
+		border-radius: 35rpx;
+		color: #000;
+		line-height: 120rpx;
+		transition: .3s linear all;
+	}
+
+
+
+	.phoneEl {
+		position: relative;
+		padding-left: 80rpx;
+	
+		border-radius: 30rpx;
+		
+		.phoneLabel {
+			position: absolute;
+			left: 30rpx;
+			top: 48%;
+
+			font-size: 30rpx;
+			transform: translateY(-50%);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.phoneCheck {
+			position: absolute;
+			right: 30rpx;
+			top: 50%;
+			transform: translateY(-50%);
+
+		}
+	}
+
+	.listItem {
 		font-size: 30rpx;
 		padding: 10rpx 20rpx;
 		margin: 10rpx 0;
 		height: 120rpx;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		// justify-content: center;
+		padding-left: 60rpx;
 		border-bottom: 1rpx solid #eee;
 	}
 

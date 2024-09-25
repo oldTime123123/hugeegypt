@@ -1,28 +1,16 @@
 
 const themeNum1 = {
-	contentColor: 'linear-gradient(90deg, #C4F082 0%, #43FCBB 100%)',
+	contentColor: 'linear-gradient(0deg, #DFB857 0%, #FFEAB1 100%)',
 	secondColor: "#fff",
-	thirdColor:"#1ADB95",
 	imgObj: {
 		kefuIcon:"/static/service/kefu1.png",
 		loginBg: {
-			'background-image':  " url('/static/mainBg.png') ",
-			'background-size':' 100% auto',
-			'background-repeat':'no-repeat',
-			'background-color':'#080808',
-			height: "calc(100vh)",
+			background: "url('/static/themeNum1/loginBg.png') repeat-y 100%/150%",
+			minHeight: "calc(100vh)",
+			paddingTop:"30rpx"
 		},
-		loginBg2: {
-			background:  " url('/static/loginBg.png')  no-repeat 100%/100% ",
-			height: "calc(100vh)",
-		},
-		
-	
 		recBg: {
-			'background-image':  " url('/static/mainBg.png') ",
-			'background-size':' 100% auto',
-			'background-repeat':'no-repeat',
-			'background-color':'#080808',
+			background: "url('/static/themeNum1/loginBg.png') repeat-y 100%/100%"
 		},
 		backIcon: '/static/themeNum1/icon/back.png',
 		labaIcon: '/static/themeNum1/icon/laba.png',
@@ -32,6 +20,12 @@ const themeNum1 = {
 			'/static/themeNum1/index/indexComm2.png',
 			'/static/themeNum1/index/indexComm3.png',
 			'/static/themeNum1/index/indexComm4.png',
+		],
+		indexComm2:[
+			'/static/themeNum1/index/indexComm5.png',
+			'/static/themeNum1/index/indexComm6.png',
+			'/static/themeNum1/index/indexComm7.png',
+			'/static/themeNum1/index/indexComm8.png',
 		],
 		withdrawIcon: '/static/themeNum1/icon/w_vip.png',
 		usdt: '/static/themeNum1/icon/usdt.png',
@@ -66,7 +60,7 @@ const themeNum1 = {
 			'/static/themeNum1/my/myItem3.png',
 			'/static/themeNum1/my/myItem4.png',
 			'/static/themeNum1/my/myItem5.png',
-			'/static/themeNum1/my/myItem6.png',
+			'/static/themeNum1/my/myItem666.png',
 			'/static/themeNum1/my/myItem7.png',
 			'/static/themeNum1/my/myItem8.png',
 		],
@@ -81,7 +75,7 @@ const themeNum1 = {
 	},
 	wr: {
 		reBox: {
-			background: "url('/static/themeNum1/wr/reBox.png') no-repeat 100%/100%"
+			background: "url('/static/themeNum1/my/m_bg.png') no-repeat 100%/100%"
 		},
 	},
 	task: {

@@ -1,52 +1,52 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="charge">
 
-		<view class="pdlr50 pt33 pb50 ">
+		<view class="pdlr50 pt53 pb50 ">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('wr.r_r1')}}</view>
+			<view class="f50 mt60 text_bold" style="color:#fff">{{t('wr.r_r1')}}</view>
 			<view class="mt55">
 				<view class="topBox center flex-col" :style="store.$state.wr.reBox">
 					<view class="topItem f26">{{t('mine.m_t4')}}</view>
-					<view class="mt35 f55" >{{currency}} {{user.balance}} </view>
+					<view class="mt35 f55" style="color: #DE3824;">{{currency}} {{user.balance}} </view>
 				</view>
 
 				<view class="mt40 inputItem">
-					<text :style="{color:store.$state.contentColor}">{{currency}}</text>
+					<text style="color: #fff">{{currency}}</text>
 					<view class="pl35">
-						<input type="number" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo"
+						<input type="number" :focus="true" :placeholder="t('add1.b_b3')" placeholder-class="f30 plo"
 							v-model="inpVal" @input="inpHandle">
 					</view>
 				</view>
-				<view class="f20 mt30 text_center" style="color: #1ADB95;">
+				<view class="f20 mt30 text_center" style="color: #fff;">
 					*{{t('wr.r_r15')}}
 					{{bankNameList[nameInd]?bankNameList[nameInd].min +"-" + bankNameList[nameInd].max:0}}
 				</view>
 
 
 				<view v-if="bankNameList.length >0">
-					<view class=" mt54 f34 " :style="{color:store.$state.thirdColor}">
+					<view class=" mt54 f34 " style="color:#fff">
 						{{t('add1.b_b1')}}
 					</view>
 
 					<view class="mainBox mt40">
 						<view class="chooseItem" v-for="(item,index) in bankNameList"
-							:style="nameInd == index?choStyle:noStyle" @click="nameInd = index">
+							:class="[nameInd == index?'choStyle':'noStyle']" @click="nameInd = index">
 							{{item.alias}}
 						</view>
 					</view>
 
 					<view v-if="nameInd >-1">
-						<view class=" mt54 f34 " :style="{color:store.$state.thirdColor}">
+						<view class=" mt54 f34 secondClo" style="color: #fff">
 							{{t('add1.b_b2')}}
 						</view>
 
 						<view class="mainBox mt35">
 							<view class="chooseItem" v-for="(item,index) in bankNameList[nameInd].buttons"
-								:style="numInd == index?choStyle:noStyle" @click="changeInpVal(index,item)">
+							:class="[nameInd == index?'choStyle':'noStyle']" @click="changeInpVal(index,item)">
 								{{item}}
 							</view>
 						</view>
@@ -54,19 +54,25 @@
 
 
 					<view v-if="nameInd >-1 && bankNameList[nameInd].way.length >0">
-						<view class=" mt54 f34 " :style="{color:store.$state.thirdColor}">
+						<view class=" mt54 f34 secondClo" style="color: #fff">
 							{{t('add1.b_b2')}}
 						</view>
 
 						<view class="mainBox mt35">
 							<view class="chooseItem" v-for="(item,index) in bankNameList[nameInd].way"
-								:style="wayInd == index?choStyle:noStyle" @click="wayInd = index">
+							:class="[wayInd == index?'choStyle':'noStyle']" @click="wayInd = index">
 								{{item.name}}
 							</view>
 						</view>
 					</view>
 				</view>
 
+					<!-- <view class="btns mt78 center" :style="noStyle" style="box-shadow: none;background-color: #1D1D1D;color: #fff;'"
+							@click="service">
+							<view style="color:'#FFFF">
+								{{t('add1.a_c3')}}
+							</view>
+						</view> -->
 				<view class="btns" :style="inpVal>0 && nameInd>-1? choStyle:noStyle" @click="submitHandle">
 					{{t('wr.r_r3')}}
 				</view>
@@ -102,12 +108,12 @@
 
 	};
 	const choStyle = {
-		background: store.$state.contentColor,
+		background: "#fff",
 		boxShadow: "none ",
 		color: '#000'
 	}
 	const noStyle = {
-		color: '#fff'
+		
 	}
 
 
@@ -120,7 +126,11 @@
 	const pageData = ref({})
 	const inpVal = ref("")
 
-
+	const service = () =>{
+		uni.switchTab({
+			url:'../tabbar/service'
+		})
+	}
 
 	const inpHandle = e => {
 
@@ -208,10 +218,31 @@
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.charge{
+		min-height: 100vh;
+		background-size: 100% 100%;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
+	.choStyle{
+		background: url(../../static/themeNum1/index/select.png);
+		// background: #fff;
+		color: #fff !important;
+		background-size: 100% 100%;
+	}
+	.noStyle{
+		background: #FFFFFF;
+		color: #333;
+	}
+	.plo{
+		color: #fff !important;
+	}
+	::v-deep.uni-input-input{
+		color: #fff;
+	}
 	.topBox {
 		width: 100%;
-		height: 328rpx;
+		height: 328rpx
 	}
 
 	.topItem {
@@ -225,13 +256,12 @@
 
 	.inputItem {
 		height: 115rpx;
-		background: #314539;
+		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
 		border-radius: 20rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 50rpx;
-		color: #fff;
 		padding-left: 40rpx;
 
 	}
@@ -245,25 +275,23 @@
 
 		.chooseItem {
 			width: 90%;
-			background-color: #314539;
+			// background-color: #fff;
 			height: 100rpx;
 			border-radius: 20rpx;
 			margin-bottom: 20rpx;
 			text-align: center;
 			line-height: 100rpx;
-			color: #fff;
+			color: #000;
 		}
 	}
 
 	.btns {
-		margin-top: 100rpx;
+		margin-top: 50rpx;
 		// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
 		height: 120rpx;
-		background: linear-gradient(0deg, #008CFF 0%, #00D2FF 100%);
-		// box-shadow: 0rpx 11rpx 47rpx 4rpx rgba(247,175,64,0.35);
+		background-color: #fff;
 		line-height: 120rpx;
 		text-align: center;
-		border-radius: 80rpx;
-		color: #fff;
+		border-radius: 35rpx;
 	}
 </style>

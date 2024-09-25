@@ -1,11 +1,15 @@
 <template>
-	<view :style="store.$state.imgObj.recBg" style="height: calc(100vh - 120rpx) !important;overflow: hidden;">
+	<view class="record" style="height: calc(100vh ) !important;overflow: hidden;">
 
 		<view class="pdlr30 pt38">
 
-			<view class="f50  text_bold" :style="{color:store.$state.thirdColor}">{{t('record.r_r10')}}</view>
+			<view class="flex between">
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+					@click="methods.back"></image>
+			</view>
+			<view class="f50 mt30  text_bold" style="color: #fff">{{t('record.r_r10')}}</view>
 
-			<view class=" between f28 mt40" style="background-color: #314539;border-radius: 20rpx">
+			<view class=" between f28 mt40" style="background-color: #fff;border-radius: 20rpx">
 				<view v-for="(item,index) in staList" class="staItem" :style="pages.status == index?choStyle:''"
 					@click="tabsChange(index)">
 					{{item}}
@@ -17,7 +21,7 @@
 				:auto-show-back-to-top="true" :empty-view-text="t('record.r_r1')" :auto="false"
 				:loading-more-no-more-text="t('record.r_r1')" :empty-view-reload-text="t('record.r_r2')"
 				:loading-more-loading-text="t('record.r_r4')" :loading-more-fail-text="t('record.r_r3')"
-				style="margin: 250rpx auto 0;width: 100%; " :loading-more-default-text="t('record.r_r3')">
+				style="margin: 320rpx auto 0;width: 100%; " :loading-more-default-text="t('record.r_r3')">
 				<view class="mt30 recordItem f24" v-for="(item,index) in recordList" >
 					<view class="colorF">
 						{{t('record.r_r5')}} :{{item.create_time_format}}
@@ -56,7 +60,7 @@
 						</view>
 					</view>
 					<!-- -->
-					<view class="btns mt34" :style="{background:store.$state.contentColor}"  v-if="item.status ==1" 
+					<view class="btns mt34" :style="{background:store.$state.contentColor,color:'#000'}"  v-if="item.status ==1" 
 						@click="getOrderInfo(item.order_no)">
 						submit orders
 					</view>
@@ -180,18 +184,19 @@
 	]
 
 	const choStyle = {
-		background: store.$state.contentColor,
-		color: '#000',
+		background: '#000',
+		color: '#fff',
 		borderRadius: "20rpx"
 	}
 	const tabsChange = (ind) => {
+		console.log('sss')
 		pages.value.status = ind
 		pages.value.page = 1
 		paging.value.clean() //清空数组
 		showLoading.value.loading = true
 
 		setTimeout(() => {
-			getData()
+			getData(1)
 		}, 1000)
 	}
 
@@ -283,7 +288,7 @@
 		if (showMask.value) {
 			showMask.value = false
 		}
-		uni.switchTab({
+		uni.navigateTo({
 			url
 		})
 	}
@@ -296,23 +301,27 @@
 </script>
 
 <style lang="scss">
+	.record{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
 	.staItem {
 		width: 25%;
 		text-align: center;
-		color: #ccc;
+		color: #999999;
 		padding: 27rpx 0;
 	}
 
 	.recordItem {
-		background: #314539;
+		background: #1D1D1D;
 		border-radius: 20rpx;
-		color: #fff;
 		padding: 34rpx 45rpx 34rpx 45rpx;
 		margin-bottom: 30rpx;
 		font-size: 28rpx;
 		width: 600rpx;
 		margin: 30rpx auto;
-
+		color: #fff;
 		.imgBg {
 			width: 160rpx;
 			height: 160rpx;
@@ -331,7 +340,7 @@
 		width: 100%;
 		height: 100rpx;
 		border-radius: 20rpx;
-		color: #000;
+		color: #fff;
 		line-height: 100rpx;
 		text-align: center;
 		font-size: 30rpx;
@@ -350,11 +359,9 @@
 			margin-top: 200rpx;
 			height: 450rpx;
 			width: 100%;
-			background: #314539;
-			// background: #fff;
+			background: #fff;
 			border-radius: 8px;
 			position: relative;
-			color: #fff;
 		}
 
 		.closeBtn {
@@ -370,11 +377,11 @@
 
 
 	.maskBtns {
-		// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
+		box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
 		height: 100rpx;
 		line-height: 100rpx;
 		text-align: center;
 		border-radius: 20rpx;
-		color: #000;
+		color: #fff;
 	}
 </style>

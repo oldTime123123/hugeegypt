@@ -1,7 +1,7 @@
 <template>
 	<view  style="height: calc(100vh ) !important;overflow: hidden;background: url('static/actIcon/redElove/listBg1.png') no-repeat 100%/100%;">
 
-		<view class="pdlr50 pt33">
+		<view class="pdlr50 pt53">
 
 			<view class="flex between">
 				<image src="/static/actIcon/back.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
@@ -10,7 +10,7 @@
 				<image src="/static/actIcon/record.png" mode="widthFix"
 					style="width: 48rpx;height: 48rpx;" @click="methods.changePage"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:'#000'}">{{t('act.r_r7')}}</view>
+			<view class="f50 mt60 text_bold" :style="{color:'#fff'}">{{t('act.r_r7')}}</view>
 
 			<view class="mt80">
 				<view class="kefuItem flex col_center" v-for="item in dataList" @click="changePage(item)">

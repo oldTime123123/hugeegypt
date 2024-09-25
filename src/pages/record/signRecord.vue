@@ -1,13 +1,13 @@
 <template>
 	<view style="background: url('/static/actIcon/sign/signBg.png') no-repeat 100%; min-height: 100vh;">
 <!-- <view :style="store.$state.imgObj.loginBg"> -->
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
 			<image src="/static/actIcon/back.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 				@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">Sign Record </view>
+			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">Sign Record </view>
 				<z-paging class="mt54 " ref="paging" v-model="recordsList" @query="getData" width="100%" :fixed="true"
 					:refresher-enabled="false" :to-bottom-loading-more-enabled="true" :auto-full-height="true"
 					:auto-show-back-to-top="true" :empty-view-text="t('record.r_r1')"
@@ -67,7 +67,7 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
@@ -99,5 +99,31 @@
 </script>
 
 <style lang="scss">
-	
+	.listItem {
+		background: #fff;
+		border-radius: 20rpx;
+		padding: 4rpx 45rpx 34rpx 45rpx;
+		margin-bottom: 30rpx;
+		font-size: 28rpx;
+		width: 600rpx;
+		margin: 30rpx auto;
+		.vvItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 29rpx;
+		}
+
+		.pass {
+			color: #5db760;
+		}
+
+		.error {
+			color: #f5564b;
+		}
+
+		.cancle {
+			color: #AFAFAF;
+		}
+	}
 </style>

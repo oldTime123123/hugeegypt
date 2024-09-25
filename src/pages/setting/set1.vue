@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="setting1">
 
-		<view class="pdlr35 pt33" :style="{color:store.$state.secondColor}">
+		<view class="pdlr35 pt53" :style="{color:store.$state.secondColor}">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">{{t('inp.i_a1')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('inp.i_a1')}}</view>
 
 			<view class="mt59">
 				<view class="pl14">
@@ -65,11 +65,14 @@
 
 
 			<!-- 登录按钮 -->
-			<view class="btns f36"
-				:style="showTag?{background:store.$state.contentColor,}:{background:store.$state.btnDis}"
-				@click="methods.saveHandle">
-				{{ t('inp.i_s1')}}
+			<view style="height: 120rpx;">
+				<view class="btns f36"
+					:style="showTag?{background:store.$state.contentColor}:{background:store.$state.btnDis}"
+					@click="methods.saveHandle">
+					{{ t('inp.i_s1')}}
+				</view>
 			</view>
+			
 
 			<view style="height: 50rpx;"></view>
 			<Loading ref="showLoading"></Loading>
@@ -97,7 +100,7 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	
 	const showIn =ref(false)
 	const methods = {
@@ -211,6 +214,7 @@
 			}
 
 			res.bank_card_can_edit == 1 ? canEdit.value = true : canEdit.value = false
+
 			if (res.bankcard) {
 				formData.value.account_holder = res.bankcard.account_holder
 				formData.value.phone = res.bankcard.phone
@@ -233,10 +237,11 @@
 			url: '/user/index',
 			methods: 'get',
 		}).then(res => {
-			if(res.country_code == '+91' || res.country_code == '+51'){
+			if(res.country_code == '+91'){
 				showIn.value = true
 			}
 		})
+		
 	}
 	// 终于可以用了
 	onShow(() => {
@@ -246,6 +251,11 @@
 </script>
 
 <style lang="scss">
+	.setting1{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
 	.colorC {
 		color: #AFAFAF !important;
 	}
@@ -253,9 +263,13 @@
 	.btns {
 		text-align: center;
 		line-height: 120rpx;
-		color: #fff;
-		height: 120rpx;
-		border-radius:80rpx;;
+		color: #000;
+		// height: 120rpx;
+		border-radius: 35rpx;
 		margin-top: 76rpx;
+	}
+	.inp{
+		background: #Fff;
+		color: #000;
 	}
 </style>

@@ -14,6 +14,14 @@
 		}, {
 			"path": "pages/tabbar/task"
 		}, {
+			"path": "pages/tabbar/historical"
+		}, {
+			"path": "pages/tabbar/gradeDetails"
+		}, {
+			"path": "pages/tabbar/myTask"
+		}, {
+			"path": "pages/tabbar/details"
+		}, {
 			"path": "pages/tabbar/record"
 		}, {
 			"path": "pages/tabbar/my"
@@ -42,20 +50,15 @@
 		}, {
 			"path": "pages/mine/withdraw"
 		}, {
-			"path": "pages/mine/share"
-		}, {
 			"path": "pages/mine/iosIntro"
+		}, {
+			"path": "pages/mine/share"
 		}, {
 			"path": "pages/mine/notice"
 		}, {
 			"path": "pages/recharge/bankRecharge"
 
-		},
-		// {
-		// 	"path": "pages/recharge/uAdd"
-
-		// },
-		{
+		}, {
 			"path": "pages/recharge/usdtRecharge"
 		}, {
 			"path": "pages/recharge/usdtOrder"
@@ -65,8 +68,6 @@
 			"path": "pages/mine/usdtWithdraw"
 		}, {
 			"path": "pages/mine/bankWithdraw"
-		}, {
-			"path": "pages/mine/team"
 		}, {
 			"path": "pages/mine/skyPay"
 		}, {
@@ -100,14 +101,94 @@
 		{
 			"path": "pages/record/eggRecord"
 		}, {
+			"path": "pages/tabbar/service"
+		}, {
+			"path": "pages/tabbar/grade"
+		}, {
+			"path": "pages/tabbar/notice"
+		}, {
+			"path": "pages/mine/team"
+		}, {
+			"path": "pages/mine/DownLoad"
+		}, {
+			"path": "pages/recharge/btcRecharge"
+		},
+		{
+			"path": "pages/recharge/btcOrder"
+		},
+		{
+			"path": "pages/recharge/btcTxid"
+		},
+		{
+			"path": "pages/setting/btcBind"
+		},
+		{
 			"path": "pages/linkEgg/linkEgg"
+		},
+		{
+			"path": "pages/mine/btcWithdraw"
+		},
+		{
+			"path": "pages/recharge/offLineBank"
+		},
+		{
+			"path": "pages/recharge/offlineOrder"
+		},
+		{
+			"path": "pages/recharge/offlineTxid"
+		}, {
+			"path": "pages/mine/teamDetails"
+		}, {
+			"path": "pages/login/beforeLogin"
+		}, {
+			"path": "pages/sign/signC"
+		}, {
+			"path": "pages/sign/signPan"
+		}, {
+			"path": "pages/mine/skyPayInfo"
+		}, {
+			"path": "pages/mine/financialDetails"
+		}, {
+			"path": "pages/mine/teamManagement"
+		}, {
+			"path": "pages/mine/passwordManagement"
+
+		}, {
+			"path": "pages/mine/walletManagement"
+
+		}, {
+			"path": "pages/linkEgg/lottery"
+
+
+		}, {
+			"path": "pages/linkEgg/lottery-record"
+		}, {
+			"path": "pages/linkEgg/Marquee"
+		}, {
+			"path": "pages/linkEgg/marqueeRecord"
+
+		}, {
+			"path": "pages/record/despoitRecord"
+
+		}, {
+			"path": "pages/tabbar/noticeTwo"
+		}, {
+			"path": "pages/tabbar/news"
+		}, {
+			"path": "pages/tabbar/company"
+		}, {
+			"path": "pages/tabbar/turoriaHome"
+		}, {
+			"path": "pages/tabbar/video"
+		}, {
+			"path": "pages/tabbar/Profits"
 		}
 	],
 
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 
-		"navigationBarTitleText": "U-Savdo",
+		"navigationBarTitleText": "AdsWorld",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"navigationStyle": "custom",
@@ -119,42 +200,39 @@
 		}
 	},
 	"tabBar": {
-		"backgroundColor": "#314539",
-		"selectedColor": "#43FCBB",
+		"backgroundColor": "#fff",
+		"selectedColor": "#DE3824",
 		"height": "60px",
-		"color": "#ccc",
+
 		"list": [{
-				"pagePath": "pages/tabbar/index",
 				"iconPath": "/static/themeNum1/tabbar/home.png",
 				"selectedIconPath": "/static/themeNum1/tabbar/home1.png",
+				"pagePath": "pages/tabbar/index",
 				"text": "Home"
 			},
-			{
-				"pagePath": "pages/tabbar/recharge",
-				"iconPath": "/static/themeNum1/tabbar/recharge.png",
-				"selectedIconPath": "/static/themeNum1/tabbar/recharge1.png",
-				"text": "Recharge"
-			},
-
 			{
 				"pagePath": "pages/tabbar/task",
 				"iconPath": "/static/themeNum1/tabbar/task.png",
 				"selectedIconPath": "/static/themeNum1/tabbar/task1.png",
 				"text": "Task"
 			},
-
 			{
-				"pagePath": "pages/tabbar/record",
-				"iconPath": "/static/themeNum1/tabbar/record.png",
-				"selectedIconPath": "/static/themeNum1/tabbar/record1.png",
-				"text": "Record"
+				"pagePath": "pages/tabbar/grade",
+				"iconPath": "/static/themeNum1/tabbar/grade.png",
+				"selectedIconPath": "/static/themeNum1/tabbar/grade1.png",
+				"text": "Grade"
+			},
+			{
+				"pagePath": "pages/tabbar/Profits",
+				"iconPath": "/static/themeNum1/tabbar/profits.png",
+				"selectedIconPath": "/static/themeNum1/tabbar/profits1.png",
+				"text": "Profits"
 			},
 			{
 				"pagePath": "pages/tabbar/my",
 				"iconPath": "/static/themeNum1/tabbar/my.png",
 				"selectedIconPath": "/static/themeNum1/tabbar/my1.png",
 				"text": "My"
-
 			}
 		]
 	}

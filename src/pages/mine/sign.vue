@@ -1,7 +1,7 @@
 <template>
 	<view style="background: url('/static/actIcon/sign/signBg.png') no-repeat 100%;">
 		<!-- 导航栏 -->
-		<view class="pdlr50 pt33">
+		<view class="pdlr50 pt53">
 
 			<view class=" between">
 				<image src="/static/actIcon/back.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
@@ -231,6 +231,7 @@
 		border-radius: 20rpx;
 		color: #FFFFFF;
 		font-size: 36rpx;
+		box-shadow: inset 0rpx 0rpx 6rpx 3rpx rgba(225, 225, 225, 0.4);
 	}
 
 	.isSignC {
@@ -242,6 +243,7 @@
 		border-radius: 20rpx;
 		color: #eee;
 		font-size: 36rpx;
+		box-shadow: inset 0rpx 0rpx 6rpx 3rpx rgba(225, 225, 225, 0.4);
 	}
 
 	.text-white {

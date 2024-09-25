@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="usdtxid">
 
-		<view class="pdlr35 pt33" :style="{color:store.$state.secondColor}">
+		<view class="pdlr35 pt53" :style="{color:store.$state.secondColor}">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('wr.r_r1')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('wr.r_r1')}}</view>
 
 			<view class="mt59">
 				<view class="pl14">
@@ -25,21 +25,19 @@
 				<view class="mt34 flex">
 
 					<nut-uploader :url="uploadHost +'api/uploads'" name="cert" type="image/jpeg"
-						@success="successHandle" style="border-radius: 20rpx;"></nut-uploader>
+						@success="successHandle" style="border-radius: 20rpx;" v-model:file-list="defaultFileList"
+						maximum="1"></nut-uploader>
 
-					<view class="ml40" v-if="showImg">
-						<image :src="uploadHost+ formData.cert"
-							style="width: 200rpx;height: 200rpx;border-radius: 20rpx;"></image>
-					</view>
 				</view>
 			</view>
 
 			<!-- 登录按钮 -->
-			<view class="btns f36" :style="{background:store.$state.contentColor}" @click="methods.saveHandle">
+			<view class="btns f36" @click="methods.saveHandle">
 				{{t('inp.i_s1')}}
 			</view>
 			<view style="height: 50rpx;"></view>
 		</view>
+		<Loading ref="showLoading"></Loading>
 	</view>
 </template>
 
@@ -63,7 +61,8 @@
 	import {
 		useI18n
 	} from "vue-i18n";
-
+	
+	const showLoading = ref(null)
 	const {
 		t
 	} = useI18n();
@@ -72,6 +71,10 @@
 			history.back()
 		},
 		saveHandle() {
+			if(!formData.value.cert){
+				return false
+			}
+			showLoading.value.loading = true
 			request({
 				url: '/finance/usdt/recharge/cert',
 				methods: 'post',
@@ -79,6 +82,7 @@
 					...formData.value
 				}
 			}).then(res => {
+				showLoading.value.loading = false
 				Toast.text(t('inp.i_s2'))
 				setTimeout(() => {
 					uni.switchTab({
@@ -86,13 +90,14 @@
 					})
 				}, 500)
 			}).catch(err => {
+				showLoading.value.loading = false
 				Toast.text(err.message)
 			})
 		},
 	};
 	const uploadHost = ref("")
 
-	const showImg = ref(false)
+
 	const getData = () => {
 		request({
 			url: 'finance/usdt/recharge/index',
@@ -111,16 +116,23 @@
 				formData.value.order_no = res.order.order_no
 				formData.value.cert = res.order.cert
 				if (res.order.cert) {
-					showImg.value = true
+					// showImg.value = true
+					let temp = {
+						name: '1238109381231.png',
+						url: uploadHost.value+ res.order.cert,
+						status: 'success',
+						message: 'success',
+						type: 'image'
+					}
+					defaultFileList.value[0] = temp
 				}
 			} catch (e) {
 				//TODO handle the exception
 			}
 		})
 	}
-
+	const defaultFileList = ref([]);
 	const successHandle = (responseText, option, fileItem) => {
-		showImg.value = false
 		formData.value.cert = JSON.parse(responseText.responseText).data
 	}
 
@@ -131,23 +143,35 @@
 	})
 
 	// 终于可以用了
-	onShow(() => {
+	onLoad(() => {
 		Locale.use('en-US', enUS);
 		getData();
 	})
 </script>
 
 <style lang="scss">
-	.colorC {
-		color: #AFAFAF !important;
-	}
+	.usdtxid{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
 
+	}
+	.colorC {
+		color: #000 !important;
+	}
+	.inp{
+		background: #Fff;
+		color: #000;
+	}
+	.plo{
+		color: #000 !important;
+	}
 	.btns {
 		text-align: center;
 		line-height: 120rpx;
-		color: #fff;
+		color: #000;
+		background: #fff;
 		height: 120rpx;
-		border-radius: 80rpx;
+		border-radius: 35rpx;
 		margin-top: 76rpx;
 	}
 </style>

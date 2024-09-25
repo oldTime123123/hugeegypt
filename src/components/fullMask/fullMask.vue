@@ -9,7 +9,7 @@
 						:circular="true" style="height: 100%;width: 100%; " :current="current" :disable-touch="true">
 						<swiper-item v-for="(item, index) in maskList" :key="index" class="maskItem center" >
 							<view v-html="item.content"
-								style=" width: 90%;height: 100%;color: #fff;"></view>
+								style="padding: 60rpx 20rpx 0 20rpx; width: 100%;height: 100%;color: #333;"></view>
 						</swiper-item>
 					</swiper>
 				</view>
@@ -53,7 +53,6 @@
 			};
 		},
 		mounted() {
-			console.log(this);
 		},
 		methods: {
 			
@@ -75,8 +74,7 @@
 		z-index: 999;
 
 		.maskTop {
-			background-color: #7d7d7d;
-			color: #000;
+			background-color: #fff;
 			margin-bottom: 18rpx;
 			border-radius: 20rpx;
 			height:800rpx;
@@ -108,7 +106,7 @@
 				bottom: 0;
 				left: 0;
 				right: 0;
-				margin: 0 auto;
+				margin: 10px auto;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -190,8 +188,7 @@
 
 		.maskItem {
 			overflow: scroll;
-			padding: 30rpx 20rpx 0;
-			// calc
+
 		}
 	}
 

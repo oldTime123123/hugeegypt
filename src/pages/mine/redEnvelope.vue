@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap" style="background: url(/static/actIcon/redElove/redBg.png) no-repeat 100%/100%;">
 		<!-- 导航栏 -->
-		<view class="pdlr50 pt33">
+		<view class="pdlr50 pt53">
 			<view class=" between">
 				<image src="/static/actIcon/back.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
@@ -9,10 +9,26 @@
 			</view>
 		</view>
 		<!-- start -->
+		<div class="open bx" @click="openHandle" :style="{ top: (newTop-3) + 'vh' }">
+			
+		</div>
 		<view class="open" @click="openHandle" :style="{ top: newTop + 'vh' }">OPEN</view>
 
-		<view class="botList" v-if="botBoxData.length > 0">
+		<view v-if="num !==0" class="botList" style="box-sizing: border-box;padding: 32rpx;text-align: center;">
+			<view class="title textHidden">{{titleText}}</view>
+		
+			<view class="text_center mt40 pb50 pdlr30 f30 text_bold" style="background-color: #fb2848; color: #fff;">
+				<view class="mt20" v-html="rules"></view>
+			</view>
+			
+			
+			
+		</view>
+
+
+		<view class="botList" v-else>
 			<view class="title textHidden">{{t('act.r_r1')}}</view>
+			
 			<swiper class="scroData mt10" :autoplay="true" :interval="4000" :duration="1500" :disable-touch="true"
 				:vertical="true" :circular="true">
 				<swiper-item v-for="(ite, ind) in botBoxData" :key="ind">
@@ -26,10 +42,7 @@
 				</swiper-item>
 			</swiper>
 
-			<view class="text_center mt40 pb50 pdlr30 f30 text_bold" style="background-color: #fb2848; color: #fff;">
-				{{t('act.r_r3')}}
-				<view class="mt20" v-html="pageData.info?pageData.info.rules:''"></view>
-			</view>
+			
 		</view>
 
 		<view v-if="showMask" class="mask center" style="flex-direction: column;">
@@ -95,6 +108,11 @@
 		}, 1000)
 	}
 	const openHandle1 = () => {
+		if(conunt.value){
+			Toast.text(jsTitle.value)
+			showLoading.value.loading = false
+			return false
+		}
 		if (pageData.value.authCheck.get_status == 0) {
 			showLoading.value.loading = false
 			Toast.text(pageData.value.authCheck.tips)
@@ -111,7 +129,7 @@
 			showLoading.value.loading = false
 			showMask.value = true
 			maskMsg.value = res.price
-			getBotData()
+			getBotData(redId.value)
 		}).catch(err => {
 			showLoading.value.loading = false
 			Toast.text(err.message)
@@ -142,37 +160,62 @@
 
 	// 获取数据
 	const redId = ref("")
-	const getBotData = () => {
+	const tips = ref()
+	const num = ref()
+	const getBotData = (id) => {
 
 		request({
 			url: 'activity/prizePackage/info',
 			methods: 'get',
 			data: {
-				id: redId.value
+				id: id
 			}
 		}).then(res1 => {
 			pageData.value = res1
 			botBoxData.value = chunk(res1.logs, 4)
+			tips.value = res1.authCheck.tips
+			num.value = res1.num
 
 
 		})
 	}
 	const currency = ref("")
+	const titleText = ref()
+	const rules = ref()
+	const conunt = ref(false)
+	const jsTitle = ref()
+	const prizePackage = () =>{
+		request({
+			url: 'activity/prizePackage/list',
+			methods: 'get'
+		}).then(res => {
+			titleText.value = res[0].title
+			rules.value = res[0].rules
+			redId.value = res[0].id
+			getBotData( res[0].id)
+		}).catch(err=>{
+			Toast.text(err.message)
+			conunt.value = true
+			jsTitle.value = err.message
+		})
+	}
 	// 终于可以用了
-	onLoad((e) => {
-		redId.value = e.id
-		getBotData()
+	onLoad(() => {
+		
+		prizePackage()
 		currency.value = uni.getStorageSync("currency")
 		uni.getSystemInfo({
 			success: res => {
 				if (res.windowHeight > 810) {
-					newTop.value = 38;
+					newTop.value = 38.5;
 				} else if (res.windowHeight <= 810 && res.windowHeight >= 710) {
-					newTop.value = 38;
+					newTop.value = 38.5;
+					
 				} else if (res.windowHeight < 710 && res.windowHeight >= 610) {
-					newTop.value = 35.5;
+					newTop.value = 36;
 				} else {
-					newTop.value = 28;
+					newTop.value = 27;
+					
 				}
 			}
 		});
@@ -181,6 +224,18 @@
 
 
 <style lang="scss" scoped>
+	page{
+		background-color: rgb(251, 40, 72);
+	}
+	.dd{
+		img{
+			background-size: 100% 100%;
+		}
+	}
+	.bx{
+		width: 100%;
+		height: 60px;
+	}
 	.mask {
 		width: 100vw;
 		height: 100vh;
@@ -250,7 +305,7 @@
 			margin: 0 auto 30rpx;
 			line-height: 100%;
 			border-radius: 20rpx;
-			background-color: #fec84a;
+			background-color: #f29a90;
 			color: #fff;
 			font-size: 30rpx;
 			text-align: center;

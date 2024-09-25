@@ -1,13 +1,21 @@
+<!--
+ * @Author: chenpn chenpn699@gmail.com
+ * @Date: 2024-09-20 16:01:15
+ * @LastEditors: chenpn chenpn699@gmail.com
+ * @LastEditTime: 2024-09-23 17:51:40
+ * @FilePath: \dandelion6 - 副本\src\pages\mine\article.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="artice">
 
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;" @click="methods.back"></image>
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;" @click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{pageData.name}}</view>
-			<view class="mt40">
+			<view class="f50 mt60 text_bold" style="color: #fff">{{pageData.name}}</view>
+			<view class="mt40 " style="color: #fff;">
 				<view v-html="pageData.contents"></view>
 			</view>
 		</view>
@@ -29,7 +37,7 @@
 	const store = userStore();
 
 
-	// 　const { t } = useI18n()
+	
 	const methods = {
 		back() {
 			history.back()
@@ -38,14 +46,24 @@
 	};
 	const pageData = ref({})
 	const getData  = (data)=>{
+		if(data.pos==2){
+			request({
+				url: 'page/article/lists',
+				methods: 'get',
+				data
+			}).then(res => {
+				pageData.value = res[0]
+			})
+		}else{
+			request({
+				url: 'page/article/detail',
+				methods: 'get',
+				data
+			}).then(res => {
+				pageData.value = res
+			})
+		}
 		
-		request({
-			url: 'page/article/detail',
-			methods: 'get',
-			data
-		}).then(res => {
-			pageData.value = res
-		})
 	}
 
 	// 终于可以用了
@@ -61,5 +79,8 @@
 </script>
 
 <style lang="scss">
-
+	.artice{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
 </style>

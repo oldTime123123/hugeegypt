@@ -3,7 +3,7 @@
 		style="background: url(/static/actIcon/zhuanpan1/lottery.png) repeat-y 100%/105%;height: 100vh;overflow: scroll;width: 100vw;">
 
 
-		<view class="pdlr50 pt33">
+		<view class="pdlr50 pt53">
 
 			<view class="flex between">
 				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
@@ -146,6 +146,7 @@
 			border-left: 1rpx solid #FFFFFF;
 			border-bottom: 1rpx solid #FFFFFF;
 			background: linear-gradient(270deg, #9550E6 0%, #EC6FD6 100%);
+			box-shadow: 0rpx 5rpx 28rpx 1rpx rgba(149, 80, 230, 0.55);
 			border-radius: 30rpx 0 0 30rpx;
 			color: #fff;
 			display: flex;

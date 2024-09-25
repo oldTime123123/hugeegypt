@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="set4">
 
-		<view class="pdlr35 pt33" :style="{color:store.$state.secondColor}">
+		<view class="pdlr35 pt53" :style="{color:store.$state.secondColor}">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">{{t('inp.i_s7')}}</view>
+			<view class="f50 mt60 text_bold"  style="color: #fff">{{t('inp.i_s7')}}</view>
 
 
 
@@ -22,11 +22,11 @@
 						<input class="inp " type="safe-password" v-model="formData.old_password"
 							:placeholder="t('inp.a_b5')" v-else>
 
-						<image v-if="showOld" src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-							style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('showOld')"></image>
+						<image v-if="showOld" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+							style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showOld')"></image>
 
-						<image v-else src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-							style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('showOld')"></image>
+						<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+							style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showOld')"></image>
 					</view>
 				</view>
 			</view>
@@ -41,11 +41,11 @@
 						:placeholder="t('inp.a_b7')" v-if="showNewPwd1">
 					<input class="inp " type="safe-password" v-model="formData.password" :placeholder="t('inp.a_b7')"
 						v-else>
-					<image v-if="showNewPwd1" src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-						style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+					<image v-if="showNewPwd1" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+						style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 
-					<image v-else src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-						style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+					<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+						style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 				</view>
 			</view>
 
@@ -58,10 +58,10 @@
 						:placeholder="t('inp.a_b9')" v-if="showNewPwd2">
 					<input class="inp " type="safe-password" v-model="formData.password2" :placeholder="t('inp.a_b9')"
 						v-else>
-					<image v-if="showNewPwd2" src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-						style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('showNewPwd2')"></image>
-					<image v-else src="../../static/themeNum1/icon/openEye.png" class="pwdEye"
-						style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('showNewPwd2')"></image>
+					<image v-if="showNewPwd2" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+						style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showNewPwd2')"></image>
+					<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye"
+						style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showNewPwd2')"></image>
 				</view>
 			</view>
 
@@ -71,11 +71,14 @@
 			</view> -->
 
 			<!-- 登录按钮 -->
-			<view class="btns f36"
-				:style="showTag?{background:store.$state.contentColor,}:{background:store.$state.btnDis}"
-				@click="methods.saveHandle">
-				{{ t('inp.i_s1')}}
+			<view style="height: 120rpx;">
+				<view class="btns f36"
+					:style="showTag?{background:'#fff',boxShadow: '0rpx 11rpx 47rpx 4rpx rgba(247, 175, 64, 0.35)'}:{background:store.$state.btnDis}"
+					@click="methods.saveHandle">
+					{{ t('inp.i_s1')}}
+				</view>
 			</view>
+			
 
 			<view style="height: 50rpx;"></view>
 			<Loading ref="showLoading"></Loading>
@@ -103,7 +106,7 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
@@ -206,6 +209,12 @@
 </script>
 
 <style lang="scss">
+	.set4{
+		height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
+
 	.colorC {
 		color: #AFAFAF !important;
 	}
@@ -213,9 +222,9 @@
 	.btns {
 		text-align: center;
 		line-height: 120rpx;
-		color: #fff;
-		height: 120rpx;
-		border-radius:80rpx;;
+		color: #000;
+		// height: 120rpx;
+		border-radius: 35rpx;
 		margin-top: 76rpx;
 	}
 
@@ -228,5 +237,12 @@
 			right: 40rpx;
 			top: 50%;
 		}
+	}
+	.inp{
+		background: #Fff;
+		color: #000;
+	}
+	.plo{
+		color: #000 !important;
 	}
 </style>

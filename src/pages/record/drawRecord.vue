@@ -1,13 +1,13 @@
 <template>
-	<view style="background: url(/static/actIcon/zhuanpan1/lottery.png) no-repeat 100%/105%; height: 100vh;">
+	<view style="background: url(/static/themeNum1/index/loginBack.png) no-repeat 100%/105%; height: 100vh;">
 	<!-- <view :style="store.$state.imgObj.loginBg"> -->
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('act.d_s7')}} </view>
+			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">{{t('act.d_s7')}} </view>
 			<view style="padding: 0;">
 				<z-paging class="mt54 " ref="paging" v-model="recordsList" @query="getData" width="100%" :fixed="true"
 					:refresher-enabled="false" :to-bottom-loading-more-enabled="true" :auto-full-height="true"
@@ -56,7 +56,7 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
@@ -88,5 +88,32 @@
 </script>
 
 <style lang="scss">
-	
+	.listItem {
+		background: #fff;
+		border-radius: 20rpx;
+		padding: 4rpx 45rpx 34rpx 45rpx;
+		margin-bottom: 30rpx;
+		font-size: 28rpx;
+		width: 600rpx;
+		margin: 30rpx auto;
+
+		.vvItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 29rpx;
+		}
+
+		.pass {
+			color: #5db760;
+		}
+
+		.error {
+			color: #f5564b;
+		}
+
+		.cancle {
+			color: #AFAFAF;
+		}
+	}
 </style>

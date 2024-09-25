@@ -1,69 +1,227 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
-
-		<!-- 轮播图 -->
-		<view class=" " style="position: relative;">
-			<!-- uni.getStorageSync("huobi") -->
-			<swiper :indicator-dots="true" :indicator-active-color="store.$state.contentColor" :autoplay="true"
-				:interval="3000" :duration="1000" next-margin="20" :circular="true" style="height: 340rpx;">
-				<swiper-item v-for="(item, index) in list" @click="botHandle(2, item)" :key="index">
-					<image :src="item.banner_image" mode="scaleToFill" style=" width: 100%;height: 340rpx;"></image>
-				</swiper-item>
-			</swiper>
-
-		</view>
-		<view class="notice " style="background-color: #fff;" v-if="showBar" dir="ltr">
-			<nut-noticebar :text="barText" :left-icon="store.$state.imgObj.labaIcon" :scrollable="true"
-				background="rgba(251, 248, 220, 0)" color="#E1E872">
-			</nut-noticebar>
-		</view>
-		<view class="content pdlr30 pt23">
-
-
-		
-
-
-			<!-- comm -->
-			<view class="mt30 flex between text_center" :style="{color:store.$state.secondColor}">
-				<view v-for="(item,index) in commglrist" :key="index" @click="changePage(index,item.url)">
-					<image :src="item.img" mode="widthFix" style="width: 120rpx;height:120rpx ;"></image>
-					<view class="mt20 f22">
-						{{item.name}}
-					</view>
+	<view style="background: #fff;">
+		<view class="content  ">
+			<view class="flex between" style="background: #D82526;">
+				<view class="f52  secondClo margintty" style="display: flex;align-items: center;">
+					<image src="/static/logo1.jpg" style="width: 70rpx;height: 70rpx;margin-bottom: 4rpx;">
+					</image>
+				</view>
+				<view class="notice " style="background-color: #fff;width: 100%;flex: 1;" v-if="showBar" dir="ltr">
+					<nut-noticebar :text="barText" :left-icon="store.$state.imgObj.labaIcon" :scrollable="true"
+						background="#fff" color="#D82526" style="border-radius: 20rpx;">
+					</nut-noticebar>
+				</view>
+				<view>
+					<image :src="store.$state.imgObj.langSetting" mode="widthFix"
+						style="width: 70rpx;height: 70rpx; margin: 5rpx 15rpx 0 15rpx;"
+						@click="changePage(3,'../mine/langSetting')">
+					</image>
 				</view>
 			</view>
 
-			<!-- goods -->
-			<view class="f40 secondClo mt70" :style="{color:store.$state.thirdColor}">
-				{{t('index.i_a1')}}
+
+
+			<!-- 轮播图 -->
+			<view class=" ">
+				<!-- uni.getStorageSync("huobi") -->
+				<swiper :indicator-dots="true" :indicator-active-color="store.$state.contentColor" :autoplay="true" 
+					:interval="3000" :duration="1000" next-margin="20" :circular="true" style="height: 410rpx;">
+					<swiper-item v-for="(item, index) in list" @click="botHandle(2, item)" :key="index">
+						<image :src="item.banner_image" mode="scaleToFill" style=" width: 100%;height: 410rpx"></image>
+					</swiper-item>
+				</swiper>
 			</view>
-			<view class="mt49">
-				<view class="goodsItem" v-for="(item,index) in goodsList" :key="index">
-					<view class="pt5 pl15">
-						<view class="f50" :style="{color:store.$state.thirdColor}">{{item.name}}</view>
-						<view class="mt8 f24">
-							<view v-for="ite in item.desc">{{ite}}</view>
-						</view>
-					</view>
-					<view>
-						<image :src="item.pic" mode="widthFix" style="width: 300rpx;height: 230rpx;"></image>
-					</view>
-					<!-- "is_active": 1,  //是否解锁 0.未解锁 1.已解锁 -->
-					<view class="goodsMask center flex-col" :class="!showMask?'animate__animated animate__fadeInUp':''"
-						v-if="item.is_active == 0" @click="goMask(item)">
-						<view class="center flex-col "
-							:class="!showMask?' animate__animated animate__backInDown   ':''">
-							<image src="../../static/themeNum1/index/locked.png" mode="widthFix"
-								style="width: 55rpx;height: 77rpx;"></image>
-							<view class="f40 mt23" style="color: #fff;"> {{t('index.i_a2')}}</view>
-						</view>
+			<view class="tabIcons">
+				<view class="tabItem" v-for="(item,index) in tabIconsContent" :key="index" @click="goTabDetail(item)">
+					<view class="tabFlex">
+						<image class="tabImg" :src="item.img"></image>
+						<text class="tabText">{{ item.name }}</text>
 					</view>
 				</view>
 			</view>
+			<view class="banner" @click="jumpPage('../mine/share')">
+				<image class="bannerImg" src="../../static/themeNum1/index/banner.png"></image>
+			</view>
+			<view class="task">
+				<view class="secondClo f40 btn">
+					<view class="">
+						{{ t('index.i_a15') }}
+					</view>
+					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
+				</view>
+				<view class="taskB">
+					<view v-for="(item,index) in movieList" :key="index" class="taskBanner" @click="goVip(item)">
+						<view class="textContent">
+							<text class="taskText">{{ item.name }}</text>
+						</view>
+						<image class="bannerImg" src="../../static/themeNum1/index/taskBanner.png"></image>
+					</view>
+				</view>
+			</view>
+			<!-- <view class="notice margintty" style="background-color: #fff;" v-if="showBar" dir="ltr">
+				<nut-noticebar :text="barText" :left-icon="store.$state.imgObj.labaIcon" :scrollable="true"
+					background="#1D1D1D" color="#EAC975" style="border-radius: 20rpx;">
+				</nut-noticebar>
+			</view> -->
+			<!-- bottom -->
+
+			<view class="margintty mt30" v-show='item.movies.length>0' v-for="(item, index) in rankListRef" :key="index">
+				<view class="mt30 secondClo f40 btn">
+					<!-- 					{{t('index.i_a5')}} -->
+					<view class="">
+						{{item.title}}
+					</view>
+					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
+				</view>
+				<swiper next-margin='30px' :indicator-dots="false" :indicator-active-color="store.$state.contentColor"
+					:autoplay="false" :interval="3000" :duration="1000" :circular='false' style="height: 210px;">
+					<swiper-item class='swiper-item_sty' :style="lang=='ar'?'margin-right: 180px':''"
+						v-for="(item, index) in item.movies" :key="index">
+						<view class="big_box">
+							<view class="movie_box">
+								<view class="movie_img">
+									<view class="movie_header">
+										<nut-icon name="uploader" style="margin-left: 2px; margin-top: 3px;"
+											color="#FFF"></nut-icon>
+									</view>
+									<image :src="item.cover" style="width: 100%;height: 100%;object-fit: cover;"></image>
+								</view>
+								<!-- <view class="rate">
+									{{item.rate}}
+								</view> -->
+								<view class="movie_name">
+									{{item.title}}
+								</view>
+								<!-- <view class="watch">
+									<view class="add">
+										<nut-icon name="uploader" style="margin-left: 2px; margin-top: 3px;" color="#5799ef"></nut-icon>
+									</view>
+									<text>关注列表</text>
+								</view> -->
+							</view>
+						</view>
+
+					</swiper-item>
+				</swiper>
+			</view>
+
+			<view class="margintty" v-if="artclList.length >0">
+				<view class="mt60 secondClo f40">
+					{{t('index.i_a5')}}
+				</view>
+				<view class="mt40 bottom ">
+					<view v-for="item in artclList" class="center botItem" @click="botHandle(3,item)">
+						<image :src="item.full_cover" style="width: 100%;height: 100%;"></image>
+					</view>
+				</view>
+			</view>
+			<view class="Membership">
+				<view class="secondClo f40 btn">
+					<view class="">
+						{{ t('index.i_a26') }}
+					</view>
+					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
+				</view>
+				<view class="numList">
+					<swiper :circular="true" :indicator-dots="false" 
+						display-multiple-items="3" style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000" :duration="1000"
+						:vertical="true">
+						<swiper-item v-for="(item, index) in MembershipList"  class="numItem" style="width: 100%;" :key="index">
+							<view class="numContent">
+								<view class="numText">
+									<view class="phone">{{t('index.i_a28')}}
+										<text class="ml5">{{ item.phone }}</text>
+									</view>
+									<view class="time">{{ t('index.i_a29') }}</view>
+								</view>
+							</view>
+							<view>
+								<text class="price">{{ item.amount }}{{ currency }}</text>
+							</view>
+						</swiper-item>
+					</swiper>
+					<!-- <view v-for="(item,index) in MembershipList" :key="index" class="numItem">
+						<view class="numContent">
+							<view class="numText">
+								<view class="phone">{{t('index.i_a28')}}
+									<text class="ml5">{{ item.phone }}</text>
+								</view>
+								<view class="time">{{ t('index.i_a29') }}</view>
+							</view>
+						</view>
+						<view>
+							<text class="price">{{ item.amount }}{{ currency }}</text>
+						</view>
+					</view> -->
+				</view>
+			</view>
+			<view class="Membership mt30">
+				<view class="secondClo f40 btn">
+					<view class="">
+						{{ t('index.i_a27') }}
+					</view>
+					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
+				</view>
+				<view class="numList">
+					<swiper :circular="true" :indicator-dots="false" 
+						display-multiple-items="3" style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000" :duration="1000"
+						:vertical="true">
+						<swiper-item v-for="(item, index) in incomeList"  class="numItem" style="width: 100%;" :key="index">
+							<view class="numContent">
+								<view class="numText">
+									<view class="phone">{{t('index.i_a28')}}
+										<text class="ml5">{{ item.phone }}</text>
+									</view>
+									<view class="time">{{t('index.i_a9')}} {{ item.children }}</view>
+								</view>
+							</view>
+							<view>
+								<text class="price">{{ item.amount }}{{ currency }}</text>
+							</view>
+						</swiper-item>
+					</swiper>
+					<!-- <view v-for="(item,index) in incomeList" :key="index" class="numItem">
+						<view class="numContent">
+							<view class="numText">
+								<view class="phone">{{t('index.i_a28')}}
+									<text class="ml5">{{ item.phone }}</text>
+								</view>
+								<view class="time">{{t('index.i_a9')}} {{ item.children }}</view>
+							</view>
+						</view>
+						<view>
+							<text class="price">{{ item.amount }}{{ currency }}</text>
+						</view>
+					</view> -->
+				</view>
+			</view>
+			<!-- 滚动数据 充值 -->
+			<!-- <view class="margintty" v-if="rechargeList.length >0">
+				<view class="mt30 secondClo f40" :style="{color:store.$state.thirdColor}">
+					{{t('add1.a_d5')}}
+				</view>
+				<view class="mt40 withdrawEl">
+					<swiper :circular="true" :indicator-dots="false" :autoplay="true" :interval="2000" :duration="1000"
+						display-multiple-items="4" style=" width: 100% !important;" :disable-touch="true"
+						:vertical="true">
+						<swiper-item v-for="(item, index) in rechargeList" style="width: 100%;" :key="index">
+							<view class="honerItem ">
+								<image :src="store.$state.imgObj.withdrawIcon" mode="widthFix"
+									style="width: 46rpx;height: 40rpx;"></image>
+								<view class=" mglr29 between" style="flex: 1;">
+									<text>{{ item.phone }} </text>
+									<text class="text_center">{{t('add1.a_d6')}}</text>
+									<text style="padding-left: 10rpx;">{{ item.amount }} {{currency}}</text>
+								</view>
+							</view>
+						</swiper-item>
+					</swiper>
+				</view>
+			</view> -->
 
 			<!-- 滚动数据 -->
-			<view v-if="withdrawList.length >0">
-				<view class="mt123 secondClo f40" :style="{color:store.$state.thirdColor}">
+			<!-- <view class="margintty" v-if="withdrawList.length >0">
+				<view class="mt30 secondClo f40" :style="{color:store.$state.thirdColor}">
 					{{t('index.i_a3')}}
 				</view>
 				<view class="mt40 withdrawEl">
@@ -77,78 +235,53 @@
 								<view class=" mglr29 between" style="flex: 1;">
 									<text>{{ item.phone }} </text>
 
-									<text>{{t('index.i_a4')}}</text>
+									<text class="text_center">{{t('index.i_a4')}}</text>
 									<text style="padding-left: 10rpx;">{{ item.amount }} {{currency}}</text>
 								</view>
-
 							</view>
 						</swiper-item>
 					</swiper>
 				</view>
-			</view>	
-			<!-- 滚动数据 -->
-			<view v-if="rechargeList.length >0">
-				<view class="mt123 secondClo f40" :style="{color:store.$state.thirdColor}">
-				Recharge cash
-				</view>
-				<view class="mt40 withdrawEl">
-					<swiper :circular="true" :indicator-dots="false" :autoplay="true" :interval="2000" :duration="1000"
-						display-multiple-items="4" style=" width: 100% !important;" :disable-touch="true"
-						:vertical="true">
-						<swiper-item v-for="(item, index) in rechargeList" style="width: 100%;" :key="index">
-							<view class="honerItem ">
-								<image :src="store.$state.imgObj.withdrawIcon" mode="widthFix"
-									style="width: 46rpx;height: 40rpx;"></image>
-								<view class=" mglr29 between" style="flex: 1;">
-									<text>{{ item.phone }} </text>
+			</view> -->
 
-									<text>Recharge success</text>
-									<text style="padding-left: 10rpx;">{{ item.amount }} {{currency}}</text>
-								</view>
-
-							</view>
-						</swiper-item>
-					</swiper>
-				</view>
-			</view>
-
-			<!-- bottom -->
-			<view v-if="artclList.length >0">
-				<view class="mt60 secondClo f40" :style="{color:store.$state.thirdColor}">
-					{{t('index.i_a5')}}
-				</view>
-				<view class="mt40 bottom ">
-					<view v-for="item in artclList" class="center botItem" @click="botHandle(3,item)">
-						<image :src="item.full_cover" style="width: 100%;height: 100%;"></image>
-					</view>
-				</view>
-			</view>
 			<view style="height: 40rpx;"></view>
+
 		</view>
-		
-		<view style="height: 200rpx;"></view>
+
 		<!-- 客服列表 -->
-		<nut-drag :boundary="{ top:50, left: 30, bottom:50, right: 30 }" :attract="true" v-if="showService"
-			:style="{ top: '850rpx', right: '30px' }">
+		<nut-drag class="margintty" :boundary="{ top:50, left: 30, bottom:50, right: 30 }" :attract="true"
+			v-if="showService" :style="{ top: '1050rpx', right: '30px' }">
 			<image :src="COUNTRY.kefu?COUNTRY.kefu:store.$state.imgObj.kefuIcon" mode="widthFix"
-				style="width: 80rpx;height: 80rpx;margin-top: 0;" @click="changePage(3,'../mine/service')"></image>
+				style="width: 80rpx;height: 80rpx;margin-top: 0; display: none;"
+				@click="changePage(3,'../mine/service')"></image>
 		</nut-drag>
 
 		<FullMask v-show="showMask" @confirm="methods.confirm" :maskList="maskContent"></FullMask>
-
+		<Loading ref="showLoading"></Loading>
+		<!-- <view style="width: 100%;height: 60px;">
+			
+		</view> -->
+		<!-- <Tabbar :activeIndex="0"></Tabbar> -->
+		<Menu :bottom="300" :right="0"></Menu> 
 	</view>
 </template>
 
 <script setup>
+	// import Tabbar from '@/components/botTabbar/botTabbar.vue'
+
 	import request from '../../../comm/request.ts';
 	import FullMask from "@/components/fullMask/fullMask";
 	import COUNTRY from "../../../setting.js"
-	import {
-		Toast
-	} from '@nutui/nutui';
+	import Menu from '@/components/menu.vue'
+
 	import {
 		useI18n
 	} from "vue-i18n";
+	import {
+		onBeforeMount,
+		onMounted,
+		ref
+	} from 'vue';
 
 	const {
 		t
@@ -161,6 +294,9 @@
 	import {
 		userStore
 	} from "@/store/themeNum.js";
+	import {
+		Toast
+	} from '@nutui/nutui';
 	import WebsocketTask from '../../../comm/websocket.js'
 	// 创建websocket
 	// let websocket = new WebsocketTask('xxx', 5000)
@@ -192,29 +328,176 @@
 			url: '../mine/withdraw'
 		},
 		{
-			img: store.$state.imgObj.indexComm[2],
-			name: t('index.i_a8'),
-			url: '../mine/skyPay'
-		},
-		{
 			img: store.$state.imgObj.indexComm[3],
 			name: t('index.i_a9'),
 			url: '../mine/share'
 		},
+		{
+			name: t('mine.m_m5'),
+			img: store.$state.imgObj.indexComm2[0],
+			url: '../mine/accountDetails',
+		},
 	])
+
+	// 金刚2
+	const commglrist2 = ref([
+
+		{
+			name: t('mine.m_m8'),
+			img: '/static/themeNum1/index/indexComm3.png',
+			url: './team',
+			openLink: false,
+		},
+		{
+			name: t('add1.a_d7'),
+			img: '/static/themeNum1/index/indexComm6.png',
+			openLink: true,
+			url: "../mine/article?id=" + 2
+		},
+		{
+			name: t('add1.a_d1') + " APP",
+			img: '/static/themeNum1/index/indexComm8.png',
+			openLink: true,
+			url: ""
+		},
+
+		{
+			name: 'save bookmark',
+			img: '/static/shuqian.png',
+			openLink: true,
+			url: "../mine/DownLoad"
+		},
+	])
+	const tabIconsContent = ref([
+		{
+			name: t('index.i_a6'),
+			img: '../../static/themeNum1/index/Recharge.png',
+			openLink: true,
+			url: "./recharge"
+		},
+		{
+			name: t('index.i_a7'),
+			img: '../../static/themeNum1/index/Withdraw.png',
+			openLink: true,
+			url: "../mine/withdraw"
+		},
+		{
+			name: t('ss1.a_a2'),
+			img: '../../static/themeNum1/index/Fund.png',
+			openLink: true,
+			url: "../mine/skyPay"
+		},
+		{
+			name: t('index.i_a10'),
+			img: '../../static/themeNum1/index/TurntableLuck.png',
+			openLink: true,
+			url: "../linkEgg/Marquee"
+		},
+		{
+			name: t('index.i_a11'),
+			img: '../../static/themeNum1/index/InvitationRewards.png',
+			openLink: true,
+			url: "../mine/share"
+		},
+		{
+			name: t('index.i_a12'),
+			img: '../../static/themeNum1/index/NewsCenter.png',
+			openLink: true,
+			url: "./news"
+		},
+		{
+			name: t('index.i_a13'),
+			img: '../../static/themeNum1/index/CompanyProfile.png',
+			openLink: true,
+			url: "./company"
+		},
+		{
+			name: t('index.i_a14'),
+			img: '../../static/themeNum1/index/VideoTutoriaHome.png',
+			openLink: true,
+			url: "./turoriaHome"
+		}
+	])
+	//任务收益
+	const MembershipList= ref([])
+	//邀请收益
+	const incomeList= ref([])
 	// 提现列表
 	const withdrawList = ref([])
+	// 充值列表
+	const rechargeList = ref([])
 
-	const goodsList = ref([])
 	// 弹窗
 	const showMask = ref(false)
 	const maskContent = ref([])
 	const changePage = (ind, url) => {
-		if (ind == 0) {
-			uni.switchTab({
-				url
-			})
+		uni.navigateTo({
+			url
+		})
+	}
+	// const changePage2 = (index, item.url) => {
+	// 	if (index == 2 || index == 3) {
+	// 		window.open(url)
+	// 	} else {
+	// 		uni.navigateTo({
+	// 			url
+	// 		})
+	// 	}
+	// }\
+	//消息栏提醒
+	const unread = () => {
+		request({
+			url: 'user/unreadArticleNum',
+			methods: 'get',
+		}).then(res => {
+			if (res !== 0) {
+				uni.setTabBarBadge({ //显示数字
+					index: 3, //tabbar下标
+					text: res //数字
+				})
+			}
+		})
+	}
+
+	//电影列表
+	const rankListRef = ref()
+	const rankList = () => {
+		request({
+			url: 'home/movieList',
+			methods: 'get'
+		}).then(res => {
+			rankListRef.value = res
+
+		})
+	}
+
+	//详情
+	const task = (item) => {
+		uni.setStorageSync('taskMove', item)
+		uni.navigateTo({
+			url: './myTask',
+		})
+	}
+	const changePage2 = (index, url) => {
+		if (index == 2) {
+			// 下载app
+			// && COUNTRY.url == 'wyf666.com'
+			var userAgent = navigator.userAgent; //获取userAgent信息  
+			if (userAgent.includes('iPhone')) {
+				// uni.navigateTo({
+				// 	url: '../mine/DownLoad'
+				// })
+				return false
+			}
+			window.open(url)
+			// window.open(url)
 		} else {
+			if (index == 0) {
+				uni.navigateTo({
+					url
+				})
+				return
+			}
 			uni.navigateTo({
 				url
 			})
@@ -228,9 +511,21 @@
 			showMask.value = false;
 		},
 	}
-	const rechargeList = ref([])
+
 	const currency = ref("")
 	const getData = () => {
+		// 获取app状态
+		rankList()
+		request({
+			url: 'setting/app',
+			methods: 'get',
+		}).then(res => {
+			if (res.download_status == 1) {
+
+				commglrist2.value[2].url = res.url
+			}
+		})
+
 		// 货币
 		request({
 			url: 'setting/currency',
@@ -286,6 +581,7 @@
 			methods: 'get'
 		}).then(res => {
 			maskContent.value = res
+			console.log(res, 'sss')
 			if (maskContent.value.length > 0) {
 				showMask.value = true
 			}
@@ -298,25 +594,20 @@
 		}).then(res => {
 			withdrawList.value = res
 		})
-			// 提现假数据
+
+		// 充值假数据
 		request({
-			url: 'home/depositRecharge',
+			url: 'home/depositRecharge ',
 			methods: 'get'
 		}).then(res => {
 			rechargeList.value = res
 		})
 
 
-
-		request({
-			url: 'home/vipList',
-			methods: 'get'
-		}).then(res => {
-			goodsList.value = res
-		})
 	}
 
 	const botHandle = (type, item) => {
+
 		// 轮播图
 		if (type == 2) {
 			if (item.turn_type == 0) {
@@ -340,45 +631,85 @@
 			})
 		}
 	}
-	const goMask= (item) =>{
-		uni.showModal({
-			// title: 'Tips',
-			content: 'Balansni ochishni tanlash kerakmi?',
-			confirmText: 'Tasdiqlang',
-			cancelText: 'Bekor qilish',
-			success: e => {
-				if (e.confirm) {
-					request({
-						url: 'home/vipUnlock',
-						methods: 'post',
-						data:  {
-							vipId: item.id
-						}
-					}).then(res => {
-						getData()
-					}).catch(err => {
-						Toast.text(err.message)
-					})
-
-				}
-			}
-		});
+	const lang = ref(uni.getStorageSync('lang'))
+	//tabbar栏语言切换
+	const tabbarIl8n = () => {
+		uni.setTabBarItem({
+			index: 0,
+			text: t('add1.a_c1')
+		})
+		uni.setTabBarItem({
+			index: 1,
+			text: t('add1.a_c2')
+		})
+		uni.setTabBarItem({
+			index: 2,
+			text: t('add1.a_c3')
+		})
+		uni.setTabBarItem({
+			index: 3,
+			text: t('index.i_a31')
+		})
+		uni.setTabBarItem({
+			index: 4,
+			text: t('add1.a_c5')
+		})
+	}
+	const movieList = ref([])
+	const movieMission = () =>{
+		request({
+			url:'home/vipList',
+			methods:'get'
+		}).then(res=>{
+			movieList.value = res
+		})
+	}
+	const goVip =(item) =>{
+		if(item.is_active==1){
+			uni.switchTab({url: "./task"})
+		}else{
+			Toast.text(t('index.i_a25'))
+		}
+	}
+	//tabs跳转
+	const goTabDetail=(item)=>{
+		if(item.url){
+			uni.navigateTo({
+				url: item.url
+			})
+		}
+	}
+	//任务收益
+	const getTaskProfit = ()=>{
+		request({
+			url:'home/taskProfit',
+			methods:'get'
+		}).then(res=>{
+			MembershipList.value = res
+		})
+	}
+	//邀请收益
+	const getInviteProfit =()=>{
+		request({
+			url:'home/inviteProfit',
+			methods:'get'
+		}).then(res=>{
+			incomeList.value = res
+		})
+	}
+	const jumpPage = (url) => {
+		uni.navigateTo({
+			url
+		})
 	}
 	// 终于可以用了
 	onLoad((e) => {
-
-		if (e.code) {
-			uni.navigateTo({
-				url: '../login/register?code=' + e.code
-			})
-			return false
-		}
-		if (e.key) {
-			uni.navigateTo({
-				url: '../linkEgg/linkEgg?key=' + e.key
-			})
-			return false
-		}
+		getData()
+		// unread()
+		movieMission()
+		getTaskProfit()
+		getInviteProfit()
+		tabbarIl8n()
 		if (!uni.getStorageSync('setLang')) {
 			request({
 				url: 'setting/lang',
@@ -386,19 +717,270 @@
 			}).then(res => {
 				uni.setStorageSync('lang', res[0].lang)
 				uni.setStorageSync('setLang', true)
-				history.go(0)
+				// window.location.reload()
 			})
+			return false
 		}
 
-		getData()
+		if (e.code) {
+			if (e.country) {
+				uni.navigateTo({
+					url: "../login/register?code=" + e.code + "&country=" + e.country
+				})
+			} else {
+				uni.navigateTo({
+					url: "../login/register?code=" + e.code
+				})
+			}
+			return
+		}
+		if (e.key) {
+			uni.navigateTo({
+				url: '../linkEgg/linkEgg?key=' + e.key
+			})
+			return false
+		}
+
+		// if(!uni.getStorageSync('token')){
+
+		// 	uni.navigateTo({
+		// 		url:'../login/beforeLogin'
+		// 	})
+		// }
+
+
+	})
+	const showLoading = ref(null)
+	onMounted(() => {
+		showLoading.value.loading = true
+		setTimeout(() => {
+			showLoading.value.loading = false
+		}, 2000)
 	})
 </script>
 
+<style>
+	::v-deep .uni-tabbar__reddot {
+		right: 12px !important;
+	}
+</style>
+
 <style lang="scss">
+	.tabIcons{
+		padding: 25rpx 25rpx 0 25rpx;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		.tabItem{
+			display: flex;
+			width: 48%;
+			height: 118rpx;
+			margin: 0 0 25rpx 0;
+			background: #fff;
+			box-shadow: 0 0 18px 0 #E9E9E9;
+			border: 0.5px solid #E9E9E9;
+			.tabFlex{
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.tabImg{
+					width: 60rpx;
+					height: 60rpx;
+				}
+				.tabText{
+					color: #000;
+					width: 80px;
+					margin-left: 5px;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+	.banner{
+		padding: 0 25rpx 25rpx 25rpx;
+		height: 160px;
+		.bannerImg{
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.secondClo{
+		color: #DE3824;
+	}
+	.task{
+		margin-left: 12px;
+		margin-bottom: 1.625rem;
+		.taskB{
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: -20px;
+			.taskBanner{
+				width: 82px;
+				height: 28px;
+				margin: 0 18rpx 25rpx 0;
+				// position: relative;
+					// z-index: 11;
+				.bannerImg{
+					width: 100%;
+					height: 100%;
+					
+				}
+			}
+			.textContent{
+				width: 54px !important;
+				text-align: center;
+				position: relative;
+				top: 21px;
+				z-index: 55;
+				.taskText{
+					color: #000;
+					font-size: 12px;
+				}
+			}
+			
+		}
+		
+	}
+	.Membership{
+		margin: 0 12px;
+		.numList{
+			background-color: #fff;
+			color: #fff;
+			border-radius: 0.9375rem;
+			padding: 0 0.75rem;
+			display: flex;
+			flex-direction: column;
+			box-shadow: 0 0 18px 0 #E9E9E9;
+			border: 0.5px solid #E9E9E9;
+			.numItem{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.numContent{
+					display: flex;
+					align-items: center;
+					.numImg{
+						width: 40px;
+						height: 40px;
+					}
+					.numText{
+						display: flex;
+						flex-direction: column;
+						margin-left: 3px;
+						.phone{
+							color: #000;
+							font-size: 12px;
+							.ml5{
+								margin-left: 3px;
+							}
+						}
+						.time{
+							color: #999999;
+							font-size: 11px;
+							margin-top: 5px;
+						}
+					}
+				}
+				.price{
+					color: #DE3824;
+					font-weight: bold;
+					font-size: 13px;
+				}
+			}
+			
+		}
+
+	}
+	.margintty {
+		// width: 94%;
+		margin-left: 12px;
+	}
+
+	.movie_img {
+		position: relative;
+		width: 160px;
+		height: 160px;
+		.movie_header {
+			background-image: url('../static/movie_start.png');
+			background-size: 100%;
+			z-index: 999;
+			position: absolute;
+			background-repeat: no-repeat;
+			width: 50rpx;
+			height: 75rpx;
+		}
+	}
+
+	.swiper-item_sty {
+		width: 326rpx !important;
+		height: 100%;
+
+		.big_box {
+			width: 326rpx;
+			height: 100%;
+
+			.rate {
+				width: 100%;
+				height: 72rpx;
+				color: #fff;
+			}
+
+			.movie_name {
+				width: 100%;
+				height: 80rpx;
+				line-height: 80rpx;
+				color: #fff;
+				text-indent: 0.5em;
+
+			}
+
+			.watch {
+				width: 286rpx;
+				height: 72rpx;
+				color: #fff;
+				line-height: 72rpx;
+				color: #5799ef;
+				margin: 0 auto;
+				display: flex;
+				justify-content: center;
+				background-color: #121212;
+
+				.add {
+					width: 40rpx;
+					height: 40rpx;
+					margin: 8rpx 20rpx 0rpx 0rpx;
+				}
+			}
+		}
+
+	}
+
+	.btn {
+		margin-bottom: 20rpx;
+		display: flex;
+	}
+
+	.movie_box {
+		width: 306rpx;
+		// height: 100%;
+		background-color: #1a1a1a;
+	}
+
+	.type {
+		position: absolute;
+		color: #fff;
+		bottom: 16rpx;
+		left: 16rpx;
+		z-index: 999;
+	}
+
 	.withdrawEl {
-		background-color: #fff;
+		background-color: #1D1D1D;
+		color: #fff;
 		border-radius: 30rpx;
-		padding: 47rpx 44rpx;
+		padding: 47rpx 24rpx 0 24rpx;
 
 		.honerItem {
 			display: flex;
@@ -423,9 +1005,12 @@
 	}
 
 	.notice {
-		padding: 10rpx 0;
-		background-color: #314539 !important;
+		// padding: 10rpx 0;
+		margin: 10rpx 0 10rpx 20rpx;
+		// background-color: #fff;
+		border-radius: 20rpx;
 		font-size: 28rpx;
+
 	}
 
 	.mt123 {
@@ -435,13 +1020,12 @@
 	.goodsItem {
 		padding: 30rpx;
 		border-radius: 30rpx;
+		background-color: #fff;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 25rpx;
 		position: relative;
-		background:rgba(168, 168, 168, 0.20);
-		color: #fff;
 	}
 
 	.goodsMask {
@@ -450,7 +1034,8 @@
 		right: 0;
 		height: 100%;
 		border-radius: 30rpx;
-		background: rgba(0, 0, 0, 0.7);
+
+		background: rgba(0, 0, 0, 0.5);
 	}
 
 	.wrapper {
@@ -495,5 +1080,12 @@
 			}
 		}
 
+	}
+	::v-deep .margintty .uni-swiper-slides{
+		width: 100% !important;
+	}
+	::v-deep .uni-swiper-wrapper .uni-swiper-dots .uni-swiper-dot-active{
+		background-color: #DE3824 !important;
+		background: linear-gradient(0deg, #e67f74 0%, #DE3824 100%) !important;
 	}
 </style>

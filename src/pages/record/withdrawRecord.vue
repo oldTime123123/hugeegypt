@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="withdrawRecord">
 
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('record.r_w1')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('record.r_w1')}}</view>
 			
 			<z-paging class="mt54" ref="paging" v-model="recordsList" @query="getData" 
 				:use-page-scroll="true" :refresher-enabled="false" :to-bottom-loading-more-enabled="true"
@@ -89,10 +89,13 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
+		// uni.switchTab({
+		// 	url:"../tabbar/my"
+		// })
 		},
 
 	};
@@ -120,9 +123,35 @@
 </script>
 
 <style lang="scss">
+	.withdrawRecord{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
 	page {
 		font-family: PingFangSC;
 	}
 
-	
+	.listItem {
+		background: #fff;
+		color: #000;
+		border-radius: 20rpx;
+		padding: 34rpx 45rpx;
+		margin-bottom: 30rpx;
+		font-size: 28rpx;
+		width: 600rpx;
+		.vvItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 29rpx;
+		}
+
+		.pass {
+			color: #5db760;
+		}
+
+		.error {
+			color: #f5564b;
+		}
+	}
 </style>

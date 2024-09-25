@@ -1,35 +1,43 @@
+<!--
+ * @Author: chenpn chenpn699@gmail.com
+ * @Date: 2024-09-20 16:01:15
+ * @LastEditors: chenpn chenpn699@gmail.com
+ * @LastEditTime: 2024-09-23 18:25:28
+ * @FilePath: \dandelion6 - 副本\src\pages\mine\iosIntro.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
+	<view class="iosIntro">
 
-
-	<view :style="store.$state.imgObj.loginBg">
-
-		<view class="pdlr35 pt33">
+		<view class="pdlr30 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
-					@click="back"></image>
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+					@click="methods.back"></image>
 			</view>
-			<view class="content_box ">
-				<view class="item f45 text_bold" v-for="(item,index) in dataList" :key="index">
-					<view class="mb10">
-						{{index+1}}.
-					</view>
-					<image :src="item" style="width: 100%;height: 50vh;"></image>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('add1.a_d1') + " APP"}}</view>
+			
+			
+			<view class="flex mt20" style="justify-content: space-between; flex-wrap: wrap;">
+				<view v-for="(item,index) in list" style="width: 100%;" class="mgtb40">
+					<view class="text_bold f40">{{index+1}}</view>
+					<image :src="item" mode="" style="width: 100%; height:944px;"></image>
 				</view>
 			</view>
 		</view>
+		
+
 	</view>
 </template>
 
 <script setup>
-	// import topNav from "@/components/topNav/topNav.vue"
 	import request from '../../../comm/request.ts';
 	import {
 		userStore
 	} from "@/store/themeNum.js";
-	// import {
-	// 	Toast
-	// } from '@nutui/nutui';
+	import {
+		Toast
+	} from '@nutui/nutui';
 	import {
 		onShow,
 		onLoad
@@ -43,29 +51,37 @@
 	const {
 		t
 	} = useI18n();
-	const dataList = [
-		"/static/downLoad/1.png",
-		"/static/downLoad/2.png",
-		"/static/downLoad/3.png",
-		"/static/downLoad/4.png",
-	]
-	const back = ()=>{
-		history.back()
-	}
+	const methods = {
+		back() {
+			uni.switchTab({
+				url:'/'
+			})
+		},
+
+	};
+const list = ref([
+		// '/static/download/1.png',
+		// '/static/download/2.png',
+		// '/static/download/3.png',
+		// '/static/download/4.png',
+		'/static/IMG_1612.JPG',
+		
+	])
 	// 终于可以用了
-	onShow(() => {})
+	onLoad(() => {
+
+	})
 </script>
 
 <style lang="scss">
-	.content_box {
-		padding: 31rpx 35rpx;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+	.iosIntro{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
+	page {
+		font-family: PingFangSC;
 	}
 
-	.item {
-		width: 48%;
-		margin-bottom: 20rpx;
-	}
+
 </style>

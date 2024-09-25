@@ -1,18 +1,19 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="rechargeRecord">
 
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image src="/static/actIcon/back.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('record.r_a1')}} </view>
-			<z-paging class="mt54 " ref="paging" v-model="recordsList" @query="getData" :refresher-enabled="false"
-				:to-bottom-loading-more-enabled="true" :auto-full-height="true" :auto-show-back-to-top="true"
-				:empty-view-text="t('record.r_r1')" :loading-more-no-more-text="t('record.r_r1')"
-				:empty-view-reload-text="t('record.r_r2')" :loading-more-loading-text="t('record.r_r4')"
-				:loading-more-fail-text="t('record.r_r3')" style="margin: 250rpx auto 0;width: 100%;  ">
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('record.r_a1')}} </view>
+			<z-paging 
+				class="mt54 " ref="paging" v-model="recordsList" @query="getData" 
+					 :refresher-enabled="false" :to-bottom-loading-more-enabled="true" :auto-full-height="true"
+					:auto-show-back-to-top="true"  :empty-view-text="t('record.r_r1')"
+					:loading-more-no-more-text="t('record.r_r1')" :empty-view-reload-text="t('record.r_r2')"
+					:loading-more-loading-text="t('record.r_r4')" :loading-more-fail-text="t('record.r_r3')" style="margin: 250rpx auto 0;width: 100%;  ">
 				<view class="listItem" v-for="(item, index) in recordsList" :key="index">
 					<view class="vvItem">
 						<view class="f26">{{t('mine.m_s10')}}</view>
@@ -32,7 +33,7 @@
 						<view class="f26">{{t('record.r_a4')}}</view>
 						<view class="">{{ item.createTime }}</view>
 					</view>
-
+					
 					<view class="vvItem">
 						<view class="f26">{{t('all.a_d2')}}</view>
 						<view class="">
@@ -62,16 +63,17 @@
 		onLoad
 	} from "@dcloudio/uni-app";
 	const store = userStore();
-	import {
-		useI18n
-	} from 'vue-i18n'
+	import {useI18n} from 'vue-i18n'
 
-	const {
+	　const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
+		// uni.switchTab({
+		// 	url:'../tabbar/my'
+		// })
 		},
 
 	};
@@ -94,11 +96,41 @@
 	}
 	// 终于可以用了
 	onLoad(() => {
-
+	
 	})
 </script>
 
 <style lang="scss">
+	.rechargeRecord{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
 
+	}
+	.listItem {
+		background: #fff;
+		color:#000;
+		border-radius: 20rpx;
+		padding: 4rpx 45rpx 34rpx 45rpx;
+		margin-bottom: 30rpx;
+		font-size: 28rpx;
+		width: 600rpx;
+		margin: 30rpx auto;
+		.vvItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 29rpx;
+		}
 
+		.pass {
+			color: #5db760;
+		}
+
+		.error {
+			color: #f5564b;
+		}
+		.cancle{
+			color: #AFAFAF;
+		}
+	}
 </style>

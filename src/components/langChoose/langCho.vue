@@ -29,7 +29,6 @@
 	const store = userStore();
 
 
-	// 　const { t } = useI18n()
 	const methods = {
 		back() {
 			history.back()

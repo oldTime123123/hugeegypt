@@ -1,310 +1,426 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
-
-		<view class="pdlr35 pt33 pb50">
-
-			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
-					@click="methods.back"></image>
-			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('all.skyPay')}}</view>
-			<view class="mt38 flex wrap between">
-				<view class="topItem" v-for="item in topList">
-					<view class="f20">{{item.name}}</view>
-					<view class="f32" :style="{color:store.$state.contentColor}">{{item.value}}</view>
-				</view>
-			</view>
-			<view class="mainBox">
-				<view class="withTitle" :style="choStyle">
-				
-					{{t('mine.m_s6')}}
-				</view>
-				<view class="flex mt70">
-					<view class="short">{{currency}}</view>
-					<input type="text" placeholder-class="plo" style="color: #fff;" focus v-model="inputNum"
-						:placeholder="t('mine.m_s7')">
-				</view>
-
-				<view class="flex mt30">
-					<view class="short">{{t('mine.m_s5')}}</view>
-					<input type="text" disabled style="color: #F65E5E;"
-						:value="(inputNum * (botList[botInd]?botList[botInd].rate:0)).toFixed(2)">
-				</view>
-			</view>
-
-			<view class="mt42 bTitle" :style="{background:store.$state.contentColor}">
-				{{t('mine.m_s8')}}
-			</view>
-
-			<view class="mt32  wrap between">
-				<view class="botItem" v-for="(item,index) in botList" :style="botInd==index?choStyle:''"
-					@click="botInd = index">
-					<view>{{item.title}}</view>
-					<view class="mt20"> rate of return: + {{(item.rate *100 ).toFixed(2)+'%'}}</view>
-					<view class="mt20">{{item.day}} {{t('mine.m_s9')}}</view>
-					<view class="mt20">{{t('mine.m_s10')}}:{{currency}} {{item.min_num}} - {{currency}}{{item.max_num}}
-					</view>
-				</view>
-			</view>
-			<view class="btns mt70" :style="choStyle" @click="methods.transferInHandle">
-				{{t('mine.m_s6')}}
-			</view>
-			<view class="btns mt30" :style="noStyle" @click="methods.changePage">
-				{{t('mine.m_s11')}}
-			</view>
-
-		</view>
-
-		<nut-overlay v-model:visible="buHandleMask">
-			<div class="wrapper">
-				<div class="content ">
-					<view class="f40">{{t('mine.m_s12') + " " + t('all.skyPay')}}</view>
-					<view class="f30 mt40">
-						{{t('mine.m_s12') + " " + inputNum + ' ' + currency}}
-					</view>
-
-					<view class="between">
-						<view :style="{background:store.$state.secondColor}">{{ t('all.a_c2')}}</view>
-						<view :style="{background:store.$state.contentColor}" @click="confirmHandle"> {{t('all.a_c1')}}
+   <view class="mainContentS">
+      <view class="between pt30 pdlr30">
+         <image
+            src="../../static/themeNum1/icon/bback.png"
+            mode="widthFix"
+            style="width: 48rpx; height: 36rpx"
+            @click="methods.back"
+         ></image>
+         <view class="f40  " style="color: #fff;" >{{t('ss1.a_a2')}}</view>
+         <image
+            src="../../static/skypay/record.png"
+            mode="widthFix"
+            style="width: 40rpx; height: 40rpx"
+            @click="goRec"
+         ></image>
+      </view>
+      <view class="pt23 pb50">
+         <view class="topMain">
+            <!-- <view class="topBox wrap between">
+               <view class="topItem" v-for="item in topList">
+                  <view class="f20">{{ item.name }}</view>
+                  <view class="f32" :style="{ color: store.$state.contentColor }">{{ item.value }}</view>
+               </view>
+            </view> -->
+            <view class="pt23 fundHead">
+               <view class="wallet">
+                  <view class="walletItem">
+							<view class="flex">
+								<image src="../../static/themeNum1/my/balance.png" mode="widthFix" style="width: 45rpx; height: 45rpx"></image>
+								<text class="ft14" style="margin-left: 4px;">{{ $t('mine.m_t4') }}</text>
+							</view>
+							<text class="ft20" style="margin-top: 5px;">{{ balance }} {{ currency }}</text>
 						</view>
-					</view>
-				</div>
-			</div>
-		</nut-overlay>
-	</view>
+						<view class="walletItem">
+							<view class="flex">
+								<image src="../../static/themeNum1/my/commission.png" mode="widthFix" style="width: 45rpx; height: 45rpx"></image>
+								<text class="ft14" style="margin-left: 4px;">{{ $t('record.r_r8') }}</text>
+							</view>
+							<text class="ft20" style="margin-top: 5px;">{{ commission }} {{ currency }}</text>
+						</view>
+               </view>
+            </view>
+         </view>
+         <view class="pdlr35 boxItemBox">
+            <view class="balances">
+               <view class="boxItem" v-for="(item, index) in boxItem">
+                  <view class="f24 secondClo" style="color: #DE3824">
+                     {{ item.value ? (item.value / 1).toFixed(2) : 0 }}
+                  </view>
+                  <view class="title mgtb10 f20">{{ item.name }}</view>
+               </view>
+            </view>
+         </view>
+         <view class="pdlr35 mt32">
+            <view class="botItem" v-for="(item, index) in botList" @click="botInd = index">
+               <view class="title">{{ item.title }}</view>
+
+               <image
+                  class="mt20"
+                  :src="item.full_poster"
+                  style="width: 100%; border-radius: 20rpx"
+               ></image>
+               <view class="mt20 between">
+                  <span>{{t('ss1.a_a3')}}:</span>
+                  <span>{{ item.min_num + ' ' + currency }}</span>
+               </view>
+               <view class="mt20 between">
+                  <span>{{t('ss1.a_a4')}}:</span>
+                  <span>{{ item.day }} Days</span>
+               </view>
+               <view class="mt20 between">
+                  <span>{{t('ss1.a_a5')}}:</span>
+                  <span>{{ item.day_income }} %</span>
+               </view>
+               <view class="mt20 between">
+                  <span>{{t('ss1.a_a6')}}:</span>
+                  <span>{{ item.day * item.day_income }} %</span>
+               </view>
+			   
+			 
+			   
+               <view class="mt20 between">
+                  <view class="center">
+                     {{t('ss1.a_a7')}}
+                     <nut-progress
+                        :show-text="false"
+                        :is-show-percentage="false"
+                        class="ml20 mt10"
+                        :percentage="item.progress"
+                        style="width: 300rpx"
+                     />
+                  </view>
+                  <span>{{item.progress +' %'}}</span>
+               </view>
+			   
+			  <view class="pdlr40">
+				  <view class="btns mt70 center f30  text_bold" @click="goInfo(item.id)">
+				     {{t('ss1.a_a8')}}
+				  </view>
+			  </view>
+            </view>
+         </view>
+      </view>
+		<Loading ref="showLoading"></Loading>
+   </view>
 </template>
 
 <script setup>
-	import request from '../../../comm/request.ts';
-	import {
-		userStore
-	} from "@/store/themeNum.js";
-	import {
-		Toast
-	} from '@nutui/nutui';
-	import {
-		onShow,
-		onLoad
-	} from "@dcloudio/uni-app";
-	import {
-		useI18n
-	} from "vue-i18n";
+import request from '../../../comm/request.ts';
+import { userStore } from '@/store/themeNum.js';
+import { Toast } from '@nutui/nutui';
+import { onShow, onLoad } from '@dcloudio/uni-app';
+import { useI18n } from 'vue-i18n';
 
-	const {
+const {
 		t
-	} = useI18n();
+	} = useI18n();;
 
-	const store = userStore();
+const store = userStore();
 
-	const topList = ref([{
-			name: t('wr.w_a2'),
-			value: 0
-		},
-		{
-			name: t('mine.m_s3'),
-			value: 0.00
-		},
-		{
-			name: t('mine.m_s4'),
-			value: 0
-		},
-		{
-			name: t('mine.m_s5'),
-			value: 0
-		},
-	])
-	const botList = ref([])
-	const inputNum = ref("")
-	const botInd = ref(0)
-	const choStyle = {
-		background: store.$state.contentColor,
-		color: '#000'
-	}
+const boxItem = ref([{
+      name: t('ss1.a_a1'),
+      value: 0,
+   },
+   {
+      name: t('mine.m_s3'),
+      value: 0,
+   },
+   {
+      name: t('mine.m_s5'),
+      value: 0,
+   }
+]);
 
-	const noStyle = {
-		background: '#fff',
-		color: store.$state.contentColor,
-		'box-shadow': 'none'
-	}
+// const topList = ref([
+//    {
+//       name: t('wr.w_a2'),
+//       value: 0
+//    },
+//    {
+//       name: t('mine.m_s3'),
+//       value: 0.0
+//    },
+//    {
+//       name: t('mine.m_s4'),
+//       value: 0
+//    },
+//    {
+//       name: t('mine.m_s5'),
+//       value: 0
+//    }
+// ]);
+const goRec = () => {
+   uni.navigateTo({
+      url: '../record/skyPayRecord'
+   });
+};
+const botList = ref([]);
+const inputNum = ref('');
+const botInd = ref(0);
+const choStyle = {
+   background: store.$state.contentColor,
+   color: '#fff'
+};
 
-	const getData = () => {
+const noStyle = {
+   background: '#fff',
+   color: store.$state.contentColor,
+   'box-shadow': 'none'
+};
+const balance = ref('')
+const commission = ref('')
+const getData = () => {
+   request({
+      url: 'lixibao/index',
+      methods: 'get'
+   }).then((res) => {
+      balance.value = res.balance;
+      commission.value = res.profit_balance;
+      boxItem.value[0].value =  res.lixibao_balance;
+      boxItem.value[1].value = res.lixibao_shouru;
+      boxItem.value[2].value = res.lixibao_shouru_yuji;
+      // console.log(res);
+      botList.value = res.lixibaos;
+      showLoading.value.loading = false
+   }).catch(()=>{
+      showLoading.value.loading = false
+   });
+};
 
-		request({
-			url: 'lixibao/index',
-			methods: 'get'
-		}).then(res => {
-			topList.value[0].value = res.balance
-			topList.value[1].value = res.lixibao_shouru
-			topList.value[2].value = res.lixibao_balance
-			topList.value[3].value = res.lixibao_shouru_yuji
-			// console.log(res);
-			botList.value = res.lixibaos
-		})
-	}
-	// 　const { t } = useI18n()
-	const methods = {
-		back() {
-			history.back()
-		},
-		changePage() {
-			uni.navigateTo({
-				url: '../record/skyPayRecord'
-			})
-		},
-		transferInHandle() {
-			if (parseInt(inputNum.value) > parseInt(topList.value[0].value) || inputNum.value <= 0) {
-				Toast.text(t('mine.m_s13'))
-				return false
-			}
-			buHandleMask.value = true
-		}
-	};
-	const confirmHandle = () => {
-		const data = {
-			id: botList.value[botInd.value].id,
-			amount: inputNum.value
-		}
-		request({
-			url: 'lixibao/invest',
-			methods: 'post',
-			data: data
-		}).then(res => {
-			getData()
-			inputNum.value = ""
-			Toast.text(t('mine.m_s14'))
-		}).catch(err => {
-			Toast.text(err.message)
-		})
-	}
-	const buHandleMask = ref(false)
-	const currency = ref("")
-	// 终于可以用了
-	onShow(() => {
-		getData()
-		currency.value = uni.getStorageSync('currency')
+const methods = {
+   back() {
+      history.back()
+   //   uni.switchTab({
+   //   	url:'../tabbar/task'
+   //   })
+   },
+   changePage() {
+      uni.navigateTo({
+         url: '../record/skyPayRecord'
+      });
+   },
+};
+
+const goInfo = (id)=>{
+	uni.navigateTo({
+		url:'./skyPayInfo?id='+id
 	})
+}
+const confirmHandle = () => {
+   const data = {
+      id: botList.value[botInd.value].id,
+      amount: inputNum.value
+   };
+   request({
+      url: 'lixibao/invest',
+      methods: 'post',
+      data: data
+   })
+      .then((res) => {
+         getData();
+         inputNum.value = '';
+         Toast.text(t('mine.m_s14'));
+      })
+      .catch((err) => {
+         Toast.text(err.message);
+      });
+};
+const buHandleMask = ref(false);
+const currency = ref('');
+const showLoading = ref(null)
+   onMounted(() => {
+		showLoading.value.loading = true
+	})
+// 终于可以用了
+onShow(() => {
+   getData();
+   currency.value = uni.getStorageSync('currency');
+});
 </script>
 
 <style lang="scss">
-	.btns {
-		height: 120rpx;
-		line-height: 120rpx;
-		text-align: center;
-		border-radius: 35rpx;
+   .f24{
+		font-size: 14px;
 	}
-
-	.topItem {
-		margin-bottom: 20rpx;
-		width: 48%;
-		background-color: #314539;
-		border-radius: 20rpx;
-		height: 100rpx;
-		text-align: center;
-		padding: 20rpx 0;
-		color: #fff;
-		view:nth-child(1) {
-			height: 60%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+	.ft20{
+		font-size: 20px;
 	}
+	.ft14{
+		font-size: 14px;
+	}
+.mainContentS {
+   background-position: top;
+   // background-color: #DE3824;
+   background: url(../../static/themeNum1/index/loginBack.png);
+   width: 100vw;
+   overflow: hidden;
+   .fundHead{
+      width: 90%;
+      height: 100%;
+      position: relative;
+      margin-left: 5%;
+      background: url('../../static/skypay/fundHead.png') no-repeat 100%/100%;
 
-	.mainBox {
-		margin-top: 36rpx;
-		border-radius: 30rpx;
-		padding: 32rpx 57rpx;
-		font-size: 28rpx;
-		background-color: #314539;
-		position: relative;
-		color: #fff;
-		.withTitle {
-			position: absolute;
-			left: 0;
-			top: 0;
-			border-radius: 30rpx 0 30rpx 0;
-			padding: 23rpx 48rpx;
-			display: flex;
-			align-items: center;
-		}
-
-		.flex {
-			display: flex;
-			align-items: center;
-			border-bottom: 1rpx solid #eee;
-			padding: 30rpx 0;
-
-			.short {
-				width: 80%;
+      .wallet{
+         width: 100%;
+         height: 110px;
+         display: flex;
+         position: absolute;
+         z-index: 99;
+         top: 40px;
+         .walletItem{
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 110px;
+            color: #fff;
+            .flex{
+               display: flex;
+               align-items: center;
+            }
+         }
+      }
+   }
+   .boxItemBox {
+         padding: 0.90625rem 1.09375rem;
+			color: #000;
+         box-sizing: border-box;
+         .balances{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            border-radius: 0.625rem;
+            padding: 0.625rem;
+            box-sizing: border-box;
+         }
+			.title {
+				color: #000;
+				// width: 90%;
 				text-align: center;
-				font-weight: bold;
+				height: 50rpx;
+				display: flex;
+				align-items: center;
+
+				justify-content: center;
 			}
 
-			input {
-				margin-left: 30rpx;
-				font-size: 30rpx;
-				font-weight: bold;
-			}
-		}
-
-	}
-
-	.bTitle {
-		color: #000;
-		border-radius: 50rpx;
-		padding: 0 47rpx;
-		display: inline-block;
-		font-size: 32rpx;
-		line-height: 80rpx;
-		height: 80rpx;
-	}
-
-	.botItem {
-		margin-bottom: 20rpx;
-		width: 48%;
-		background-color: #fff;
-		border-radius: 20rpx;
-		text-align: center;
-		font-size: 22rpx;
-		padding: 26rpx 0;
-	}
-
-	.wrapper {
-		display: flex;
-		height: 100%;
-		justify-content: center;
-		padding: 0 50rpx;
-
-		.content {
-			margin-top: 400rpx;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 100%;
-			height: 350rpx;
-			background: #314539;
-			border-radius: 30rpx;
-			// justify-content: center;
-			padding-top: 50rpx;
-			position: relative;
-			overflow: hidden;
-			color: #fff;
-			.between {
-				position: absolute;
-				bottom: 0;
-				width: calc(100% - 80rpx);
-				padding: 0 30rpx 40rpx;
-
-				view {
-					width: 48%;
-					height: 100rpx;
-					color: #000;
-					text-align: center;
-					line-height: 100rpx;
-					font-size: 30rpx;
-					border-radius: 50rpx
-				}
+			.boxItem {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				// width: 48%;
 			}
 		}
-	}
+   .topMain {
+      height: 300rpx;
+      position: relative;
+      // background: url('../../static/skypay/redHead.png') no-repeat 100%/100%;
+      // margin-bottom: 30rpx;
+   }
+   .topBox {
+      position: absolute;
+      width: 80%;
+      height: 200rpx;
+      right: -60rpx;
+      background: linear-gradient(0deg, #e67f74 0%, #DE3824 100%);
+      box-shadow: 0px 5rpx 23rpx 4rpx rgba(0, 0, 0, 0.46);
+      border-radius: 20rpx;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding: 30rpx 0;
+      .topItem {
+         width: 100%;
+         border-radius: 20rpx;
+         height: 100rpx;
+         text-align: center;
+         view:nth-child(1) {
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+      }
+   }
+}
+.btns {
+   height: 98rpx;
+   line-height: 98rpx;
+   background: linear-gradient(to right, #e67f74 50%, #DE3824 100%);
+   border-radius: 39rpx;
+   color: #fff;
+}
+.botItem {
+   margin-bottom: 20rpx;
+   width: calc(100% - 40rpx);
+   background-color: #fff;
+   border-radius: 20rpx;
+   font-size: 30rpx;
+   padding: 20rpx;
+   color: #000;
+   .title {
+      position: relative;
+      padding-left: 5px;
+   }
+   .title::before {
+      position: absolute;
+      display: block;
+      content: '';
+      height: 90%;
+      width: 12rpx;
+      background: linear-gradient(to right, #e67f74 50%, #DE3824 100%);
+      border-radius: 6rpx;
+      left: -20rpx;
+   }
+}
+
+.wrapper {
+   display: flex;
+   height: 100%;
+   justify-content: center;
+   padding: 0 50rpx;
+
+   .content {
+      margin-top: 400rpx;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 350rpx;
+      background: #fff;
+      border-radius: 30rpx;
+      // justify-content: center;
+      padding-top: 50rpx;
+      position: relative;
+      overflow: hidden;
+
+      .between {
+         position: absolute;
+         bottom: 0;
+         width: calc(100% - 80rpx);
+         padding: 0 30rpx 40rpx;
+
+         view {
+            width: 48%;
+            height: 100rpx;
+            color: #fff;
+            text-align: center;
+            line-height: 100rpx;
+            font-size: 30rpx;
+            border-radius: 50rpx;
+         }
+      }
+   }
+}
+::v-deep .nut-progress .nut-progress-outer .nut-progress-inner {
+   background: linear-gradient(135deg, #e67f74 0%, #DE3824 100%);
+}
+::v-deep .nut-progress .nut-progress-outer{
+   background-color: #000;
+}
 </style>

@@ -1,36 +1,35 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="setting2">
 
-		<view class="pdlr35 pt33" :style="{color:store.$state.secondColor}">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">{{t('inp.a_b1')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('inp.a_b1')}}</view>
 
 			<view class="mt59">
-				<view class="pl14">
+				<view class="pl14" style="color: #fff;">
 					TRC20
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" :placeholder="t('inp.a_b2')" v-model="formData.address">
+					<input class="inp" v-model="formData.address" placeholder-class="plo" :placeholder="t('inp.a_b2')">
 				</view>
 			</view>
-			<!-- 	<view class="mt29 f20 pl14" style="color: #F43D45;">
-				reminder:At present, only trc20 addresses are supported,and the
-				platform will not be responsible for the drop of orders caused.
-			</view> -->
 
 
 			<!-- 登录按钮 -->
-			<view class="btns f36"
-				:style="showTag?{background:store.$state.contentColor,}:{background:store.$state.btnDis}"
-				@click="methods.saveHandle">
-				{{ t('inp.i_s1')}}
+			<view style="height: 120rpx;">
+				<view class="btns f36"
+					:style="showTag?{background:'#fff',boxShadow: '0rpx 11rpx 47rpx 4rpx rgba(247, 175, 64, 0.35)'}:{background:store.$state.btnDis}"
+					@click="methods.saveHandle">
+					{{ t('inp.i_s1')}}
 
 
+				</view>
 			</view>
+		
 			<view style="height: 50rpx;"></view>
 			<Loading ref="showLoading"></Loading>
 		</view>
@@ -50,14 +49,14 @@
 		onLoad
 	} from "@dcloudio/uni-app";
 	const store = userStore();
+	const showLoading = ref(null)
 	import {
 		useI18n
 	} from 'vue-i18n'
 
 	const {
 		t
-	} = useI18n()
-	const showLoading = ref(null)
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
@@ -66,6 +65,11 @@
 		saveHandle() {
 			if (!canEdit.value) {
 				return false
+			}
+			if(!formData.value.address){
+				return false
+			}{
+				showTag.value = true
 			}
 			showLoading.value.loading = true
 			setTimeout(() => {
@@ -77,7 +81,8 @@
 				methods: 'post',
 				url: 'user/attribute/wallet',
 				data: {
-					address: formData.value.address
+					address: formData.value.address,
+					type:"1"
 				}
 			}).then(res => {
 				showLoading.value.loading = false
@@ -94,17 +99,18 @@
 		request({
 			methods: 'get',
 			url: 'user/attribute/wallet',
+			data:{
+				type:1
+			}
 		}).then(res => {
 			if (res.address) {
 				formData.value.address = res.address
 				res.u_card_can_edit == 1 ? canEdit.value = true : canEdit.value = false
-				
 			} else {
 				canEdit.value = true
 			}
 		})
 	}
-
 	const formData = ref({
 		address: ''
 	})
@@ -128,14 +134,23 @@
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.setting2{
+		height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
 	.btns {
 		text-align: center;
 		line-height: 120rpx;
-		color: #fff;
-		height: 120rpx;
-		border-radius:80rpx;;
+		color: #000;
+		// height: 120rpx;
+		border-radius: 35rpx;
 		margin-top: 76rpx;
-		transition: .3s linear all;
+		// transition: .3s linear all;
+	}
+	.inp{
+		background: #Fff;
+		color: #000;
 	}
 </style>

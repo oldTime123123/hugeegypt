@@ -1,99 +1,143 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="team">
 
 		<view class="pdlr35 pt33">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('mine.m_t15')}}</view>
-
-			<view class="flex mt40" v-if="!pages.start" >
-				<view class="sel btns" @click="isVisible =true">
-					{{t('mine.m_a2')}}
-					<image class="mglr17" :src="store.$state.imgObj.down" mode="widthFix"
-						style="width: 21rpx; height: 13rpx;"></image>
+			<view class="f50 mt60  text_bold" style="color: #fff">{{t('mine.m_t15')}}</view>
+			
+			
+			<view class="topGrid">
+				<view class="item">
+					<view>{{teamData?.teamNewNum}}</view>
+					<view>{{t('team.t1')}}</view>
 				</view>
-				<view class="sea btns mglr22" @click="searchHandle">
-					<image class="mr17" :src="store.$state.imgObj.search" mode="widthFix"
-						style="width: 31rpx; height: 30rpx;"></image>
-					{{t('mine.m_a3')}}
-				</view>
-			</view>
-			<view class="flex mt40" v-else>
-				<view class="sel btns">
-					{{pages.start +' -- '+ pages.end}}
-
-					<view class="mglr17" @click="clearHandle">
-						<nut-icon name="close" size="14"></nut-icon>
-					</view>
-				</view>
-				<view class="sea btns mglr22" @click="searchHandle">
-					<image class="mr17" :src="store.$state.imgObj.search" mode="widthFix"
-						style="width: 31rpx; height: 30rpx;"></image>
-					{{t('mine.m_a3')}}
+				<view class="item">
+					<view>{{teamData?.member_cate_commission}}</view>
+					<view>{{t('team.t2')}}</view>
 				</view>
 			</view>
-
-			<view class="mt35 topEl">
-				<view class="topItem f20" v-for="(item,index) in topBox">
-					<view class="">
-						{{item.name}}
-						<nut-icon name="ask" size="10" class="askIcon" color="red" v-if="index ==3"
-							@click="teamMask = true"></nut-icon>
-					</view>
-					<view class="">
-						{{index==0||index == 1? parseFloat(item.value).toFixed(2):item.value}}
-					</view>
+			
+			<!-- <view class="inviteEl mt50 between">
+				<view style="width: 70%;" class="textHiddenOne">
+					<view class="mb10  " :style="{color:store.$state.secondColor}">{{t('act.m_m1')}} :<text class="f36 pl20" style="color:#EAC975 ;">{{inviteCode}}</text>	</view>
+				</view>
+				<view class="copyBtn" @click="copyHandle(inviteCode)">
+					{{t('all.a_d1')}}
+				</view>
+			</view> -->
+			
+			<view class="inviteEl mgtb20 between">
+				<view style="width: 70%;color: #DE3824;" class="textHiddenOne">
+					{{codeUrl}}
+				</view>
+				<view class="copyBtn" @click="copyHandle(codeUrl)">
+					{{t('all.a_d1')}}
 				</view>
 			</view>
-
-			<view class="mt35 selBot" :style="{background:store.$state.contentColor}">
-				{{t('mine.m_t1')}}: <text @click="memberShow = true">{{memberValue.text}}</text>
+			
+			<view class="typeListEl mt40 " >
+				<view style="font-size: 14px;" v-for="(item,index) in typeList"  :class="index == typeInd?'actType':''" @click='change(index)'>
+					{{item.name}}
+				</view>
 			</view>
-
-			<view class="mt40 botEl">
-				<view class="botItem" v-for="item in botList">
-					<view class="between">
-						<view>{{t('mine.m_t2')}}</view>
-						<view>{{item.filter_phone}}</view>
+			
+			<view class="mt30">
+				<view class="teamBox">
+					<view class="title">
+						{{t('team.t3')}}
 					</view>
-					<view class="between mt16">
-						<view>{{t('mine.m_t3')}}</view>
-						<view>{{item.child}}</view>
-					</view>
-					<view class="between mt16">
-						<view>{{t('mine.m_t6')}}</view>
-						<view>{{item.total_commission}}</view>
-					</view>
-					<view class="between mt16">
-						<view>{{t('mine.m_t4')}}</view>
-						<view>{{item.balance}}</view>
-					</view>
-					<view class="between mt16">
-						<view>{{t('mine.m_t5')}}</view>
-						<view>{{item.create_time}}</view>
+					<view class="teamBot">
+						<view class="between borderB">
+							<view>{{t('team.t4')}} {{teamData?.list[0].module==2?(teamData?.list[0].rate/100)*100+'%':teamData?.list[0].rate+'%'}}</view>
+							<view>{{teamData?.list[0].firstRechange}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t5')}}</view>
+							<view>{{teamData?.list[0].orderNum}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t6')}}</view>
+							<view>{{teamData?.list[0].questMoney}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t7')}} {{teamData?.list[0].module==2?(teamData?.list[0].questRate/100)*100+'%':teamData?.list[0].questRate+'%'}}</view>
+							<view>{{teamData?.list[0].money}}</view>
+						</view>
+						<view class="between">
+							<view>{{t('team.t8')}}</view>
+							<view @click="teamSize(1)" class="flex col_center"> {{teamData?.list[0].teamNum}}  <image class="ml10" src="/static/next.png" mode="" style="width: 32rpx;height: 32rpx;"></image> </view>
+						</view>
 					</view>
 				</view>
-				<view class="center mt30" style="color: #fff;">
-					<view class="line"></view>
-					<view class="mglr27 f20" v-if="hasMore" @click="loadMore">
-						{{t('record.r_r2')}}
+			
+				
+				<view class="teamBox">
+					<view class="title">
+						{{t('team.t9')}}
 					</view>
-					<view class="mglr27 f20" v-else>
-						{{t('record.r_r1')}}
+					<view class="teamBot">
+						<view class="between borderB">
+							<view>{{t('team.t4')}} {{teamData?.list[1].module==2?(teamData?.list[1].rate/100)*100+'%':teamData?.list[1].rate+'%'}}</view>
+							<view>{{teamData?.list[1].firstRechange}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t5')}}</view>
+							<view>{{teamData?.list[1].orderNum}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t6')}}</view>
+							<view>{{teamData?.list[1].questMoney}}</view>
+						</view>
+						<view class="between borderB">
+							<view>{{t('team.t7')}} {{teamData?.list[1].module==2?(teamData?.list[1].questRate/100)*100+'%':teamData?.list[1].questRate+'%'}}</view>
+							<view>{{teamData?.list[1].money}}</view>
+						</view>
+						<view class="between">
+							<view>{{t('team.t8')}}</view>
+							<view @click="teamSize(2)" class="flex col_center"> {{teamData?.list[1].teamNum}}  <image class="ml10" src="/static/next.png" mode="" style="width: 32rpx;height: 32rpx;"></image> </view>
+						</view>
 					</view>
-					<view class="line"></view>
 				</view>
-				<view style="height: 50rpx;"></view>
+							
+							
+							
+							<view class="teamBox">
+								<view class="title">
+									{{t('team.t10')}}
+								</view>
+								<view class="teamBot">
+									<view class="between borderB">
+									<view>{{t('team.t4')}} {{teamData?.list[2].module==2?(teamData?.list[2].rate/100)*100+'%':teamData?.list[2].rate+'%'}}</view>
+										<view>{{teamData?.list[2].firstRechange}}</view>
+									</view>
+									<view class="between borderB">
+										<view>{{t('team.t5')}}</view>
+										<view>{{teamData?.list[2].orderNum}}</view>
+									</view>
+									<view class="between borderB">
+										<view>{{t('team.t6')}}</view>
+										<view>{{teamData?.list[2].questMoney}}</view>
+									</view>
+									<view class="between borderB">
+										<view>{{t('team.t7')}} {{teamData?.list[2].module==2?(teamData?.list[2].questRate/100)*100+'%':teamData?.list[2].questRate+'%'}}</view>
+										<view>{{teamData?.list[2].money}}</view>
+									</view>
+									<view class="between">
+										<view>{{t('team.t8')}}</view>
+										<view @click="teamSize(3)" class="flex col_center"> {{teamData?.list[2].teamNum}}  <image class="ml10" src="/static/next.png" mode="" style="width: 32rpx;height: 32rpx;"></image> </view>
+									</view>
+								</view>
+							</view>
+										
+										
 			</view>
+		
 		</view>
-
-		<!-- 日历 -->
-		<nut-calendar v-model:visible="isVisible" type="range" @choose="setChooseValue">
-		</nut-calendar>
-
+	<view style="height: 100rpx;"></view>
 		<!-- 选择器 -->
 		<nut-picker v-model:visible="memberShow" :columns="columns" @confirm="confirm">
 		</nut-picker>
@@ -109,6 +153,9 @@
 </template>
 
 <script setup>
+	
+	
+	const typeInd = ref(0)
 	import request from '../../../comm/request.ts';
 	import {
 		Locale
@@ -117,9 +164,10 @@
 	import {
 		userStore
 	} from "@/store/themeNum.js";
-	// import {
-	// 	Toast
-	// } from '@nutui/nutui';
+	import {
+		Toast
+	} from '@nutui/nutui';
+	import useClipboard from 'vue-clipboard3'
 	import {
 		onShow,
 		onLoad
@@ -132,6 +180,20 @@
 	const {
 		t
 	} = useI18n();
+	const typeList = ref([
+		{
+			name:t('team.t11')
+		},
+		{
+			name:t('team.t12')
+		},
+		{
+			name:t('team.t13')
+		},
+		{
+			name:t('team.t14')
+		},
+	])
 	const showLoading = ref(null)
 	const methods = {
 		back() {
@@ -139,13 +201,34 @@
 		},
 
 	};
+	
+	const teamSize = (id) =>{
+		uni.navigateTo({
+			url:'./teamDetails?level='+id +'&type='+typeInd.value
+		})
+	}
+	const change = (id) =>{
+		typeInd.value = id
+		getData(id+1);
+	}
+	const currency = uni.getStorageSync('currency')
+	const {
+		toClipboard
+	} = useClipboard()
 	const isVisible = ref(false)
 	const memberShow = ref(false)
 	const memberValue = ref({
 		text: t('mine.m_t7'),
 		value: 0
 	})
-
+	const copyHandle = async (data) => {
+		try {
+			await toClipboard(data)
+			Toast.text(t('all.a_d1') + " " + t('all.a_c9'))
+		} catch (e) {
+			console.error(e)
+		}
+	}
 	const closeSwitch = param => {
 		isVisible.value = false;
 	};
@@ -211,20 +294,33 @@
 	])
 
 
-
-	const getData = () => {
+	const codeUrl = ref("")
+	const inviteCode = ref("")
+	const teamData = ref()
+	const getData = (id) => {
 		request({
 			url: 'user/record/team/report',
 			methods: 'get',
+			data:{
+				type:id
+			}
 		}).then(res => {
-			topBox.value[0].value = res.member_cate_commission
-			topBox.value[1].value = res.member_cate_commission_today
-			topBox.value[2].value = res.level
-			topBox.value[3].value = res.zhitui
-			topBox.value[4].value = res.level2
-			topBox.value[5].value = res.level3
-
+			codeUrl.value = res.link
+			inviteCode.value = res.code
+			teamData.value = res
 		})
+
+		// request({
+		// 	url: 'user/index',
+		// 	methods: 'get',
+		// }).then(res => {
+		// 	// let str = "+55"
+		// 	res.country_code = res.country_code.replace("+", "")
+		// 	inviteCode.value = res.invite_code
+		// 	codeUrl.value = window.location.protocol + "//" + window.location.host + "/\#/\?code=" + res.invite_code 
+
+		
+		// })
 	}
 
 	const pages = ref({
@@ -247,7 +343,7 @@
 			botList.value = res.data
 			if (botList.value.length < res.total) {
 				hasMore.value = true
-			}else{
+			} else {
 				hasMore.value = false
 			}
 		})
@@ -272,7 +368,7 @@
 			botList.value = botList.value.concat(res.data)
 			if (botList.value.length < res.total) {
 				hasMore.value = true
-			}else{
+			} else {
 				hasMore.value = false
 			}
 		})
@@ -283,12 +379,106 @@
 	// 终于可以用了
 	onShow(() => {
 		Locale.use('en-US', enUS);
-		getData();
+		getData(1);
 		getRecord(pages.value)
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.team{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
+	.teamBox:nth-child(1){
+		.title{
+			background: linear-gradient(0deg, #89A1D8 0%, #DCE7FE 98%);
+		}
+	}
+	.teamBox:nth-child(2){
+		.title{
+			background: linear-gradient(0deg, #AD9DFF 0%, #D7D9F1 98%);
+		}
+	}
+	.teamBox:nth-child(3){
+		.title{
+			background: linear-gradient(0deg, #EC8D8E 0%, #FFECED 98%);
+		}
+	}
+	.teamBox{
+		margin-top: 50rpx;
+		.title{
+			border-radius: 20px 20px 0px 0px;
+			padding: 30rpx;
+			font-size: 36rpx;
+		}
+		.teamBot{
+			background-color: #fff;
+			border-radius:0px 0px 20px 20px ;
+			.between{
+				padding: 20rpx 30rpx;
+				color: #000;
+				font-size:22rpx ;
+			}
+			.borderB{
+				border-bottom: 1rpx solid #FFFFFF;
+			}
+		}
+	}
+	.typeListEl{
+		background-color: #fff;
+		color: #000;
+		height: 100rpx;
+		display: flex;
+		
+		view{
+			text-align: center;
+			width: 25%;
+			line-height: 100rpx;
+		}
+		.actType{
+			background: linear-gradient(0deg, #e67f74 0%, #DE3824 100%);
+			border-radius: 10px;
+			color: #fff;
+		}
+	}
+	.topGrid{
+		display: flex;
+		background-color:#fff ;
+		color: #000;
+		height: 130rpx;
+		margin-top: 30rpx;
+		border-radius: 20rpx;
+		padding:  20rpx 0 ;
+		.item{
+			width: 50%;
+			display: flex;
+			align-items: center;
+			justify-content:center;
+			flex-direction: column;
+		}
+		.item:nth-child(1){
+			border-right: 1rpx solid #fff;
+		}
+	}
+	.inviteEl{
+		border: 1rpx solid #DE3824;
+		padding-left:50rpx;
+		border-radius: 80rpx;
+		font-size: 28rpx;
+		height: 80rpx;
+		background: #fff;
+		.copyBtn {
+			padding: 0 40rpx;
+			border-radius: 80rpx;
+			background: linear-gradient(0deg, #e67f74 0%, #DE3824 100%);
+			color: #fff;
+			height: 80rpx;
+			line-height: 80rpx;
+			
+		}
+	}
+
+
 	.btns {
 		// width: 220rpx;
 		height: 80rpx;
@@ -305,12 +495,12 @@
 
 	.sea {
 		background: #F5B04C;
-		
+		box-shadow: 0rpx 1rpx 31rpx 0rpx rgba(232, 158, 52, 0.57);
 	}
 
 	.sel {
 		background: #3477E0;
-	
+		box-shadow: 0rpx 1rpx 31rpx 0rpx rgba(76, 136, 230, 0.38);
 	}
 
 	.topEl {
@@ -319,7 +509,7 @@
 		// grid-template-rows: repeat(3, 1fr);
 		grid-column-gap: 0px;
 		grid-row-gap: 0px;
-		background-color: #314539;
+		background-color: #1D1D1D;
 		border-radius: 30rpx;
 		padding: 27rpx 20rpx;
 		color: #fff;
@@ -327,6 +517,7 @@
 			padding: 47rpx 0;
 			text-align: center;
 			position: relative;
+
 			// .askIcon{
 			// 	position: absolute;
 			// 	right: 20rpx;
@@ -340,7 +531,7 @@
 
 	.selBot {
 		padding: 21rpx 31rpx;
-		color: #000;
+		color: #fff;
 		display: inline-block;
 		border-radius: 30rpx;
 		font-size: 26rpx;
@@ -348,7 +539,7 @@
 
 	.botItem {
 		padding: 35rpx;
-		background-color: #314539;
+		background-color: #1D1D1D;
 		border-radius: 30rpx;
 		margin-bottom: 30rpx;
 		font-size: 20rpx;
@@ -372,6 +563,6 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0 30rpx;
-		
+
 	}
 </style>

@@ -9,13 +9,12 @@ export const userStore = defineStore({
 			contentColor: '',
 			btnDis: "#d8d8d8",
 			secondColor: "",
-			thirdColor: "#1ADB95",
+			thirdColor:"#EAC975",
 			imgObj: {},
 			my: {},
 			wr: {},
 			task: {},
-			countryCode: [],
-			linImg:""
+			countryCode: []
 		}
 	},
 	actions: {
@@ -44,12 +43,6 @@ export const userStore = defineStore({
 		},
 		setTask(data) {
 			this.task = data
-		},
-		setThirdColor(data) {
-			this.thirdColor = data
-		},
-		setImg(data){
-			this.linImg = data
 		}
 	},
 	// 持久化存储

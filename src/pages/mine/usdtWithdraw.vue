@@ -1,54 +1,77 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="withdraw">
 
-		<view class="pdlr50 pt33 pb50 ">
+		<view class="pdlr50 pt53 pb50 ">
 
-			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+			<view class=" between">
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('wr.w_a1')}}</view>
+			<view class="f50 mt60 text_bold ml10" style="color: #fff">{{t('wr.w_a1')}}</view>
+			<view class="pay">{{ $t('add2.a_a6') }}</view>
 			<view class="mt55">
-				<view class="topBox center flex-col color0" :style="store.$state.wr.reBox">
-					<view class="topItem f26">{{t('wr.w_a2')}}</view>
-
-					<view class="mt35 f55" > {{pageData.balance_max}} {{currency}}</view>
-
-					<!-- <view class="mt28 f26 withdrawAll" :style="{color:store.$state.contentColor}"
-						@click="inputNum = pageData.balance_max">{{t('wr.w_a3')}}</view> -->
+				<view class="topBox  flex-col" style="border-radius: 30rpx;">
+					<view class="topBoxTab">
+						<view class="tabItem" @click="tabChange(1)" :class="[tabClick==1?'active1':'gray1']">
+							{{ $t('add2.a_a7') }}
+						</view>
+						<view class="tabItem" @click="tabChange(2)" :class="[tabClick==2?'active2':'gray2']">
+							{{ $t('add2.a_a8') }}
+						</view>
+					</view>
+					<view class="topBoxItem" >
+						<view style="display: flex;align-items: center;">
+							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg"></image>
+							<image v-else src="../../static/themeNum1/my/commission.png" class="tabImg"></image>
+							<view class="topItem f26">{{ tabText }}</view>
+						</view>
+						<view class="mt35 f55" style="color: #DE3824;"> {{pageData.balance_max}} {{currency}}</view>
+					</view>
 				</view>
-				<view class="notice " style="background-color: #314539;" dir="ltr">
-					<nut-noticebar :text="topNotice" :left-icon="store.$state.imgObj.labaIcon"
-						background="rgba(251, 248, 220, 0)" color="#E1E872">
-					</nut-noticebar>
+				<view class="notice flex col_center" dir="ltr">
+					
+					<image :src="store.$state.imgObj.labaIcon" mode="widthFix" style="width: 40rpx;"></image>
+					<view class="ml30" >
+						<text v-if="showWord">
+							{{wordText}}
+						</text>
+						<text v-else class="f24">
+							{{t('add2.a_a3')}}
+						</text>
+					</view>
 				</view>
-
-				<view class="mainBox">
+				<view v-if="pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.input_type==2" class="inputBut">
+					<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+						<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+					</view>
+				</view>
+				<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
+					<view class="short">≈USDT:</view>
+					<text style="margin-left: 10px;">{{(inputNum * pageData.u_rate).toFixed(2)}}</text>
+				</view>				
+				<view class="mainBox" v-if="pageData.input_type==1">
 					<view class="withTitle" :style="choStyle">{{t('wr.w_u1')}}</view>
 					<view class="flex mt70">
 						<view class="short">{{currency}}</view>
-						<input type="text" placeholder-class="plo" style="color: #F65E5E;" v-model="inputNum" focus
+						<input type="text" placeholder-class="plo" style="color: #F65E5E;" v-model="inputNum" focus @input="inputNumHandle"
 							:placeholder="t('mine.m_s7')">
 
 					</view>
 
 					<view class="flex mt30">
 						<view class="short">USDT</view>
-						<input type="text" :disabled="true" :value="(inputNum * pageData.u_rate).toFixed(2)">
+						<input type="text" :disabled="true" :value="(inputNum * pageData.u_rate).toFixed(2)"  >
 					</view>
-
-					<view class="mt44">
-						<view class="tips">
-							{{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
-						</view>
-					</view>
+					
+					
 				</view>
 
 				<view class="mt38">
 					<view class="f34  text_bold" :style="{color:store.$state.secondColor}">{{t('wr.w_u3')}}</view>
 					<view class="mt34 otpEl">
 						<input class="inp" placeholder-class="plo" :placeholder="t('wr.w_u4')" :disabled="true" :value="pageData.user_link">
-						<view class="otp" v-if="!pageData.user_link" @click="changePage('../setting/set2')" :style="{background:store.$state.contentColor}">
+						<view class="otp" v-if="!pageData.user_link" @click="changePage('../setting/set2')">
 							{{t('wr.w_u5')}}
 						</view>
 					</view>
@@ -62,27 +85,29 @@
 							:placeholder="t('login.l_l5')" v-if="showNewPwd1">
 						<input class="inp " placeholder-class="plo" type="safe-password" v-model="fundPwd" :placeholder="t('login.l_l5')"
 							v-else>
-						<image v-if="showNewPwd1" src="../../static/themeNum1/icon/closeEye.png" class="pwdEye"
-							style="width: 29rpx;height: 16rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+						<image v-if="showNewPwd1" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
+							style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 
-						<image v-else src="../../static/themeNum1/icon/openEye.png" class="pwdEye openEye"
-							style="width: 29rpx;height: 25rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
+						<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye openEye"
+							style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 					</view>
 					
 					<view class="mt34  passwordInp otpEl" v-else>
 						<input class="inp " placeholder-class="plo" type="safe-password" password="true" :disabled="true"
 							:placeholder="t('inp.a_c6')" >
-						<view class="otp"  @click="changePage('../setting/set4')" :style="{background:store.$state.contentColor}">
+						<view class="otp"  @click="changePage('../setting/set4')">
 							{{t('mine.m_m14')}}
 						</view>
 					</view>
 
 
-					<view class="btns" :style="choStyle" @click="submitHandle">
+					<view class="btns" @click="submitHandle">
 						{{t('wr.w_a11')}}
 					</view>
 
-					<view class="mt70 " v-html="pageData.description" style="color: #fff;"></view>
+					<view class="desc">
+						<view class="mt70" v-html="pageData.description" style="color: #fff;"></view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -91,6 +116,30 @@
 </template>
 
 <script setup>
+	const showWord = ref(false)
+	const wordText = ref("")
+	
+	const inputNumHandle  = e=>{
+		let val = Number(e.detail.value)
+		
+		
+		for(let i = 0;i<fealList.value.length;i++){
+			if((Number(fealList.value[i].withdraw_min )<= val) && (val <= Number(fealList.value[i].withdraw_max))){
+				let str = t('wr.w_u6')
+				// 手续费类型 1.比例 2.固定金额
+				if (fealList.value[i].fee_type == 1) {
+					str = str + fealList.value[i].fee  + '%'
+				} else if (fealList.value[i].fee_type == 2) {
+					str = str + fealList.value[i].fee
+				}
+				wordText.value = str
+				showWord.value = true
+				break
+			}else{
+				showWord.value = false
+			}
+		}
+	}
 	import request from '../../../comm/request.ts';
 	import {
 		userStore
@@ -103,7 +152,6 @@
 		onLoad
 	} from "@dcloudio/uni-app";
 	const store = userStore();
-
 	const showLoading = ref(null)
 	import {
 		useI18n
@@ -127,35 +175,36 @@
 		}
 	};
 	const choStyle = {
-		background: store.$state.contentColor,
-		color: '#000'
+		background: "#DE3824",
+		color: '#fff'
 	}
 	const noStyle = {
 		color: store.$state.contentColor
 	}
 	const showNewPwd1 = ref(true)
 	const fundPwd = ref("")
-
+	const fealList = ref([])
 	const pageData = ref({})
 	const showInp = ref(true)
-	const getData = () => {
+	const getData = (tabClick) => {
 		request({
-			url: 'finance/usdt/withdraw/index',
+			url: `finance/usdt/withdraw/index?balance_type=${tabClick?tabClick:1}`,
 			methods: 'get',
 		}).then(res => {
 			pageData.value = res
 			if (res.user.payment_password) {
 				showInp.value = false
 			}
+			fealList.value = res.feeList
 			// console.log(res);
-			let str = t('wr.w_u6')
-			// 手续费类型 1.比例 2.固定金额
-			if (res.fee_type == 1) {
-				str = str + res.fee_rate * 100 + '%'
-			} else if (res.fee_type == 2) {
-				str = str + res.fee
-			}
-			topNotice.value = str
+			// let str = t('wr.w_u6')
+			// // 手续费类型 1.比例 2.固定金额
+			// if (res.fee_type == 1) {
+			// 	str = str + res.fee_rate * 100 + '%'
+			// } else if (res.fee_type == 2) {
+			// 	str = str + res.fee
+			// }
+			// topNotice.value = str
 		})
 	}
 	const changePage = (url) => {
@@ -163,10 +212,22 @@
 			url
 		})
 	}
+	const tabClick = ref(1)
+	const tabText = ref('')
 	const currency = ref("")
 	const inputNum = ref("")
 	const topNotice = ref("")
-
+	const locked = ref(false)
+	const titckIndex = ref(undefined)
+	const selectBut = (item,index)=>{
+		titckIndex.value = index;
+		inputNum.value = Number(item)
+	}
+	const tabChange = (index)=>{
+		tabClick.value = index;
+		tabText.value = index==1?t('mine.m_t4'):t('add2.a_a14');
+		getData(index)
+	}
 	const submitHandle = () => {
 		if (pageData.value.check.status == 1) {
 			Toast.text(pageData.value.check.message)
@@ -177,29 +238,36 @@
 			Toast.text(t('wr.w_u7'))
 			return false
 		}
-
-		showLoading.value.loading = true
-		setTimeout(() => {
+		if (!fundPwd.value) {
+			Toast.text(t('login.l_l5'))
+			return
+		}
+		// showLoading.value.loading = true
+		// setTimeout(() => {
 			submitHandle1()
-		}, 2000)
+		// }, 2000)
 	}
 
 	const submitHandle1 = () => {
 		const data = {
 			amount: inputNum.value,
-			password: fundPwd.value
+			password: fundPwd.value,
+			balance_type: tabClick.value
 		}
-
+		showLoading.value.loading = true;
 		request({
 			url: 'finance/usdt/withdraw/submit',
 			methods: 'post',
 			data: data
-		}).then(res => {
-				getData();
+		}).then(res => {			
 			showLoading.value.loading = false
 			Toast.text(t('wr.w_u8'))
 			inputNum.value = ""
 			fundPwd.value = ""
+			
+			uni.navigateTo({
+				url:'../record/withdrawRecord'
+			})
 		}).catch(err => {
 			showLoading.value.loading = false
 			Toast.text(err.message)
@@ -207,41 +275,114 @@
 	}
 	// 终于可以用了
 	onShow(() => {
+		tabClick.value = 1;
+		tabText.value = t('mine.m_t4');
 		getData();
 		currency.value = uni.getStorageSync('currency')
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.withdraw{
+		background: url(../../static/themeNum1/index/loginBack.png);
+	}
 	.topBox {
 		width: 100%;
-		height: 328rpx;
+		height: 328rpx
 	}
-
+	.topBoxTab{
+		width: 100%;
+		height: 45px;
+		display: flex;
+		.tabItem{
+			width: 50%;
+			height: 100%;
+		}
+	}
+	.ml10{
+		margin-left: 10px;
+	}
+	.pay{
+		color: #fff;
+		margin-top: 10px;
+	}
+	.topBoxItem {
+		height: calc(100% - 45px);
+		border-bottom-left-radius: 12px;
+		border-bottom-right-radius: 12px;
+		border: none;
+		background: url(../../static/themeNum1/my/orBottom.png);
+		background-size: 100% 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.active1{
+		border-top-right-radius: 12px;
+		color: #000;
+		background: url(../../static/themeNum1/my/orLeft.png);
+		background-size: 100% 100%;
+	}
+	.active2{
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		color: #000;
+		background: url(../../static/themeNum1/my/orRight.png);
+		background-size: 100% 100%;
+	}
+	.gray1{
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		background: #fff;
+		color: #000;
+	}
+	.gray2{
+		background: #fff;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		color: #000;
+	}
+	.tabItem{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.tabImg{
+		width: 24px;
+		height: 24px;
+		margin-right: 10px;
+	}
+	.flex{
+		display: flex;
+		// flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 	.withdrawAll {
 		padding: 27rpx 36rpx;
 		border-radius: 38rpx;
 		background: #fff;
 	}
-	.inp{
-		background-color: #314539;
-	}
+
 	.notice {
-		padding: 20rpx 0;
+		padding: 0 40rpx;
 		background-color: #fff;
 		border-radius: 20rpx;
 		margin-top: 34rpx;
 		font-size: 28rpx;
+		height: 100rpx;
+		color: #DE3824;
 	}
 
 	.mainBox {
-		margin-top: 36rpx;
+		margin-top: 28rpx;
 		border-radius: 30rpx;
 		padding: 32rpx 57rpx;
 		font-size: 28rpx;
-		background-color: #314539;
+		background-color: #fff;
 		position: relative;
-		color: #fff;
+		color: #000;
 		.withTitle {
 			position: absolute;
 			left: 0;
@@ -270,12 +411,12 @@
 		}
 
 		.tips {
-			background-color: #fff;
+			background-color: #1D1D1D;
 			border-radius: 10rpx;
 			padding: 20rpx;
 			font-size: 20rpx;
 			width: auto;
-			color: #000;
+			color: #DE3824;
 			display: inline-block;
 		}
 	}
@@ -285,9 +426,17 @@
 		height: 120rpx;
 		line-height: 120rpx;
 		text-align: center;
-		border-radius: 80rpx;
+		border-radius: 35rpx;
+		background: #fff;
+		color: #000;
 	}
-
+	.inp{
+		background: #fff;
+		color: #000 !important;
+	}
+	.plo{
+		color: #000 !important;
+	}
 	.otpEl {
 		position: relative;
 
@@ -301,10 +450,9 @@
 			// width: 60rpx;
 			padding: 0 10rpx;
 			height: 60rpx;
-			
-			
+			background: linear-gradient(-43deg, #e67f74 0%, #DE3824 100%);
 			border-radius: 10rpx;
-			color: #000;
+			color: #fff;
 			text-align: center;
 			line-height: 60rpx;
 		}
@@ -321,5 +469,27 @@
 			transform: translateY(-50%);
 		}
 		
+	}
+	.inputBut{
+		display: flex;
+		color: #000;
+		flex-wrap: wrap;
+		margin-top: 32rpx;
+		.inputItem{
+			border-radius: 8px;
+			margin: 0 15px 15px 0;
+			padding: 5px;
+			box-sizing: border-box;
+			color: #000;
+			background: #fff;
+		}
+		.activeItem{
+			border-radius: 8px;
+			margin: 0 15px 15px 0;
+			padding: 5px;
+			box-sizing: border-box;
+			color: #fff;
+			background: #DE3824
+		}
 	}
 </style>

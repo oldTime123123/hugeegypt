@@ -1,13 +1,13 @@
 <template>
-	<view :style="store.$state.imgObj.loginBg">
+	<view class="set5">
 
-		<view class="pdlr35 pt33" :style="{color:store.$state.secondColor}">
+		<view class="pdlr35 pt53" :style="{color:store.$state.secondColor}">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.secondColor}">{{t('inp.a_c1')}}
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('inp.a_c1')}}
 			</view>
 
 
@@ -32,10 +32,12 @@
 			</view>
 
 			<!-- 登录按钮 -->
-			<view class="btns f36"
-				:style="showTag?{background:store.$state.contentColor}:{background:store.$state.btnDis}"
-				@click="methods.saveHandle">
-				{{ t('inp.i_s1')}}
+			<view style="height: 120rpx;">
+				<view class="btns f36"
+					:style="showTag?{background:'#fff',boxShadow: '0rpx 11rpx 47rpx 4rpx rgba(247, 175, 64, 0.35)'}:{background:store.$state.btnDis}"
+					@click="methods.saveHandle">
+					{{ t('inp.i_s1')}}
+				</view>
 			</view>
 
 			<view style="height: 50rpx;"></view>
@@ -63,7 +65,7 @@
 
 	const {
 		t
-	} = useI18n()
+	} = useI18n();
 	const methods = {
 		back() {
 			history.back()
@@ -122,6 +124,11 @@
 </script>
 
 <style lang="scss">
+	.set5{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
 	.colorC {
 		color: #AFAFAF !important;
 	}
@@ -129,9 +136,16 @@
 	.btns {
 		text-align: center;
 		line-height: 120rpx;
-		color: #fff;
-		height: 120rpx;
-		border-radius:80rpx;;
+		color: #000;
+		// height: 120rpx;
+		border-radius: 35rpx;
 		margin-top: 76rpx;
+	}
+	.inp{
+		background: #Fff;
+		color: #000;
+	}
+	.plo{
+		color: #000 !important;
 	}
 </style>

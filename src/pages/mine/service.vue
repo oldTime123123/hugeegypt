@@ -1,13 +1,21 @@
+<!--
+ * @Author: chenpn chenpn699@gmail.com
+ * @Date: 2024-09-20 16:01:15
+ * @LastEditors: chenpn chenpn699@gmail.com
+ * @LastEditTime: 2024-09-23 18:28:27
+ * @FilePath: \dandelion6 - 副本\src\pages\mine\service.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
-	<view :style="store.$state.imgObj.recBg" style="height: calc(100vh) !important;overflow: hidden;">
+	<view  class="service" style="height: calc(100vh) !important;overflow: hidden;">
 
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 			<view class="flex between">
-				<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+				<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 					@click="methods.back"></image>
 			</view>
-			<view class="f50 mt60 text_bold" :style="{color:store.$state.thirdColor}">{{t('all.a_c4')}}</view>
+			<view class="f50 mt60 text_bold" style="color: #fff">{{t('all.a_c4')}}</view>
 
 			<view class="mt80">
 				<view class="kefuItem flex col_center" v-for="item in serviceList" @click="changePage(item)">
@@ -70,6 +78,11 @@
 </script>
 
 <style lang="scss">
+	.service{
+		min-height: 100vh;
+		background: url(../../static/themeNum1/index/loginBack.png);
+
+	}
 	.kefuItem {
 		background-color: #fff;
 		border-radius: 20rpx;

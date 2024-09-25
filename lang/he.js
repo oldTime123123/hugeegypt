@@ -1,4 +1,102 @@
 export default {
+	ss1:{
+		a_a1:"Fondssaldo",
+		a_a2:"Fonds",
+		a_a3:"Mininum",
+		a_a4:"Cyclus",
+		a_a5:"Dagelijks inkomen",
+		a_a6:"Totaal inkomen",
+		a_a7:"Bezig met verwerken",
+		a_a8:"Kopen",
+		
+		a_a9:"Aantal aankopen",
+		a_a10:"dagelijkse verhoging",
+		a_a11:"Bedrag bereik",
+		s_s1:'Je bent nog geen formele werknemer en kunt geen arbeidsovereenkomst ondertekenen.',
+		s_s2:"Om te ondertekenen",
+		s_s3:"Arbeidscontract",
+		s_s4:"Ontvangen bedrag",
+		s_s5:"Financiële details",
+		s_s6:"Teambeheer",
+		s_s7:"Wachtwoordbeheer",
+		s_s8:"Portefeuillebeheer",
+		s_s9:"Afmelden bij account",
+		s_s10:"Fondsgegevens",
+		s_s11:"Onthoud wachtwoord",
+		s_s12:"Er is momenteel een onvoltooide bestelling, wil je doorgaan met de laatste opwaardering?",
+		l_l1:"Loterij",
+		l_l2:"Beschikbaar",
+		l_l3:"Voltooid",
+		l_l6:"Naam van de onderscheiding",
+		l_l7:"Prijsprijs",
+		l_l8:"Beschikbaar",
+		l_l9:"Voltooid",
+		l_l10:"Mijn cadeau ",
+		l_l11:"Evenementregels",
+		l_l12:'Gefeliciteerd met het behalen'
+	},
+	team:{
+		t1:'Teamgrootte',
+		t2:"Teamvoordelen",
+		t3:'Team A',
+		t4:'Promotiepositiebeloningen',
+		t5:'Totaal voltooide bestellingen',
+		t6:'Provisie teaminkomsten',
+		t7:'Teamcommissie',
+		t8:'Teamgrootte',
+		t9:'Team B',
+		t10:'Team C',
+		t11:'Heel',
+		t12:"Vandaag",
+		t13:'Deze week',
+		t14:'Deze maand',
+		t15:"Teamgrootte",
+		t16:'Telefoon',
+		t17:"Aantal ondergeschikten",
+		t18:'Totale commissie',
+		t19:'Balans',
+		t20:'Registratietijd'
+	},
+	back:{
+		a_c2:'bevestiging',
+		r_o2:"volgnummer",
+		r_o3:'Aantal bestellingen',
+		r_o4: "Status van de bestelling",
+		r_o5: "Nog te betalen",
+		r_o6: "Adres van de lading",
+		r_o7: "Annulering van de bestelling",
+		r_o8: "Al dan niet een bestelling annuleren",
+		a_c1: "vervallen",
+		a_c2: "bevestiging",
+		a_c4: "Succesvol kopieren",
+		a_c5: "Succesvol geannuleerd",
+		r_r11:"Overgelegde bewijzen",
+		r_r6:"vervoer",
+		b1:'bankbezit',
+		b2:'Naam van de bank',
+		b3:'Aantal banken',
+		a_t1:"omschrijving",
+		r_r8:"laadvermogen"
+	},
+	add2:{
+		a_a1:"Dienst",
+		a_a2:"Opmerking",
+		a_a3:"Voer het wettelijke opnamebereik in",
+		a_a4:"Er is al een account om in te loggen",
+		a_a5: "Selecteer een betalingsportemonnee",
+		a_a6: "Betalingsportefeuille",
+		a_a7: "Saldo portemonnee",
+		a_a8: "Commissie portemonnee",
+		a_a9: "Ga", 
+		a_a10: "INR", 
+		a_a11: "Per bestelling", 
+		a_a12: "Dagelijks werk", 
+		a_a13: "storting",
+		a_a14: "Commissiesaldo",
+		a_a15: "Hoofdportemonnee",
+		a_a16: "Winstportemonnee",
+		a_a17: "Selecteer het opnamebedrag"
+	},
 	// 荷兰语
 	add1: {
 		b_b1: "Selecteer banknaam",
@@ -8,7 +106,20 @@ export default {
 		b_b5: "Gelieve in te voeren",
 		a_d1:'Downloaden',
 		a_d2:"Berichtencentrum",
-		a_d3:"Instellen"
+		a_d3:"Instellen",
+		a_d4:"Team",
+		a_d5:"Liste de rechargement",
+		a_d6:"recharge réussie",
+		a_d7:"salarisomschrijving",
+		a_d8:"Aanbetaling bevriezen",
+		a_d9:"Geldstorting",
+		
+		a_c1:'Thuis',
+		a_c2:'Taak',
+		a_c3:'Dienst',
+		a_c4:'Activiteit',
+		a_c5:'Mijn'
+		
 	},
 	act: {
 		a_s1: "Aanmelden",
@@ -57,6 +168,7 @@ export default {
 		e_e18: "creëerTijd",
 
 		m_m1: "Uitnodigingscode",
+		m_m2:'Na 360 dagen onafgebroken werken wordt het vaste rekeningsaldo teruggestort op de geldrekening'
 
 	},
 	all: {
@@ -91,7 +203,10 @@ export default {
 		l_l9: "Voer een geldig telefoonnummer in",
 		l_l10: "Gelieve het wachtwoord in te vullen",
 		l_l11: "Succesvol inloggen",
-
+				
+		l_l12: "Welkom bij Paardebloem",
+		l_l13:"Begin je geluksreis",
+				
 		l_r1: "Registreren",
 		l_r2: "Wachtwoord bevestigen",
 		l_r3: "Voer uw wachtwoord opnieuw in",
@@ -229,7 +344,8 @@ export default {
 		m_m11: "Uitloggen",
 		m_m12: "Servicecentrum",
 		m_m13: "Of uitloggen, opnieuw inloggen?",
-		m_m14: "binden"
+		m_m14: "binden",
+		m_m15:"Intrekken"
 	},
 	wr: {
 		w_a1: "Intrekking",
@@ -308,6 +424,43 @@ export default {
 		a_c4: "Adres",
 		a_c5: "Voer adres in",
 		a_c6: "Binnen eerst het wachtwoord van het fonds"
+	},
+	movie:{
+		m_a1:'Records',
+		m_a2:"De inkomsten van deze maand",
+		m_a3:'Totale omzet',
+		m_a4:'Voltooi de taak vandaag nog',
+		m_a5:'Taakrecord',
+		m_a6:'Mijn taak',
+		m_a7:'taaktijd',
+		m_a8:'taaknummer',
+		m_a9:'commissie',
+		m_b1:'Mijn positie',
+		m_b2:'Mijn team',
+		m_b3:'Klik om de introductie te bekijken',
+		m_b4:'taakintroductie',
+		m_b5:'Ontgrendel bedrag',
+		m_b6:'Dagelijks aantal bestellingen',
+		m_b7:'Dagelijks inkomen',
+		m_b8:'Eaming elke',
+		m_b8d:'dag',
+		m_b9:'deelnemer',
+		m_c1:'Tips',
+		m_c2:'Annuleren',
+		m_c3:'verifiëren',
+		m_c4:'Filmintroductie',
+		m_c5:'Taakvereisten',
+		m_c6:'Kijk uit',
+		m_c7:'seconden',
+		m_c8:'markeren',
+		m_c9:'BEOORDEL DIT',
+		m_d1:'Tarief',
+		m_d2:"Je hebt er niet lang genoeg naar gekeken",
+		m_d3:'Bekijk de video langer dan 10 seconden nadat de evaluatie is voltooid voordat u de taak indient ',
+		m_d4:'Succesvolle operatie',
+		m_d5:'Over ons',
+		m_d6:'Verstuur voltooide taak',
+		m_d7:'Je hebt alle taken voltooid, neem contact op met de rayonmanager'
 	}
 
 }

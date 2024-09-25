@@ -3,7 +3,7 @@
 		style="background: url(../../static/egg/bg.png) no-repeat  100%/100%;">
 		 -->
 	<view style="background: url(../../static/egg/bg.png) no-repeat  100%/100%;height: 100vh;overflow: scroll;">
-		<view class="pdlr35 pt33">
+		<view class="pdlr35 pt53">
 
 
 			<view class="flex between">
@@ -55,7 +55,7 @@
 				<view class="" style="margin-top: -120rpx;z-index: 99;height: 100rpx;"
 					v-if="pageData.show_status !== 3">
 					<view class="center flex-direction text-white"
-						style="background: linear-gradient(91deg, #EC4D14 0%, #DC2E22 99%);border-radius: 50rpx;padding: 20rpx 70rpx; height: 101rpx;color: #fff;"
+						style="background: linear-gradient(91deg, #EC4D14 0%, #DC2E22 99%);border-radius: 50rpx;padding: 20rpx 70rpx; height: 101rpx;color: #fff;box-shadow: #fff 0 0 7px 4px inset; "
 						@click="openEggHandle" v-if="pageData.show_status !== 2">
 						<view class="f36">{{t('act.e_e6')}}</view>
 						<view class="f16 mt5">{{t('act.e_e7')}}
@@ -63,7 +63,7 @@
 						</view>
 					</view>
 					<view class="center flex-direction text-white"
-						style="background: linear-gradient(91deg, #EC4D14 0%, #DC2E22 99%);border-radius: 50rpx;padding: 20rpx 70rpx; height: 101rpx;color: #fff;min-width: 400rpx; "
+						style="background: linear-gradient(91deg, #EC4D14 0%, #DC2E22 99%);border-radius: 50rpx;padding: 20rpx 70rpx; height: 101rpx;color: #fff;box-shadow: #fff 0 0 7px 4px inset; min-width: 400rpx; "
 						@click="withDraw" v-else>
 						<view class="f36">{{t('index.i_a7')}}</view>
 					</view>
@@ -300,6 +300,8 @@
 	}
 	const actId = ref(0)
 	onLoad((e) => {
+		console.log(e,'e');
+		return
 		if (e.id) {
 			actId.value = e.id
 			getData()
