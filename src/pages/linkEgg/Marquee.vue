@@ -593,7 +593,7 @@
 		.BlotOut_box {
 			width: 212px;
 			height: 231px;
-			background: linear-gradient(180deg, #4A4A4A 0%, #303030 100%);
+			background: #fff;
 			border-radius: 16px 16px 16px 16px;
 			opacity: 1;
 			position: absolute;
@@ -609,14 +609,14 @@
 				padding: 0 40rpx;
 				font-size: 14px;
 				font-weight: 400;
-				color: #FFFFFF;
+				color: #000;
 				line-height: 50rpx;
 			}
 
 			.btns {
 				width: 160px;
 				height: 40px;
-				background: linear-gradient(180deg, #1FBA95 0%, #077E62 100%);
+				background: linear-gradient(180deg, #e67f74 0%, #DE3824 100%);
 				border-radius: 22px 22px 22px 22px;
 				opacity: 1;
 				position: absolute;

@@ -54,7 +54,7 @@ const myList = ref([
  
    {
       name: t('mine.m_m5'),
-      img: store.$state.my.myList[0],
+      img: "../../static/themeNum1/my/financialDetail.png",
       url: './accountDetails',
       showFlag: true
    },

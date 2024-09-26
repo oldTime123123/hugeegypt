@@ -324,7 +324,9 @@
 			if (times.value == 0) {
 				clearTimeout(timer.value)
 				Toast.text('Order completed')
-				methods.back()
+				uni.navigateTo({
+					url: '../tabbar/recharge'
+				});
 			} else {
 				times.value--;
 				changeTime(times.value)
