@@ -9,7 +9,7 @@
 			<video v-if="movieData.video_type=='mp4'" webkit-playsinline="true" playsinline="true" id="myVideo" show-loading :src="movieData?movieData.video:''" :poster="movieData?movieData.cover:''" @timeupdate='videoTime($event)' :controls="true"    controls> 
 			</video>
 			<iframe v-else class="iframe" style="position: relative;" width="100%" height="265" :src="movieData.video" frameborder="0" fs="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<view class="ifeamBox"></view>
+			<view class="ifeamBox" v-if="movieData.video_type=='iframe'"></view>
 			<!-- <nut-video :source="videoData.source" :options="option" @time="videoTime">
 			  </nut-video>
 			options='true' -->
@@ -516,10 +516,10 @@
 	.ifeamBox{
 		position: absolute;
 		width: 50%;
-		min-height: 36px;
+		min-height: 48px;
 		opacity: 0;
 		background: #fff;
-		top: 358px;
+		top: 325px;
 		left: 50%;
 	}
 </style>

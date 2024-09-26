@@ -26,7 +26,7 @@
 						<input class="pl20" type="number" v-model="regisForm.phone" :placeholder="t('login.l_l3')"
 							style="margin-left: 50rpx;">
 						<nut-icon name="Check" size="20" v-if="phoneRegFlag"
-							class="phoneCheck animate__animated animate__fadeIn " color="gold"></nut-icon>
+							class="phoneCheck animate__animated animate__fadeIn " color="#DE3824"></nut-icon>
 					</view>
 
 					<view class="mt38">
@@ -339,7 +339,6 @@
 			}, 1500)
 		},
 		regisHandle1() {
-			regisForm.value.country_code = country_code.value.text;
 			request({
 				url: '/join/register',
 				methods: 'post',
@@ -422,7 +421,8 @@
 				if (canChoCountry.value) {
 					country_code.value = store.$state.countryCode[0]
 				} else {
-
+					console.log(country_code.vlaue,'country_code.vlaue');
+					
 					store.$state.countryCode.forEach(item => {
 						let str = "+" + countryVal.value
 						if (item.country_code == str) {
@@ -448,25 +448,16 @@
 			clearInterval(timer.value)
 		}
 	})
-	onLoad(() => {
-		if (!uni.getStorageSync('setLang')) {
-			request({
-				url: 'setting/lang',
-				methods: 'get',
-			}).then(res => {
-				uni.setStorageSync('lang', res[0].lang)
-				uni.setStorageSync('setLang', true)
-				window.location.reload()
-			})
-		}
-	})
 	const canInpCode = ref(true)
 	const canChoCountry = ref(true)
 	const countryVal = ref(0)
 	onLoad((e) => {
-
+		console.log(e,'rerrr');
+		
 		if (e.country) {
-			country_code.vlaue = e.country
+			canChoCountry.value = false;
+			countryVal.value = e.country;
+			country_code.vlaue = e.country;
 			request({
 				url: 'setting/country',
 				methods: 'get',
@@ -479,25 +470,35 @@
 				})
 			})
 		}
+		if (!uni.getStorageSync('setLang')) {
+			request({
+				url: 'setting/lang',
+				methods: 'get',
+			}).then(res => {
+				uni.setStorageSync('lang', res[0].lang)
+				uni.setStorageSync('setLang', true)
+				window.location.reload()
+			})
+		}
 		if (e.code) {
 			regisForm.value.invite_code = e.code
 			canInpCode.value = false
 
 		}
-		if (e.country) {
-			canChoCountry.value = false
-			countryVal.value = e.country
+		// if (e.country) {
+		// 	canChoCountry.value = false
+		// 	countryVal.value = e.country
 
-		}
+		// }
 	})
-	onMounted(() => {
-		getSetting()
-	})
+	// onMounted(() => {
+	// 	getSetting()
+	// })
 </script>
 
 <style lang="scss" scoped>
 	.regist{
-		height: 100vh;
+		min-height: 100vh;
 		background: url(../../static/themeNum1/index/loginBack.png);
 	}
 	.inp{

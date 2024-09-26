@@ -89,6 +89,8 @@
 			
 			inviteCode.value = res.invite_code
 			codeUrl.value = window.location.protocol + "//"+window.location.host+"/\#/\?code=" +res.invite_code +'&country='+res.country_code
+			console.log(codeUrl.value,'codeUrl.value');
+			
 		})
 	}
 	// 终于可以用了
