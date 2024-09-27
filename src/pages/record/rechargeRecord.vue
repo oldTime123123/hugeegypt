@@ -70,10 +70,10 @@
 	} = useI18n();
 	const methods = {
 		back() {
-			history.back()
-		// uni.switchTab({
-		// 	url:'../tabbar/my'
-		// })
+			// history.back()
+		uni.navigateTo({
+			url:'/pages/tabbar/recharge'
+		})
 		},
 
 	};
