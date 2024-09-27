@@ -111,8 +111,16 @@
 	const goOrder1 = () => {
 
 
-		const data = {
+		let data = {}
+		if(vipId.value){
+			data={
+				amount:inputNum.value,
+				vipId:vipId.value
+			}
+		}else{
+			data = {
 			amount: inputNum.value
+		}
 		}
 		request({
 			url: 'finance/usdt/recharge/submit',
@@ -198,7 +206,16 @@ const getData = () => {
 		getData();
 		currency.value = uni.getStorageSync('currency')
 	})
+	const vipId = ref()
+const rechargeAmount = ref()
 	onLoad(e=>{
+		if(e.id){
+			vipId.value = e.id
+		}
+		if(e.number){
+			rechargeAmount.value = e.number
+			inputNum.value = Number(e.number)
+		}
 		u_percent.value = e.u_percent/100
 	})
 </script>

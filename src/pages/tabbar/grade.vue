@@ -227,6 +227,9 @@
 	
 	onLoad(()=>{
 		tabbarIl8n()
+		
+	})
+	onLoad(()=>{
 		movieMission()
 	})
 	onMounted(()=>{
