@@ -167,8 +167,8 @@ const getData = () => {
       methods: 'get'
    }).then((res) => {
       let { recharge_type } = res;
-      recharge_fee.value = res.recharge_fee
-      u_percent.value = res.u_percent
+	  recharge_fee.value = res.recharge_fee
+	  u_percent.value = res.u_percent
 
       if (recharge_type.includes(1)) {
          showUsdt.value = true;
@@ -205,27 +205,68 @@ const chooseHandle = () => {
    // }
    let value = cType.value;
    if (value == 'usdt') {
-      uni.navigateTo({
+      console.log(vipId.value , rechargeAmount.value)
+      if(vipId.value && rechargeAmount.value){
+         uni.navigateTo({
+         url: `../recharge/usdtRecharge?id=${vipId.value}&number=${rechargeAmount.value}&u_percent=${u_percent.value}`
+      });
+      }else{
+         uni.navigateTo({
          url: '../recharge/usdtRecharge?u_percent='+u_percent.value
       });
+      }
+     
    } else if (value == 'bank') {
-      uni.navigateTo({
-         url: '../recharge/bankRecharge'
+      if(vipId.value && rechargeAmount.value){
+         uni.navigateTo({
+         url: `../recharge/bankRecharge?id=${vipId.value}&number=${rechargeAmount.value}`
       });
+      }else{
+         uni.navigateTo({
+         url: `../recharge/bankRecharge`
+      });
+      }
+     
    } else if (value == 'btc') {
-      uni.navigateTo({
+      if(vipId.value && rechargeAmount.value){
+         uni.navigateTo({
+            url: `../recharge/btcRecharge?id=${vipId.value}&number=${rechargeAmount.value}&u_percent=${recharge_fee.value['3']}`
+
+         })
+      }else{
+         uni.navigateTo({
          url: '../recharge/btcRecharge?u_percent='+recharge_fee.value['3']
       });
+      }
+     
    } else if (value == 'offline') {
-      uni.navigateTo({
+      if(vipId.value && rechargeAmount.value){
+         uni.navigateTo({
+         url: `../recharge/offLineBank?id=${vipId.value}&number=${rechargeAmount.value}`
+      });
+      }else{
+         uni.navigateTo({
          url: '../recharge/offLineBank?u_percent='+recharge_fee.value['4']
       });
+      }
+     
    }
 };
 const showLoading = ref(null)
-   onMounted(() => {
-		showLoading.value.loading = true
-	})
+const vipId = ref()
+const rechargeAmount = ref()
+onLoad((e)=>{
+   console.log(e)
+   if(e.id){
+      vipId.value = e.id
+   }
+   if(e.rechargeAmount){
+      rechargeAmount.value = e.rechargeAmount
+   }
+})
+onMounted(() => {
+   showLoading.value.loading = true
+})
 // 终于可以用了
 onShow(() => {
    getData();
@@ -240,7 +281,7 @@ onShow(() => {
    .red{
 		color: #fff;
 	}
-   .choStyle{
+	.choStyle{
 		object-fit:contain;
 		flex-shrink: 0	;	
 		background-size: 100% 100% !important;
@@ -249,8 +290,8 @@ onShow(() => {
 	.noStyle{
 		background: #fff;
 		color: #000;
-      // box-shadow: 0 0 18px 0 #E9E9E9;
-	   // border: 0.5px solid #E9E9E9;
+		// box-shadow: 0 0 18px 0 #E9E9E9;
+		// border: 0.5px solid #E9E9E9;
 	}
 .choItem {
    padding: 37rpx 30rpx;

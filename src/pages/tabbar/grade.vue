@@ -46,8 +46,8 @@
 			</view> -->
 			<view class="mian">
 				<view style="width: 100%;color: #fff;margin-bottom: 10px;">
-					<view class="gradeItem" v-for="(item, index) in allGradeList" @click="goGrade(item)">
-						<view class="starviptc" v-if="item.is_active==1">
+					<view class="gradeItem" v-for="(item, index) in allGradeList">
+						<view class="starviptc" v-if="item.is_active==1" @click="goGrade(item)">
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
@@ -57,7 +57,23 @@
 								<view style="margin-top: 5px;">{{ item.start_time}} ~ {{ item.end_time }}</view>
 							</view>
 						</view>
-						<view class="starviptc" v-else>
+						<view class="starviptc" v-else-if="item.is_active==3" @click="goUnlock(item.id)">
+							<image class="grademg" :src="item.little_pic"></image>
+							<view class="pg">{{ item.name }}</view>
+							<view class="iden">{{ t('index.i_a33') }}</view>
+							<view class="lh">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="bottom" >
+								<view>Unlock</view>
+							</view>
+						</view>
+						<view class="starviptc" v-else-if="item.is_active==0"  @click="gochange(item)">
+							<image class="grademg" :src="item.little_pic"></image>
+							<view class="pg">{{ item.name }}</view>
+							<view class="iden">{{ t('index.i_a33') }}</view>
+							<view class="lh">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="bottom">{{ item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
+						</view>
+						<view class="starviptc" v-else @click="goGrade(item)">
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
@@ -79,7 +95,9 @@
 <script setup>
 	import request from '../../../comm/request.ts';
     import Menu from '@/components/menu.vue'
-
+	import {
+		Toast
+	} from '@nutui/nutui';
 	import {
 		userStore
 	} from "@/store/themeNum.js";
@@ -114,6 +132,7 @@
 			url:'home/vipList',
 			methods:'get'
 		}).then(res=>{
+			allGradeList.value = [];
 			// const num = res.find(item=>{
 			// 	if(item.is_active == 1){
 			// 		return item
@@ -135,6 +154,32 @@
 			showLoading.value.loading = false
 		}).catch(()=>{
 			showLoading.value.loading = false
+		})
+	}
+
+	//去充值
+
+	const gochange = (item) =>{
+		uni.navigateTo({
+			url:`/pages/tabbar/recharge?id=${item.id}&rechargeAmount=${item.price}`
+		})
+		
+	}
+
+	//等级解锁
+	const goUnlock = (id) =>{
+		request({
+			url:'home/vipUnlock',
+			methods:'post',
+			data:{
+				vipId:id
+			}
+		}).then(res=>{
+			Toast.text('Unlocked successfully')
+			movieMission()
+			
+		}).catch((err)=>{
+			Toast.text(err.message)
 		})
 	}
 	

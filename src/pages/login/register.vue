@@ -339,6 +339,7 @@
 			}, 1500)
 		},
 		regisHandle1() {
+			regisForm.value.country_code = country_code.value.text;
 			request({
 				url: '/join/register',
 				methods: 'post',

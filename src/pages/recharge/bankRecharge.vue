@@ -34,8 +34,8 @@
 
 					<view class="mainBox mt40">
 						<view class="chooseItem" v-for="(item,index) in bankNameList"
-							:class="[nameInd == index?'choStyle':'noStyle']" @click="nameInd = index">
-							{{item.alias}}
+						:class="[nameInd == index?'choStyle':'noStyle']" @click="nameInd = index">
+						{{item.alias}}
 						</view>
 					</view>
 
@@ -171,12 +171,25 @@
 			Toast.text('add1.b_b2')
 			return false
 		}
-		const formData = {
+		let formData = {}
+		if(vipId.value){
+			formData = {
+				vipId:vipId.value,
+
 			amount: inpVal.value,
 			channelId: bankNameList.value[nameInd.value].id,
 			way: bankNameList.value[nameInd.value].way.length > 0 ? bankNameList.value[nameInd.value].way[wayInd
 				.value].id : 0
 		}
+		}else{
+			formData = {
+			amount: inpVal.value,
+			channelId: bankNameList.value[nameInd.value].id,
+			way: bankNameList.value[nameInd.value].way.length > 0 ? bankNameList.value[nameInd.value].way[wayInd
+				.value].id : 0
+		}
+		}
+		
 		request({
 			url: '/finance/bank/recharge/submit',
 			methods: 'post',
@@ -210,6 +223,17 @@
 		})
 
 	}
+	const vipId = ref()
+const rechargeAmount = ref()
+onLoad((e)=>{
+	if(e.id){
+			vipId.value = e.id
+		}
+		if(e.number){
+			rechargeAmount.value = e.number
+			inpVal.value = Number(e.number)
+		}
+})
 	const currency = ref("")
 	// 终于可以用了
 	onShow(() => {
@@ -256,12 +280,14 @@
 
 	.inputItem {
 		height: 115rpx;
+		// background: #FFFFFF;
 		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
 		border-radius: 20rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 50rpx;
+		// color: #333;
 		padding-left: 40rpx;
 
 	}
@@ -275,7 +301,7 @@
 
 		.chooseItem {
 			width: 90%;
-			// background-color: #fff;
+			// background-color: #1D1D1D;
 			height: 100rpx;
 			border-radius: 20rpx;
 			margin-bottom: 20rpx;
