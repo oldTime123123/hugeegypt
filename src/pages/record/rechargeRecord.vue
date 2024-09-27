@@ -71,8 +71,8 @@
 	const methods = {
 		back() {
 			// history.back()
-		uni.navigateTo({
-			url:'/pages/tabbar/recharge'
+		uni.switchTab({
+			url:'../tabbar/my'
 		})
 		},
 
