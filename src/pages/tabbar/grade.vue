@@ -168,6 +168,7 @@
 
 	//等级解锁
 	const goUnlock = (id) =>{
+		showLoading.value.loading = true
 		request({
 			url:'home/vipUnlock',
 			methods:'post',
@@ -177,9 +178,13 @@
 		}).then(res=>{
 			Toast.text('Unlocked successfully')
 			movieMission()
+			showLoading.value.loading = false
+
 			
 		}).catch((err)=>{
 			Toast.text(err.message)
+			showLoading.value.loading = false
+
 		})
 	}
 	
