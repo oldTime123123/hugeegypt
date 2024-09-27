@@ -2,7 +2,7 @@
  * @Author: chenpn chenpn699@gmail.com
  * @Date: 2024-09-09 14:31:35
  * @LastEditors: chenpn chenpn699@gmail.com
- * @LastEditTime: 2024-09-25 17:51:40
+ * @LastEditTime: 2024-09-27 12:29:43
  * @FilePath: \dandelion6 - 副本\setting.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,7 +12,7 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-const dev = 1
+const dev = 0
 let COUNTRY = {}
 
 const countryList = [
@@ -30,7 +30,7 @@ const countryList = [
 		qianzhui: 'api.',
 		lang: "en",
 		icon: "/static/logo1.jpg",
-		title: "AdsWorld"
+		title: "HUGE"
 	}
 ]
 countryList.forEach((item, index) => {

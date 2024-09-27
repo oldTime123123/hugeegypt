@@ -212,7 +212,7 @@ export default {
 		l_l9: "Please enter a valid phone number",
 		l_l10: "Please fill in the password",
 		l_l11: "Login successfully",
-		l_l12: "Welcome to AdsWorld",
+		l_l12: "Welcome to HUGE",
 		l_l13: "Start your lucky journey",
 
 		l_r1: "Register",
