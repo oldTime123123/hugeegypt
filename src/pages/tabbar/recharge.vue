@@ -17,9 +17,23 @@
 					{{t('wr.w_u9')}}
 				</view> -->
          </view>
+         <view class="choItem mt88" @click="changeChoosed('bank')" :class="cType == 'bank' ? 'choStyle' : 'noStyle'" v-if="showBank">
+            <view class="flex">
+               <image :src="store.$state.imgObj.bank" mode="widthFix" style="width: 55rpx; height: 55rpx"></image>
+               <view class="mglr20 center f28">Bank Card</view>
+            </view>
+            <view class="noCho">
+               <image
+                  :src="store.$state.imgObj.choosed"
+                  mode="widthFix"
+                  style="width: 35rpx; height: 35rpx"
+                  v-if="cType == 'bank'"
+               ></image>
+            </view>
+         </view>
 
          <view
-            class="choItem mt88"
+            class="choItem"
             @click="changeChoosed('usdt')"
             :class="cType == 'usdt' ? 'choStyle' : 'noStyle'"
             v-if="showUsdt"
@@ -37,21 +51,6 @@
                   mode="widthFix"
                   style="width: 35rpx; height: 35rpx"
                   v-if="cType == 'usdt'"
-               ></image>
-            </view>
-         </view>
-
-         <view class="choItem" @click="changeChoosed('bank')" :class="cType == 'bank' ? 'choStyle' : 'noStyle'" v-if="showBank">
-            <view class="flex">
-               <image :src="store.$state.imgObj.bank" mode="widthFix" style="width: 55rpx; height: 55rpx"></image>
-               <view class="mglr20 center f28">Bank Card</view>
-            </view>
-            <view class="noCho">
-               <image
-                  :src="store.$state.imgObj.choosed"
-                  mode="widthFix"
-                  style="width: 35rpx; height: 35rpx"
-                  v-if="cType == 'bank'"
                ></image>
             </view>
          </view>
@@ -138,7 +137,7 @@ import { useI18n } from 'vue-i18n';
 const {
 		t
 	} = useI18n();;
-const cType = ref('usdt');
+const cType = ref('');
 const changeChoosed = (type) => {
    cType.value = type;
 };
@@ -167,9 +166,21 @@ const getData = () => {
       methods: 'get'
    }).then((res) => {
       let { recharge_type } = res;
-	  recharge_fee.value = res.recharge_fee
-	  u_percent.value = res.u_percent
-
+      recharge_fee.value = res.recharge_fee
+      u_percent.value = res.u_percent
+      if(recharge_type.includes(2)){
+         cType.value = 'bank'     
+      }else{
+         if (recharge_type[0]==1) {
+            cType.value = 'usdt'     
+         }
+         if (recharge_type[0]==3) {
+            cType.value = 'btc'  
+         }
+         if (recharge_type[0]==4) {
+            cType.value = 'offline'  
+         }   
+      }
       if (recharge_type.includes(1)) {
          showUsdt.value = true;
       }

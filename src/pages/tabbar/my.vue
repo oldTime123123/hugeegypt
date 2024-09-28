@@ -318,12 +318,12 @@
 			url: '../sign/signC',
 			showFlag: false
 		},
-		{
-			name: t('ss1.l_l14'),
-			img: '/static/themeNum1/icon/loginBg.png',
-			url: '../record/despoitRecord',
-			showFlag: true
-		},
+		// {
+		// 	name: t('ss1.l_l14'),
+		// 	img: '/static/themeNum1/icon/loginBg.png',
+		// 	url: '../record/despoitRecord',
+		// 	showFlag: true
+		// },
 		{
 			name: t('ss1.s_s5'),
 			img: store.$state.my.myList[0],

@@ -46,7 +46,7 @@
 
 						<view class="mainBox mt35">
 							<view class="chooseItem" v-for="(item,index) in bankNameList[nameInd].buttons"
-							:class="[nameInd == index?'choStyle':'noStyle']" @click="changeInpVal(index,item)">
+							:class="[numInd == index?'choStyle':'noStyle']" @click="changeInpVal(index,item)">
 								{{item}}
 							</view>
 						</view>
@@ -145,8 +145,8 @@
 		}
 	}
 	const changeInpVal = (index, item) => {
-		numInd.value = index
-		inpVal.value = item
+		numInd.value = index;
+		inpVal.value = item;
 	}
 	const getData = () => {
 		request({
