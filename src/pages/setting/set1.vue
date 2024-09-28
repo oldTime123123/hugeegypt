@@ -16,8 +16,9 @@
 				<view class="mt34">
 					<nut-picker v-model:visible="show" :text="'text2'" :columns="columns" @confirm="confirm"
 						:cancel-text="t('all.a_c2')" :ok-text="t('all.a_c1')" />
-					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a3')" disabled
-						 v-model="bName" @click="show = true">
+					<view class="inp" :style="{color: bName?'#000':'#afafaf'}" @click="show = true">
+						{{ bName?bName:t('inp.i_a3') }}
+					</view>
 					<!--  <input class="inp" placeholder-class="plo"  placeholder="please enter the Bank Name"  v-model="formData.bName"> -->
 				</view>
 			</view>
@@ -67,7 +68,7 @@
 			<!-- 登录按钮 -->
 			<view style="height: 120rpx;">
 				<view class="btns f36"
-					:style="showTag?{background:store.$state.contentColor}:{background:store.$state.btnDis}"
+					:style="showTag?{background:'#fff'}:{background:store.$state.btnDis}"
 					@click="methods.saveHandle">
 					{{ t('inp.i_s1')}}
 				</view>
@@ -160,6 +161,7 @@
 		selectedOptions
 	}) => {
 		// desc.value = selectedValue.join(',');
+		show.value = false;
 		bName.value = selectedOptions[0].text
 		formData.value.bankId = selectedOptions[0].value
 	}
@@ -174,21 +176,25 @@
 	const showTag = ref(false)
 	// 监听
 	watch(formData, (newVal, oldVal) => {
-		showTag.value = false
-		if (!canEdit.value) {
-			return false
-		}
+		// if (!canEdit.value) {
+		// 	showTag.value = false
+		// 	return false
+		// }
 		if (!formData.value.bankId) {
+			showTag.value = false
 			return false
 		}
 
 		if (!formData.value.bank_num) {
+			showTag.value = false
 			return false
 		}
 		if (!formData.value.account_holder) {
+			showTag.value = false
 			return false
 		}
 		if (!formData.value.phone) {
+			showTag.value = false
 			return false
 		}
 		showTag.value = true
