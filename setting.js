@@ -12,11 +12,10 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-const dev = 0
+const dev = 1
 let COUNTRY = {}
 
-const countryList = [
-	{
+const countryList = [{
 		url: 'task678.com',
 		themeNum: 1,
 		qianzhui: 'ads.',

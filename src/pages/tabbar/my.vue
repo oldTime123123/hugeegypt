@@ -42,17 +42,20 @@
 					<view class="wallet">
 						<view class="walletItem">
 							<view class="flex">
-								<image src="../../static/themeNum1/my/balance.png" mode="widthFix" style="width: 45rpx; height: 45rpx"></image>
+								<image src="../../static/themeNum1/my/balance.png" mode="widthFix"
+									style="width: 45rpx; height: 45rpx"></image>
 								<text class="ft14" style="margin-left: 8px;">{{ $t('add2.a_a15') }}</text>
 							</view>
 							<text class="ft20" style="margin-top: 5px;">{{ pageData.balance }} {{ currency }}</text>
 						</view>
 						<view class="walletItem">
 							<view class="flex">
-								<image src="../../static/themeNum1/my/commission.png" mode="widthFix" style="width: 45rpx; height: 45rpx"></image>
+								<image src="../../static/themeNum1/my/commission.png" mode="widthFix"
+									style="width: 45rpx; height: 45rpx"></image>
 								<text class="ft14" style="margin-left: 8px;">{{ $t('add2.a_a16') }}</text>
 							</view>
-							<text class="ft20" style="margin-top: 5px;">{{ pageData.profit_balance }} {{ currency }}</text>
+							<text class="ft20" style="margin-top: 5px;">{{ pageData.profit_balance }}
+								{{ currency }}</text>
 						</view>
 					</view>
 					<view class="mt26 boxItemBox">
@@ -109,7 +112,7 @@
 						<nut-icon name="arrow-right" color="#000"></nut-icon>
 					</view>
 				</view>
-				
+
 			</view>
 		</view>
 
@@ -139,7 +142,8 @@
 
 					<view class="between">
 						<view :style="{border:'1rpx solid #ccc'}">{{ t('all.a_c2')}}</view>
-						<view style="background:linear-gradient(0deg, #DE3824 0%, #d56c74  100%)" @click="confirmHandle"> {{t('all.a_c1')}}
+						<view style="background:linear-gradient(0deg, #DE3824 0%, #d56c74  100%)"
+							@click="confirmHandle"> {{t('all.a_c1')}}
 						</view>
 					</view>
 				</div>
@@ -149,7 +153,7 @@
 		<!-- v-if="showAllAct v-if="showSign"" -->
 		<!-- 		<view style="width: 100%;height: 60px;"></view> -->
 		<!-- <Tabbar :activeIndex="4"></Tabbar> -->
-		<Menu :bottom="300" :right="0"></Menu> 
+		<Menu :bottom="300" :right="0"></Menu>
 
 	</view>
 </template>
@@ -181,8 +185,7 @@
 	const {
 		t
 	} = useI18n();
-	const myDataList = ref([
-		{
+	const myDataList = ref([{
 			name: t('index.i_a16'),
 			value: 0
 		},
@@ -415,9 +418,9 @@
 			// 	});
 			// } else {
 
-				uni.navigateTo({
-					url
-				});
+			uni.navigateTo({
+				url
+			});
 			// }
 		}
 	};
@@ -458,7 +461,7 @@
 			myDataList.value[5].value = res.task.rest;
 			myDataList.value[6].value = res.incomeReport.month;
 			myDataList.value[7].value = res.incomeReport.children_job;
-			myDataList.value[8].value = res.incomeReport.children_rebate;
+			myDataList.value[8].value = res.total_rebate;
 			// res.template= 1
 			res.template == 1 ? showSignTemplate.value = true : showSignTemplate.value = false
 		});
@@ -489,7 +492,7 @@
 			methods: 'get'
 		}).then((res) => {
 			currency.value = res.currency ? res.currency : 'USDT';
-			uni.setStorageSync('currency',currency.value)
+			uni.setStorageSync('currency', currency.value)
 		});
 	};
 	const currency = ref('');
@@ -547,32 +550,39 @@
 	}
 </style>
 <style lang="scss" scoped>
-	.my{
+	.my {
 		background: #fff;
 	}
-	.content{
+
+	.content {
 		background: url(../../static/themeNum1/my/backgroundMy.png);
 	}
-	.mt80{
+
+	.mt80 {
 		margin-top: 2.25rem;
 	}
-	.f24{
+
+	.f24 {
 		font-size: 14px;
 	}
-	.ft20{
+
+	.ft20 {
 		font-size: 20px;
 		color: #DE3824;
 		font-weight: bold;
 	}
-	.ft14{
+
+	.ft14 {
 		font-size: 14px;
 		color: #000;
 	}
-	.header{
+
+	.header {
 		padding: 0 1rem 0 1rem;
 		background-size: 100% 100%;
 
 	}
+
 	.wrapper {
 		display: flex;
 		height: 100%;
@@ -612,11 +622,13 @@
 			}
 		}
 	}
-	.wallet{
+
+	.wallet {
 		width: 100%;
 		height: 110px;
 		display: flex;
-		.walletItem{
+
+		.walletItem {
 			width: 50%;
 			display: flex;
 			align-items: center;
@@ -624,12 +636,14 @@
 			flex-direction: column;
 			height: 110px;
 			color: #fff;
-			.flex{
+
+			.flex {
 				display: flex;
 				align-items: center;
 			}
 		}
 	}
+
 	.refresh {
 		width: 70rpx;
 		height: 70rpx;
@@ -722,6 +736,7 @@
 		background: url(../../static/themeNum1/my/myPosition.png);
 		background-size: 100% 100%;
 	}
+
 	.bItem1 {
 		width: 48%;
 		color: #fff;
@@ -734,54 +749,63 @@
 		background: url(../../static/themeNum1/my/myTeam.png);
 		background-size: 100% 100%;
 	}
-	.mglr27{
+
+	.mglr27 {
 		margin-left: 65px;
 	}
-	.mt30{
+
+	.mt30 {
 		margin-top: 0.8rem;
 	}
-	.myData{
+
+	.myData {
 		// padding: 0 1rem;
 		display: flex;
 		flex-wrap: wrap;
-		.myItem{
+
+		.myItem {
 			width: 31%;
 			height: 75px;
 			background: #fff;
 			border-radius: 12px;
 			margin: 0 0.5rem 0.6rem 0;
-			
+
 			// color: #fff;
-			.myContent{
+			.myContent {
 				width: 100%;
 				height: 100%;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				.name{
+
+				.name {
 					font-size: 11px;
 					color: #000000;
 					text-align: center;
 				}
-				.value{
+
+				.value {
 					padding-top: 10px;
 					color: #DE3824;
 				}
 			}
 		}
 	}
+
 	.myEl {
 		// width: 100%;
 		padding-top: 0.6rem;
+
 		// padding: 0.2rem 1rem 0 1rem;
-		.myElItem{
+		.myElItem {
 			// background: url(../../static/themeNum1/my/content.png);
 			background: #fff;
 			background-size: 100% 100%;
 			padding-top: 1.2rem;
 			border-top-left-radius: 70px !important;
 			border-top-right-radius: 70px !important;
+
 			.myItem {
 				padding: 12rpx 32rpx;
 				// background-color: #1d1d1d;
@@ -796,7 +820,7 @@
 				margin-top: 20rpx;
 			}
 		}
-		
+
 	}
 
 	.rightIcon {
