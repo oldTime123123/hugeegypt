@@ -265,6 +265,7 @@ export default {
 		i_a32: "Video tutorial",
 		i_a33: "My identity",
 		i_a34: "Effective date",
+		i_a35: "This week's income"
 	},
 	record: {
 		r_r1: "No more data",

@@ -34,24 +34,38 @@
 						<view class="mt35 f55" style="color: #000;"> {{pageData.balance_max}} {{currency}}</view>
 					</view>
 				</view>
-				<view v-if="pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
-				<view v-if="pageData.input_type==2" class="inputBut">
-					<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
-						<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+				<view v-if="pageData.withdrawLimitType==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.withdrawLimitType==1&&pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				
+				<view v-if="pageData.withdrawLimitType==2">
+					<view class="inputBut">
+						<view v-for="(item,index) in pageData.withdrawArr" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
 					</view>
+					<view v-if="inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
 				</view>
-				<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
-					<view class="short">≈USDT:</view>
-					<text style="margin-left: 10px;">{{(inputNum * pageData.u_rate).toFixed(2)}}</text>
-				</view>		
-				<view class="mt40 inputItem" v-if="pageData.input_type==1">
-					{{currency}}
-					<view class="pl15">
-						<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo"
-						:disabled="pageData.input_type==2"	v-model="inputNum">
+				<view v-else>
+					<view  v-if="pageData.input_type==2" class="inputBut">
+						<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
 					</view>
+					<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
+					<view class="mt40 inputItems" v-if="pageData.input_type==1">
+						{{currency}}
+						<view class="pl15">
+							<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo" v-model="inputNum">
+						</view>
+					</view>	
 				</view>
-				<view class="f20 mt30 text_center" style="color: #fff;">
+				<view class="f20 mt30 text_center" v-if="pageData.withdrawLimitType==1&&pageData.input_type==1" style="color: #fff;">
 					* {{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
 				</view>
 
@@ -341,19 +355,6 @@
 		font-size: 28rpx;
 	}
 
-	.inputItem {
-		height: 115rpx;
-		background: #fff;
-		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
-		border-radius: 20rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 50rpx;
-		color: #DE3824;
-		padding-left: 40rpx;
-	}
-
 	.info {
 		background-color: #fff;
 		border-radius: 30rpx;
@@ -404,6 +405,18 @@
 			line-height: 60rpx;
 		}
 	}
+	.inputItems {
+		height: 115rpx;
+		background: #fff;
+		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
+		border-radius: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 50rpx;
+		color: #DE3824;
+		padding-left: 40rpx;
+	}
 	.inputBut{
 		display: flex;
 		color: #000;
@@ -418,6 +431,7 @@
 		}
 		.activeItem{
 			border-radius: 8px;
+			color: #fff;
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;

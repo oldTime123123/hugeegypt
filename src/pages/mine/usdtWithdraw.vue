@@ -19,10 +19,9 @@
 							{{ $t('add2.a_a8') }}
 						</view>
 					</view>
-					<view class="topBoxItem">
+					<view class="topBoxItem" >
 						<view style="display: flex;align-items: center;">
-							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg">
-							</image>
+							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg"></image>
 							<image v-else src="../../static/themeNum1/my/commission.png" class="tabImg"></image>
 							<view class="topItem f26">{{ tabText }}</view>
 						</view>
@@ -30,9 +29,9 @@
 					</view>
 				</view>
 				<view class="notice flex col_center" dir="ltr">
-
+					
 					<image :src="store.$state.imgObj.labaIcon" mode="widthFix" style="width: 40rpx;"></image>
-					<view class="ml30">
+					<view class="ml30" >
 						<text v-if="showWord">
 							{{wordText}}
 						</text>
@@ -41,48 +40,44 @@
 						</text>
 					</view>
 				</view>
-				<view v-if="pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
-				<view v-if="pageData.input_type==2" class="inputBut">
-					<view v-for="(item,index) in pageData.buttons" :key="index"
-						:class="[index==titckIndex?'activeItem':'inputItem']">
-						<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+				<view v-if="pageData.withdrawLimitType==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.withdrawLimitType==1&&pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.withdrawLimitType==2">
+					<view class="inputBut">
+						<view v-for="(item,index) in pageData.withdrawArr" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
 					</view>
+					<view v-if="inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
 				</view>
-				<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
-					<view class="short">≈USDT:</view>
-					<text style="margin-left: 10px;">{{(inputNum * pageData.u_rate).toFixed(2)}}</text>
+				<view v-else>
+					<view  v-if="pageData.input_type==2" class="inputBut">
+						<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
+					</view>
+					<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
+					<view class="mt40 inputItems" v-if="pageData.input_type==1">
+						{{currency}}
+						<view class="pl15">
+							<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo" v-model="inputNum">
+						</view>
+					</view>	
 				</view>
-				<view class="mainBox" v-if="pageData.input_type==1">
-					<view class="withTitle" :style="choStyle">{{t('wr.w_u1')}}</view>
-					<view class="flex mt70">
-						<view class="short">{{currency}}</view>
-						<input type="text" :disabled="withdrawLimitType==2?true:false" placeholder-class="plo"
-							style="color: #F65E5E;" v-model="inputNum" focus @input="inputNumHandle"
-							:placeholder="t('mine.m_s7')">
-
-					</view>
-
-					<view class="flex mt30">
-						<view class="short">USDT</view>
-						<input type="text" :disabled="true" :value="(inputNum * pageData.u_rate).toFixed(2)">
-					</view>
-
-
-				</view>
-
-
-				<view class="mt30" style="display: flex;justify-content: flex-start;flex-wrap: wrap;"
-					v-if="withdrawLimitType==2">
-					<view class="withdrawLimitType_item" @click="inputNum = item" v-for="item of withdrawLimitTypeList">
-						{{item}}
-					</view>
+				<view class="f20 mt30 text_center" v-if="pageData.withdrawLimitType==1&&pageData.input_type==1" style="color: #fff;">
+					* {{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
 				</view>
 
 				<view class="mt38">
 					<view class="f34  text_bold" :style="{color:store.$state.secondColor}">{{t('wr.w_u3')}}</view>
 					<view class="mt34 otpEl">
-						<input class="inp" placeholder-class="plo" :placeholder="t('wr.w_u4')" :disabled="true"
-							:value="pageData.user_link">
+						<input class="inp" placeholder-class="plo" :placeholder="t('wr.w_u4')" :disabled="true" :value="pageData.user_link">
 						<view class="otp" v-if="!pageData.user_link" @click="changePage('../setting/set2')">
 							{{t('wr.w_u5')}}
 						</view>
@@ -93,21 +88,21 @@
 					<view class="f34  text_bold" :style="{color:store.$state.secondColor}">{{t('login.l_l5')}}</view>
 					<view class="mt34  passwordInp" v-if="!showInp">
 
-						<input class="inp " type="safe-password" placeholder-class="plo" password="true"
-							v-model="fundPwd" :placeholder="t('login.l_l5')" v-if="showNewPwd1">
-						<input class="inp " placeholder-class="plo" type="safe-password" v-model="fundPwd"
-							:placeholder="t('login.l_l5')" v-else>
+						<input class="inp " type="safe-password" placeholder-class="plo"  password="true" v-model="fundPwd"
+							:placeholder="t('login.l_l5')" v-if="showNewPwd1">
+						<input class="inp " placeholder-class="plo" type="safe-password" v-model="fundPwd" :placeholder="t('login.l_l5')"
+							v-else>
 						<image v-if="showNewPwd1" src="../../static/themeNum1/index/biyan.png" class="pwdEye"
 							style="width: 49rpx;height: 36rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 
 						<image v-else src="../../static/themeNum1/index/zhengyan.png" class="pwdEye openEye"
 							style="width: 49rpx;height: 35rpx;" @click="methods.openPwdHandle('showNewPwd1')"></image>
 					</view>
-
+					
 					<view class="mt34  passwordInp otpEl" v-else>
-						<input class="inp " placeholder-class="plo" type="safe-password" password="true"
-							:disabled="true" :placeholder="t('inp.a_c6')">
-						<view class="otp" @click="changePage('../setting/set4')">
+						<input class="inp " placeholder-class="plo" type="safe-password" password="true" :disabled="true"
+							:placeholder="t('inp.a_c6')" >
+						<view class="otp"  @click="changePage('../setting/set4')">
 							{{t('mine.m_m14')}}
 						</view>
 					</view>
@@ -130,24 +125,24 @@
 <script setup>
 	const showWord = ref(false)
 	const wordText = ref("")
-
-	const inputNumHandle = e => {
+	
+	const inputNumHandle  = e=>{
 		let val = Number(e.detail.value)
-
-
-		for (let i = 0; i < fealList.value.length; i++) {
-			if ((Number(fealList.value[i].withdraw_min) <= val) && (val <= Number(fealList.value[i].withdraw_max))) {
+		
+		
+		for(let i = 0;i<fealList.value.length;i++){
+			if((Number(fealList.value[i].withdraw_min )<= val) && (val <= Number(fealList.value[i].withdraw_max))){
 				let str = t('wr.w_u6')
 				// 手续费类型 1.比例 2.固定金额
 				if (fealList.value[i].fee_type == 1) {
-					str = str + fealList.value[i].fee + '%'
+					str = str + fealList.value[i].fee  + '%'
 				} else if (fealList.value[i].fee_type == 2) {
 					str = str + fealList.value[i].fee
 				}
 				wordText.value = str
 				showWord.value = true
 				break
-			} else {
+			}else{
 				showWord.value = false
 			}
 		}
@@ -198,8 +193,6 @@
 	const fealList = ref([])
 	const pageData = ref({})
 	const showInp = ref(true)
-	const withdrawLimitType = ref(false)
-	const withdrawLimitTypeList = ref([])
 	const getData = (tabClick) => {
 		request({
 			url: `finance/usdt/withdraw/index?balance_type=${tabClick?tabClick:1}`,
@@ -210,9 +203,6 @@
 				showInp.value = false
 			}
 			fealList.value = res.feeList
-			withdrawLimitType.value = res.withdrawLimitType
-			withdrawLimitTypeList.value = res.withdrawArr
-
 			// console.log(res);
 			// let str = t('wr.w_u6')
 			// // 手续费类型 1.比例 2.固定金额
@@ -236,13 +226,13 @@
 	const topNotice = ref("")
 	const locked = ref(false)
 	const titckIndex = ref(undefined)
-	const selectBut = (item, index) => {
+	const selectBut = (item,index)=>{
 		titckIndex.value = index;
 		inputNum.value = Number(item)
 	}
-	const tabChange = (index) => {
+	const tabChange = (index)=>{
 		tabClick.value = index;
-		tabText.value = index == 1 ? t('mine.m_t4') : t('add2.a_a14');
+		tabText.value = index==1?t('mine.m_t4'):t('add2.a_a14');
 		getData(index)
 	}
 	const submitHandle = () => {
@@ -261,7 +251,7 @@
 		}
 		// showLoading.value.loading = true
 		// setTimeout(() => {
-		submitHandle1()
+			submitHandle1()
 		// }, 2000)
 	}
 
@@ -276,14 +266,14 @@
 			url: 'finance/usdt/withdraw/submit',
 			methods: 'post',
 			data: data
-		}).then(res => {
+		}).then(res => {			
 			showLoading.value.loading = false
 			Toast.text(t('wr.w_u8'))
 			inputNum.value = ""
 			fundPwd.value = ""
-
+			
 			uni.navigateTo({
-				url: '../record/withdrawRecord'
+				url:'../record/withdrawRecord'
 			})
 		}).catch(err => {
 			showLoading.value.loading = false
@@ -300,44 +290,29 @@
 </script>
 
 <style lang="scss" scoped>
-	.withdrawLimitType_item {
-		box-sizing: border-box;
-		padding: 20rpx 30rpx;
-		text-align: center;
-		border-radius: 15rpx;
-		margin-right: 30rpx;
-		background-color: #fff;
-	}
-
-	.withdraw {
+	.withdraw{
 		background: url(../../static/themeNum1/index/loginBack.png);
 	}
-
 	.topBox {
 		width: 100%;
 		height: 328rpx
 	}
-
-	.topBoxTab {
+	.topBoxTab{
 		width: 100%;
 		height: 45px;
 		display: flex;
-
-		.tabItem {
+		.tabItem{
 			width: 50%;
 			height: 100%;
 		}
 	}
-
-	.ml10 {
+	.ml10{
 		margin-left: 10px;
 	}
-
-	.pay {
+	.pay{
 		color: #fff;
 		margin-top: 10px;
 	}
-
 	.topBoxItem {
 		height: calc(100% - 45px);
 		border-bottom-left-radius: 12px;
@@ -350,55 +325,47 @@
 		align-items: center;
 		justify-content: center;
 	}
-
-	.active1 {
+	.active1{
 		border-top-right-radius: 12px;
 		color: #000;
 		background: url(../../static/themeNum1/my/orLeft.png);
 		background-size: 100% 100%;
 	}
-
-	.active2 {
+	.active2{
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		color: #000;
 		background: url(../../static/themeNum1/my/orRight.png);
 		background-size: 100% 100%;
 	}
-
-	.gray1 {
+	.gray1{
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		background: #fff;
 		color: #000;
 	}
-
-	.gray2 {
+	.gray2{
 		background: #fff;
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		color: #000;
 	}
-
-	.tabItem {
+	.tabItem{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-
-	.tabImg {
+	.tabImg{
 		width: 24px;
 		height: 24px;
 		margin-right: 10px;
 	}
-
-	.flex {
+	.flex{
 		display: flex;
 		// flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
-
 	.withdrawAll {
 		padding: 27rpx 36rpx;
 		border-radius: 38rpx;
@@ -423,7 +390,6 @@
 		background-color: #fff;
 		position: relative;
 		color: #000;
-
 		.withTitle {
 			position: absolute;
 			left: 0;
@@ -471,16 +437,13 @@
 		background: #fff;
 		color: #000;
 	}
-
-	.inp {
+	.inp{
 		background: #fff;
 		color: #000 !important;
 	}
-
-	.plo {
+	.plo{
 		color: #000 !important;
 	}
-
 	.otpEl {
 		position: relative;
 
@@ -512,31 +475,39 @@
 			top: 50%;
 			transform: translateY(-50%);
 		}
-
+		
 	}
-
-	.inputBut {
+	.inputItems {
+		height: 115rpx;
+		background: #fff;
+		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
+		border-radius: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 50rpx;
+		color: #DE3824;
+		padding-left: 40rpx;
+	}
+	.inputBut{
 		display: flex;
 		color: #000;
 		flex-wrap: wrap;
 		margin-top: 32rpx;
-
-		.inputItem {
+		.inputItem{
 			border-radius: 8px;
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
-			color: #000;
-			background: #fff;
+			background: rgb(255, 234, 177);
 		}
-
-		.activeItem {
+		.activeItem{
 			border-radius: 8px;
+			color: #fff;
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
-			color: #fff;
-			background: #DE3824
+			background: rgb(223, 184, 87);
 		}
 	}
 </style>

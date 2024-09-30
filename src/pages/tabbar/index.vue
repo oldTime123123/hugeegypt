@@ -132,7 +132,7 @@
 									<view class="phone">{{t('index.i_a28')}}
 										<text class="ml5">{{ item.phone }}</text>
 									</view>
-									<view class="time">{{ t('index.i_a29') }}</view>
+									<view class="time">{{ t('index.i_a35') }}</view>
 								</view>
 							</view>
 							<view>

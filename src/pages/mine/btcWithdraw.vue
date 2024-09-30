@@ -40,31 +40,39 @@
 						</text>
 					</view>
 				</view>
-				<view v-if="pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
-				<view v-if="pageData.input_type==2" class="inputBut">
-					<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
-						<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+				<view v-if="pageData.withdrawLimitType==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				<view v-if="pageData.withdrawLimitType==1&&pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+				
+				<view v-if="pageData.withdrawLimitType==2">
+					<view class="inputBut">
+						<view v-for="(item,index) in pageData.withdrawArr" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
 					</view>
+					<view v-if="inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
 				</view>
-				<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
-					<view class="short">≈USDT:</view>
-					<text style="margin-left: 10px;">{{(inputNum).toFixed(2)}}</text>
-				</view>	
-				<view class="mainBox" v-if="pageData.input_type==1">
-					<view class="withTitle" :style="choStyle">{{t('wr.w_u1')}}</view>
-					<view class="flex mt70">
-						<view class="short">{{currency}}</view>
-						<input type="text" placeholder-class="plo" style="color: #F65E5E;" v-model="inputNum" focus @input="inputNumHandle"
-							:placeholder="t('mine.m_s7')">
-
+				<view v-else>
+					<view  v-if="pageData.input_type==2" class="inputBut">
+						<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
+						</view>
 					</view>
-
-					<view class="flex mt30">
-						<view class="short">USDT</view>
-						<input type="text" :disabled="true" :value="Number(inputNum).toFixed(2)"  >
-					</view>
-					
-					
+					<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
+						<view class="short">≈USDT:</view>
+						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>	
+					<view class="mt40 inputItems" v-if="pageData.input_type==1">
+						{{currency}}
+						<view class="pl15">
+							<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo" v-model="inputNum">
+						</view>
+					</view>	
+				</view>
+				<view class="f20 mt30 text_center" v-if="pageData.withdrawLimitType==1&&pageData.input_type==1" style="color: #fff;">
+					* {{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
 				</view>
 				<view class="mt38">
 					<view class="f34  text_bold" :style="{color:store.$state.secondColor}">{{t('wr.w_u3')}}</view>
@@ -208,7 +216,7 @@
 	const tabClick = ref(1)
 	const tabText = ref('')
 	const currency = uni.getStorageSync('currency')
-	const inputNum = ref(0)
+	const inputNum = ref("")
 	const topNotice = ref("")
 	const locked = ref(false)
 
@@ -467,6 +475,18 @@
 		}
 		
 	}
+	.inputItems {
+		height: 115rpx;
+		background: #fff;
+		box-shadow: 0rpx 1rpx 51rpx 0rpx rgba(64, 46, 197, 0.05);
+		border-radius: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 50rpx;
+		color: #DE3824;
+		padding-left: 40rpx;
+	}
 	.inputBut{
 		display: flex;
 		color: #000;
@@ -477,17 +497,15 @@
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
-			background: #fff;
+			background: rgb(255, 234, 177);
 		}
 		.activeItem{
-			background: url(../../static/themeNum1/index/loginBtn.png);
-			color: #fff !important;
-			background-size: 100% 100%;
 			border-radius: 8px;
+			color: #fff;
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
-			// background: rgb(223, 184, 87);
+			background: rgb(223, 184, 87);
 		}
 	}
 </style>
