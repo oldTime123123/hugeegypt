@@ -25,47 +25,56 @@
 							{{ $t('add2.a_a8') }}
 						</view>
 					</view>
-					<view class="topBoxItem" >
+					<view class="topBoxItem">
 						<view style="display: flex;align-items: center;">
-							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg"></image>
+							<image v-if="tabClick==1" src="../../static/themeNum1/my/balance.png" class="tabImg">
+							</image>
 							<image v-else src="../../static/themeNum1/my/commission.png" class="tabImg"></image>
 							<view class="topItem f26">{{ tabText }}</view>
 						</view>
 						<view class="mt35 f55" style="color: #000;"> {{pageData.balance_max}} {{currency}}</view>
 					</view>
 				</view>
-				<view v-if="pageData.withdrawLimitType==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
-				<view v-if="pageData.withdrawLimitType==1&&pageData.input_type==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
-				
+				<view v-if="pageData.withdrawLimitType==2" style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:
+				</view>
+				<view v-if="pageData.withdrawLimitType==1&&pageData.input_type==2"
+					style="color: #fff;margin-top: 15px;">{{ t('add2.a_a17') }}:</view>
+
 				<view v-if="pageData.withdrawLimitType==2">
 					<view class="inputBut">
-						<view v-for="(item,index) in pageData.withdrawArr" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+						<view v-for="(item,index) in pageData.withdrawArr" :key="index"
+							:class="[index==titckIndex?'activeItem':'inputItem']">
 							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
 						</view>
 					</view>
 					<view v-if="inputNum" style="color: #fff;display: flex;">
 						<view class="short">≈USDT:</view>
-						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
-					</view>	
+						<text
+							style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>
 				</view>
 				<view v-else>
-					<view  v-if="pageData.input_type==2" class="inputBut">
-						<view v-for="(item,index) in pageData.buttons" :key="index" :class="[index==titckIndex?'activeItem':'inputItem']">
+					<view v-if="pageData.input_type==2" class="inputBut">
+						<view v-for="(item,index) in pageData.buttons" :key="index"
+							:class="[index==titckIndex?'activeItem':'inputItem']">
 							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
 						</view>
 					</view>
 					<view v-if="pageData.input_type==2&&inputNum" style="color: #fff;display: flex;">
 						<view class="short">≈USDT:</view>
-						<text style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
-					</view>	
+						<text
+							style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
+					</view>
 					<view class="mt40 inputItems" v-if="pageData.input_type==1">
 						{{currency}}
 						<view class="pl15">
-							<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo" v-model="inputNum">
+							<input type="text" :focus="true" :placeholder="t('mine.m_s7')" placeholder-class="f30 plo"
+								v-model="inputNum">
 						</view>
-					</view>	
+					</view>
 				</view>
-				<view class="f20 mt30 text_center" v-if="pageData.withdrawLimitType==1&&pageData.input_type==1" style="color: #fff;">
+				<view class="f20 mt30 text_center" v-if="pageData.withdrawLimitType==1&&pageData.input_type==1"
+					style="color: #fff;">
 					* {{t('wr.w_a4')}} : {{pageData.min+currency}} - {{pageData.max+currency}}
 				</view>
 
@@ -207,7 +216,8 @@
 
 		const data = {
 			amount: inputNum.value,
-			password: fundPwd.value
+			password: fundPwd.value,
+			balance_type: tabClick.value
 		}
 
 		request({
@@ -218,9 +228,9 @@
 			getData();
 			Toast.text(t('wr.w_u8'))
 			inputNum.value = ""
-			
+
 			uni.navigateTo({
-				url:'../record/withdrawRecord'
+				url: '../record/withdrawRecord'
 			})
 		}).catch(err => {
 			Toast.text(err.message)
@@ -228,7 +238,7 @@
 		locked.value = false
 	}
 	const titckIndex = ref(undefined)
-	const selectBut = (item,index)=>{
+	const selectBut = (item, index) => {
 		titckIndex.value = index;
 		inputNum.value = Number(item)
 	}
@@ -242,9 +252,9 @@
 
 	const currency = ref("")
 
-	const tabChange = (index)=>{
+	const tabChange = (index) => {
 		tabClick.value = index;
-		tabText.value = index==1?t('mine.m_t4'):t('add2.a_a14');
+		tabText.value = index == 1 ? t('mine.m_t4') : t('add2.a_a14');
 		getData(index)
 	}
 	// 终于可以用了
@@ -256,33 +266,40 @@
 </script>
 
 <style lang="scss">
-	.withdraw{
+	.withdraw {
 		background: url(../../static/themeNum1/index/loginBack.png);
 	}
-	.inp{
+
+	.inp {
 		background: #fff;
 		color: #000 !important;
 	}
+
 	.topBox {
 		width: 100%;
 		height: 328rpx
 	}
-	.topBoxTab{
+
+	.topBoxTab {
 		width: 100%;
 		height: 45px;
 		display: flex;
-		.tabItem{
+
+		.tabItem {
 			width: 50%;
 			height: 100%;
 		}
 	}
-	.ml10{
+
+	.ml10 {
 		margin-left: 10px;
 	}
-	.pay{
+
+	.pay {
 		color: #fff;
 		margin-top: 10px;
 	}
+
 	.topBoxItem {
 		height: calc(100% - 45px);
 		border-bottom-left-radius: 12px;
@@ -295,47 +312,55 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.active1{
+
+	.active1 {
 		border-top-right-radius: 12px;
 		color: #000;
 		background: url(../../static/themeNum1/my/orLeft.png);
 		background-size: 100% 100%;
 	}
-	.active2{
+
+	.active2 {
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		color: #000;
 		background: url(../../static/themeNum1/my/orRight.png);
 		background-size: 100% 100%;
 	}
-	.gray1{
+
+	.gray1 {
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		background: #fff;
 		color: #000;
 	}
-	.gray2{
+
+	.gray2 {
 		background: #fff;
 		border-top-left-radius: 12px;
 		border-top-right-radius: 12px;
 		color: #000;
 	}
-	.tabItem{
+
+	.tabItem {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	.tabImg{
+
+	.tabImg {
 		width: 24px;
 		height: 24px;
 		margin-right: 10px;
 	}
-	.flex{
+
+	.flex {
 		display: flex;
 		// flex-direction: column;
 		align-items: center;
 		justify-content: left;
 	}
+
 	.topBox {
 		width: 100%;
 		height: 328rpx
@@ -405,6 +430,7 @@
 			line-height: 60rpx;
 		}
 	}
+
 	.inputItems {
 		height: 115rpx;
 		background: #fff;
@@ -417,19 +443,22 @@
 		color: #DE3824;
 		padding-left: 40rpx;
 	}
-	.inputBut{
+
+	.inputBut {
 		display: flex;
 		color: #000;
 		flex-wrap: wrap;
 		margin-top: 32rpx;
-		.inputItem{
+
+		.inputItem {
 			border-radius: 8px;
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
 			background: rgb(255, 234, 177);
 		}
-		.activeItem{
+
+		.activeItem {
 			border-radius: 8px;
 			color: #fff;
 			margin: 0 15px 15px 0;

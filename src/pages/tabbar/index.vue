@@ -24,7 +24,7 @@
 			<!-- 轮播图 -->
 			<view class=" ">
 				<!-- uni.getStorageSync("huobi") -->
-				<swiper :indicator-dots="true" :indicator-active-color="store.$state.contentColor" :autoplay="true" 
+				<swiper :indicator-dots="true" :indicator-active-color="store.$state.contentColor" :autoplay="true"
 					:interval="3000" :duration="1000" next-margin="20" :circular="true" style="height: 410rpx;">
 					<swiper-item v-for="(item, index) in list" @click="botHandle(2, item)" :key="index">
 						<image :src="item.banner_image" mode="scaleToFill" style=" width: 100%;height: 410rpx"></image>
@@ -65,7 +65,8 @@
 			</view> -->
 			<!-- bottom -->
 
-			<view class="margintty mt30" v-show='item.movies.length>0' v-for="(item, index) in rankListRef" :key="index">
+			<view class="margintty mt30" v-show='item.movies.length>0' v-for="(item, index) in rankListRef"
+				:key="index">
 				<view class="mt30 secondClo f40 btn">
 					<!-- 					{{t('index.i_a5')}} -->
 					<view class="">
@@ -84,7 +85,8 @@
 										<nut-icon name="uploader" style="margin-left: 2px; margin-top: 3px;"
 											color="#FFF"></nut-icon>
 									</view>
-									<image :src="item.cover" style="width: 100%;height: 100%;object-fit: cover;"></image>
+									<image :src="item.cover" style="width: 100%;height: 100%;object-fit: cover;">
+									</image>
 								</view>
 								<!-- <view class="rate">
 									{{item.rate}}
@@ -123,10 +125,11 @@
 					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
 				</view>
 				<view class="numList">
-					<swiper :circular="true" :indicator-dots="false" 
-						display-multiple-items="3" style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000" :duration="1000"
-						:vertical="true">
-						<swiper-item v-for="(item, index) in MembershipList"  class="numItem" style="width: 100%;" :key="index">
+					<swiper :circular="true" :indicator-dots="false" display-multiple-items="3"
+						style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000"
+						:duration="1000" :vertical="true">
+						<swiper-item v-for="(item, index) in MembershipList" class="numItem" style="width: 100%;"
+							:key="index">
 							<view class="numContent">
 								<view class="numText">
 									<view class="phone">{{t('index.i_a28')}}
@@ -155,7 +158,7 @@
 					</view> -->
 				</view>
 			</view>
-			<view class="Membership mt30">
+			<view class="Membership mt30" v-if="false">
 				<view class="secondClo f40 btn">
 					<view class="">
 						{{ t('index.i_a27') }}
@@ -163,10 +166,11 @@
 					<nut-icon name="arrow-right" style="margin: 10rpx 0rpx 0rpx 20rpx;" color="#fff"></nut-icon>
 				</view>
 				<view class="numList">
-					<swiper :circular="true" :indicator-dots="false" 
-						display-multiple-items="3" style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000" :duration="1000"
-						:vertical="true">
-						<swiper-item v-for="(item, index) in incomeList"  class="numItem" style="width: 100%;" :key="index">
+					<swiper :circular="true" :indicator-dots="false" display-multiple-items="3"
+						style=" width: 100% !important;" :disable-touch="true" :autoplay="true" :interval="2000"
+						:duration="1000" :vertical="true">
+						<swiper-item v-for="(item, index) in incomeList" class="numItem" style="width: 100%;"
+							:key="index">
 							<view class="numContent">
 								<view class="numText">
 									<view class="phone">{{t('index.i_a28')}}
@@ -262,7 +266,7 @@
 			
 		</view> -->
 		<!-- <Tabbar :activeIndex="0"></Tabbar> -->
-		<Menu :bottom="300" :right="0"></Menu> 
+		<Menu :bottom="300" :right="0"></Menu>
 	</view>
 </template>
 
@@ -368,8 +372,7 @@
 			url: "../mine/DownLoad"
 		},
 	])
-	const tabIconsContent = ref([
-		{
+	const tabIconsContent = ref([{
 			name: t('index.i_a6'),
 			img: '../../static/themeNum1/index/Recharge.png',
 			openLink: true,
@@ -419,9 +422,9 @@
 		}
 	])
 	//任务收益
-	const MembershipList= ref([])
+	const MembershipList = ref([])
 	//邀请收益
-	const incomeList= ref([])
+	const incomeList = ref([])
 	// 提现列表
 	const withdrawList = ref([])
 	// 充值列表
@@ -656,44 +659,46 @@
 		})
 	}
 	const movieList = ref([])
-	const movieMission = () =>{
+	const movieMission = () => {
 		request({
-			url:'home/vipList',
-			methods:'get'
-		}).then(res=>{
+			url: 'home/vipList',
+			methods: 'get'
+		}).then(res => {
 			movieList.value = res
 		})
 	}
-	const goVip =(item) =>{
-		if(item.is_active==1){
-			uni.switchTab({url: "./task"})
-		}else{
+	const goVip = (item) => {
+		if (item.is_active == 1) {
+			uni.switchTab({
+				url: "./task"
+			})
+		} else {
 			Toast.text(t('index.i_a25'))
 		}
 	}
 	//tabs跳转
-	const goTabDetail=(item)=>{
-		if(item.url){
+	const goTabDetail = (item) => {
+		if (item.url) {
 			uni.navigateTo({
 				url: item.url
 			})
 		}
 	}
 	//任务收益
-	const getTaskProfit = ()=>{
+	const getTaskProfit = () => {
 		request({
-			url:'home/taskProfit',
-			methods:'get'
-		}).then(res=>{
+			url: 'home/taskProfit',
+			methods: 'get'
+		}).then(res => {
 			MembershipList.value = res
 		})
 	}
 	//邀请收益
-	const getInviteProfit =()=>{
+	const getInviteProfit = () => {
 		request({
-			url:'home/inviteProfit',
-			methods:'get'
-		}).then(res=>{
+			url: 'home/inviteProfit',
+			methods: 'get'
+		}).then(res => {
 			incomeList.value = res
 		})
 	}
@@ -766,12 +771,13 @@
 </style>
 
 <style lang="scss">
-	.tabIcons{
+	.tabIcons {
 		padding: 25rpx 25rpx 0 25rpx;
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		.tabItem{
+
+		.tabItem {
 			display: flex;
 			width: 48%;
 			height: 118rpx;
@@ -779,16 +785,19 @@
 			background: #fff;
 			box-shadow: 0 0 18px 0 #E9E9E9;
 			border: 0.5px solid #E9E9E9;
-			.tabFlex{
+
+			.tabFlex {
 				width: 100%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				.tabImg{
+
+				.tabImg {
 					width: 60rpx;
 					height: 60rpx;
 				}
-				.tabText{
+
+				.tabText {
 					color: #000;
 					width: 80px;
 					margin-left: 5px;
@@ -797,54 +806,65 @@
 			}
 		}
 	}
-	.banner{
+
+	.banner {
 		padding: 0 25rpx 25rpx 25rpx;
 		height: 160px;
-		.bannerImg{
+
+		.bannerImg {
 			width: 100%;
 			height: 100%;
 		}
 	}
-	.secondClo{
+
+	.secondClo {
 		color: #DE3824;
 	}
-	.task{
+
+	.task {
 		margin-left: 12px;
 		margin-bottom: 1.625rem;
-		.taskB{
+
+		.taskB {
 			display: flex;
 			flex-wrap: wrap;
 			margin-top: -20px;
-			.taskBanner{
+
+			.taskBanner {
 				width: 82px;
 				height: 28px;
 				margin: 0 18rpx 25rpx 0;
+
 				// position: relative;
-					// z-index: 11;
-				.bannerImg{
+				// z-index: 11;
+				.bannerImg {
 					width: 100%;
 					height: 100%;
-					
+
 				}
 			}
-			.textContent{
+
+			.textContent {
 				width: 54px !important;
 				text-align: center;
 				position: relative;
 				top: 21px;
 				z-index: 55;
-				.taskText{
+
+				.taskText {
 					color: #000;
 					font-size: 12px;
 				}
 			}
-			
+
 		}
-		
+
 	}
-	.Membership{
+
+	.Membership {
 		margin: 0 12px;
-		.numList{
+
+		.numList {
 			background-color: #fff;
 			color: #fff;
 			border-radius: 0.9375rem;
@@ -853,46 +873,55 @@
 			flex-direction: column;
 			box-shadow: 0 0 18px 0 #E9E9E9;
 			border: 0.5px solid #E9E9E9;
-			.numItem{
+
+			.numItem {
 				width: 100%;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				.numContent{
+
+				.numContent {
 					display: flex;
 					align-items: center;
-					.numImg{
+
+					.numImg {
 						width: 40px;
 						height: 40px;
 					}
-					.numText{
+
+					.numText {
 						display: flex;
 						flex-direction: column;
 						margin-left: 3px;
-						.phone{
+
+						.phone {
 							color: #000;
 							font-size: 12px;
-							.ml5{
+
+							.ml5 {
 								margin-left: 3px;
 							}
 						}
-						.time{
+
+						.time {
 							color: #999999;
 							font-size: 11px;
 							margin-top: 5px;
 						}
 					}
 				}
-				.price{
+
+				.price {
 					color: #DE3824;
 					font-weight: bold;
 					font-size: 13px;
 				}
 			}
-			
+
 		}
 
 	}
+
 	.margintty {
 		// width: 94%;
 		margin-left: 12px;
@@ -902,6 +931,7 @@
 		position: relative;
 		width: 160px;
 		height: 160px;
+
 		.movie_header {
 			background-image: url('../static/movie_start.png');
 			background-size: 100%;
@@ -1081,10 +1111,12 @@
 		}
 
 	}
-	::v-deep .margintty .uni-swiper-slides{
+
+	::v-deep .margintty .uni-swiper-slides {
 		width: 100% !important;
 	}
-	::v-deep .uni-swiper-wrapper .uni-swiper-dots .uni-swiper-dot-active{
+
+	::v-deep .uni-swiper-wrapper .uni-swiper-dots .uni-swiper-dot-active {
 		background-color: #DE3824 !important;
 		background: linear-gradient(0deg, #e67f74 0%, #DE3824 100%) !important;
 	}
