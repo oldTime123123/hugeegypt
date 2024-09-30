@@ -47,11 +47,11 @@
 							<view @click="selectBut(item,index)">{{ item }}{{ currency }}</view>
 						</view>
 					</view>
-					<view v-if="inputNum" style="color: #fff;display: flex;">
+					<!-- <view v-if="inputNum" style="color: #fff;display: flex;">
 						<view class="short">≈USDT:</view>
 						<text
 							style="margin-left: 10px;">{{(inputNum * (pageData.u_rate?pageData.u_rate:1)).toFixed(2)}}</text>
-					</view>
+					</view> -->
 				</view>
 				<view v-else>
 					<view v-if="pageData.input_type==2" class="inputBut">
