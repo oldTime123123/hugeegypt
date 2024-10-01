@@ -51,7 +51,9 @@
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
-							<view class="lh">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
 							<view class="bottom">
 								<view>{{ t('index.i_a34') }}</view>
 								<view style="margin-top: 5px;">{{ item.start_time}} ~ {{ item.end_time }}</view>
@@ -61,7 +63,9 @@
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
-							<view class="lh">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
 							<view class="bottom" >
 								<view>Unlock</view>
 							</view>
@@ -70,7 +74,9 @@
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
-							<view class="lh">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
 							<view class="bottom">{{ item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
 						</view>
 						<view class="starviptc" v-else @click="goGrade(item)">
