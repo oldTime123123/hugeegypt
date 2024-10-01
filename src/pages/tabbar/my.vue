@@ -461,7 +461,7 @@
 			myDataList.value[5].value = res.task.rest;
 			myDataList.value[6].value = res.incomeReport.month;
 			myDataList.value[7].value = res.incomeReport.children_job;
-			myDataList.value[8].value = res.incomeReport.total;
+			myDataList.value[8].value = res.incomeReport.children_rebate;
 			// res.template= 1
 			res.template == 1 ? showSignTemplate.value = true : showSignTemplate.value = false
 		});

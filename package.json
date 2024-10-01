@@ -53,7 +53,7 @@
     "@nutui/nutui-bingo": "^1.0.7",
     "i18n": "^0.15.1",
     "lib-flexible": "^0.3.2",
-    "pinia": "^2.0.36",
+    "pinia": "2.0.36",
     "pinia-plugin-persist": "^1.0.0",
     "postcss-px2rem": "^0.3.0",
     "postcss-pxtorem": "^6.0.0",
