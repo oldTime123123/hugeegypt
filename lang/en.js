@@ -101,7 +101,7 @@ export default {
 		a_a10: "INR",
 		a_a11: "Per order",
 		a_a12: "Daily work",
-		a_a13: "desposit",
+		a_a13: "Revenue per task",
 		a_a14: "Commission Balance",
 		a_a15: "Main Wallet",
 		a_a16: "Profit Wallet",
@@ -326,7 +326,9 @@ export default {
 		t4: 'Other job levels',
 		t5: 'Monthly salary',
 		t6: 'Apply',
-		t7: "Check"
+		t7: "Check",
+		t8: "Not open",
+		t9: 'The current level is not open yet',
 	},
 	mine: {
 		m_a1: "Balance Detail",

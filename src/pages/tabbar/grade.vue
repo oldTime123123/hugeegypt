@@ -52,8 +52,8 @@
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
 							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
-							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
-							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }} : {{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }} : {{ currency }}{{ item.bonus }}</view>
 							<view class="bottom">
 								<view>{{ t('index.i_a34') }}</view>
 								<view style="margin-top: 5px;">{{ item.start_time}} ~ {{ item.end_time }}</view>
@@ -64,8 +64,8 @@
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
 							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
-							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
-							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }} : {{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ item.is_active == 4?t('task.t8'):item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
 							<view class="bottom" >
 								<view>Unlock</view>
 							</view>
@@ -75,17 +75,17 @@
 							<view class="pg">{{ item.name }}</view>
 							<view class="iden">{{ t('index.i_a33') }}</view>
 							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
-							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
-							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
-							<view class="bottom">{{ item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }} : {{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }} : {{ currency }}{{ item.bonus }}</view>
+							<view class="bottom">{{ item.is_active == 4?t('task.t8'):item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
 						</view>
 						<view class="starviptc" v-else @click="goGrade(item)">
 							<image class="grademg" :src="item.little_pic"></image>
 							<view class="pg">{{ item.name }}</view>
 							<view class="mf14">{{ currency }} {{item.price}}/{{ $t('add2.a_a11') }}</view>
-							<view class="mf14">{{ $t('add2.a_a12') }}:{{ item.day_max }} {{ $t('act.e_e12') }}</view>
-							<view class="mf14">{{ $t('add2.a_a13') }}:{{ currency }}{{ item.bonus }}</view>
-							<view class="bottom">{{ item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
+							<view class="mf14">{{ $t('add2.a_a12') }} : {{ item.day_max }} {{ $t('act.e_e12') }}</view>
+							<view class="mf14">{{ $t('add2.a_a13') }} : {{ currency }}{{ item.bonus }}</view>
+							<view class="bottom">{{ item.is_active == 4?t('task.t8'):item.number>actineNum?t('task.t6'):t('task.t7') }}</view>
 						</view>
 					</view>
 				</view>
@@ -197,6 +197,10 @@
 	
 	//单个等级详情
 	const goGrade = (item) =>{
+		if (item.is_active==4) {
+			Toast.text(t('task.t9'))
+			return false
+		}
 		if(item.is_active==1){
 			uni.switchTab({url: "./task"})
 		}else{
@@ -288,6 +292,7 @@
 		width: 90%;
 		height: 100%;
 		margin: 70rpx 38rpx 0rpx 38rpx;
+		
 	}
 	.main_box{
 		width: 100%;
