@@ -11,8 +11,19 @@
 			<!-- <view class="f30 mt60 secondClo">
 				{{t('wr.w_u9')}}
 			</view> -->
+			<view class="choItem mt88" @click="changeChoosed('other')" :class="cType == 'other' ? 'choStyle' : 'noStyle'" v-if="showBank">
+				<view class="flex">
+					<image :src="store.$state.imgObj.other" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
+					<view class="mglr49 center f28">Other</view>
+				</view>
+				<!-- {{store.$state.imgObj.ohter}} -->
+				<view class="noCho">
+					<image :src="store.$state.imgObj.choosed" mode="widthFix" style="width: 35rpx;height: 35rpx;"
+						v-if="cType =='other'"></image>
+				</view>
+			</view>
 
-			<view class="choItem mt88" @click="changeChoosed('usdt')" :class="cType == 'usdt' ? 'choStyle' : 'noStyle'"
+			<view class="choItem" @click="changeChoosed('usdt')" :class="cType == 'usdt' ? 'choStyle' : 'noStyle'"
 				v-if="showUsdt">
 				<view class="flex">
 					<image :src="store.$state.imgObj.usdt" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
@@ -22,18 +33,6 @@
 				<view class="noCho">
 					<image :src="store.$state.imgObj.choosed" mode="widthFix" style="width: 35rpx;height: 35rpx;"
 						v-if="cType =='usdt'"></image>
-				</view>
-			</view>
-
-			<view class="choItem" @click="changeChoosed('other')" :class="cType == 'other' ? 'choStyle' : 'noStyle'" v-if="showBank">
-				<view class="flex">
-					<image :src="store.$state.imgObj.other" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
-					<view class="mglr49 center f28">Other</view>
-				</view>
-				<!-- {{store.$state.imgObj.ohter}} -->
-				<view class="noCho">
-					<image :src="store.$state.imgObj.choosed" mode="widthFix" style="width: 35rpx;height: 35rpx;"
-						v-if="cType =='other'"></image>
 				</view>
 			</view>
 			
@@ -85,7 +84,7 @@
 		color:'#000',
 		animation: '.2s linear all'
 	}
-	const cType = ref('usdt')
+	const cType = ref('')
 	const changeChoosed = (type) => {
 		cType.value = type
 	}
@@ -108,7 +107,16 @@ const showBTC = ref(false)
 				withdraw_type
 			} = res
 			// withdraw_type = [1]
-
+			if(withdraw_type.includes(2)){
+				cType.value = 'other'     
+			}else{
+				if (withdraw_type[0]==1) {
+					cType.value = 'usdt'     
+				}
+				if (withdraw_type[0]==3) {
+					cType.value = 'btc'  
+				}  
+			}
 			if (withdraw_type.includes(1)) {
 				showUsdt.value = true
 			}
