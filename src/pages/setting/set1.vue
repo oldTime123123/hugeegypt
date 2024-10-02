@@ -28,7 +28,7 @@
 					{{t('inp.i_a4')}}
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a5')" 
+					<input class="inp" placeholder-class="plo" maxlength="11" :placeholder="t('inp.i_a5')" 
 						v-model="formData.bank_num">
 				</view>
 			</view>
