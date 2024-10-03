@@ -1,5 +1,9 @@
 const skyPay = 'Fund'
 export default {
+
+	redE: {
+		p_a8: 'Congratulations on winning the award',
+	},
 	ss1: {
 		a_a1: "Fund balance",
 		a_a2: "Fund",
@@ -192,6 +196,9 @@ export default {
 		a_c10: "Cancel",
 		a_d1: "Copy",
 		a_d2: "Status",
+		a_d3: 'Start',
+		a_d4: 'Records',
+		a_d5: 'Rule'
 	},
 	tabbar: {
 		t_t1: "Home",

@@ -25,12 +25,13 @@
 				<view class="mainBox">
 					<view class="flex">
 						<view class="short" style="width: 30%;">{{currency}}</view>
-						<input type="number"  :disabled="pageData.type==2" placeholder-class="plo" focus :placeholder="t('add1.b_b3')" v-model="inputNum">
+						<input type="number" placeholder-class="plo" focus :placeholder="t('add1.b_b3')"
+							v-model="inputNum">
 					</view>
 
 					<view class="flex mt30">
 						<view class="short" style="width: 30%;">≈USDT</view>
-						<input type="number"  style="color: #F65E5E;" disabled
+						<input type="number" style="color: #F65E5E;" disabled
 							:value="(((inputNum?inputNum:0 ) * pageData.rate)+ ((inputNum?inputNum:0 ) * pageData.rate) * u_percent).toFixed(2)">
 					</view>
 
@@ -47,16 +48,16 @@
 				</view>
 			</view>
 		</view>
-		
-	<!-- <nut-overlay v-model:visible="showMask">
+
+		<!-- <nut-overlay v-model:visible="showMask">
 		<div class="wrapper">
 			<div class="content">
 				<view v-html="maskData"></view>
 			</div>
 		</div>
 	</nut-overlay> -->
-	<FullMask  v-show="showMask" @confirm="methods.confirm" :maskList="maskData"></FullMask>
-	
+		<FullMask v-show="showMask" @confirm="methods.confirm" :maskList="maskData"></FullMask>
+
 		<Loading ref="showLoading"></Loading>
 	</view>
 </template>
@@ -79,7 +80,7 @@
 	import {
 		useI18n
 	} from "vue-i18n";
-	
+
 	const {
 		t
 	} = useI18n();
@@ -112,15 +113,15 @@
 
 
 		let data = {}
-		if(vipId.value){
-			data={
-				amount:inputNum.value,
-				vipId:vipId.value
-			}
-		}else{
+		if (vipId.value) {
 			data = {
-			amount: inputNum.value
-		}
+				amount: inputNum.value,
+				vipId: vipId.value
+			}
+		} else {
+			data = {
+				amount: inputNum.value
+			}
 		}
 		request({
 			url: 'finance/usdt/recharge/submit',
@@ -132,14 +133,14 @@
 				url: './usdtOrder'
 			})
 		}).catch(err => {
-				showLoading.value.loading = false
+			showLoading.value.loading = false
 			uni.showToast({
 				title: err.message,
 				icon: 'none'
 			})
 		})
 	}
-const getData = () => {
+	const getData = () => {
 		request({
 			url: 'finance/usdt/recharge/index',
 			methods: 'get'
@@ -173,7 +174,7 @@ const getData = () => {
 									showMask.value = true
 									showMask.value = true
 									let obj = {
-										content:res2.hint
+										content: res2.hint
 									}
 									maskData.value = [obj]
 								}
@@ -186,17 +187,17 @@ const getData = () => {
 			pageData.value = res
 
 			if (res.hint) {
-				
+
 				showMask.value = true
 				let obj = {
-					content:res.hint
+					content: res.hint
 				}
 				maskData.value = [obj]
 			}
 		})
 	}
-	
-	const selectBut = (item)=>{
+
+	const selectBut = (item) => {
 		inputNum.value = Number(item)
 	}
 	const currency = ref("")
@@ -207,31 +208,33 @@ const getData = () => {
 		currency.value = uni.getStorageSync('currency')
 	})
 	const vipId = ref()
-const rechargeAmount = ref()
-	onLoad(e=>{
-		if(e.id){
+	const rechargeAmount = ref()
+	onLoad(e => {
+		if (e.id) {
 			vipId.value = e.id
 		}
-		if(e.number){
+		if (e.number) {
 			rechargeAmount.value = e.number
 			inputNum.value = Number(e.number)
 		}
-		u_percent.value = e.u_percent/100
+		u_percent.value = e.u_percent / 100
 	})
 </script>
 
 <style lang="scss" scoped>
-	.charge{
+	.charge {
 		height: 100vh;
 		background: url(../../static/themeNum1/index/loginBack.png);
 	}
-	.choStyle{
+
+	.choStyle {
 		// background: url(../../static/themeNum1/index/loginBtn.png);
 		// background-size: 100% 100%;
 		background: #fff;
 		color: #000 !important;
 
 	}
+
 	.mainBox {
 		margin-top: 36rpx;
 		border-radius: 30rpx;
@@ -239,6 +242,7 @@ const rechargeAmount = ref()
 		font-size: 28rpx;
 		background-color: #fff;
 		color: #000;
+
 		.flex {
 			display: flex;
 			align-items: center;
@@ -277,12 +281,13 @@ const rechargeAmount = ref()
 		text-transform: capitalize;
 		border-radius: 35rpx;
 	}
+
 	.wrapper {
 		display: flex;
 		height: 100%;
 		align-items: center;
 		justify-content: center;
-	
+
 		.content {
 			width: 650rpx;
 			padding: 20rpx;
@@ -292,12 +297,14 @@ const rechargeAmount = ref()
 			border-radius: 8px;
 		}
 	}
-	.inputBut{
+
+	.inputBut {
 		display: flex;
 		color: #fff;
 		flex-wrap: wrap;
 		margin-top: 32rpx;
-		.inputItem{
+
+		.inputItem {
 			margin: 0 15px 15px 0;
 			padding: 5px;
 			box-sizing: border-box;
