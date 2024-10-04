@@ -25,10 +25,10 @@
 
 			<view class="mt38">
 				<view class="pl14">
-					{{t('inp.i_a4')}}
+					{{t('inp.i_a10')}}
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" maxlength="11" :placeholder="t('inp.i_a5')" 
+					<input class="inp" placeholder-class="plo" maxlength="11" :placeholder="t('inp.i_a11')" 
 						v-model="formData.bank_num">
 				</view>
 			</view>

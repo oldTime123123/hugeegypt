@@ -457,6 +457,8 @@ export default {
 		i_a7: "Please enter Name of account holder",
 		i_a8: "Phone number",
 		i_a9: "Please enter your Phone number",
+		i_a10: "Digital Wallet Number",
+		i_a11: "Please enter the Digital Wallet Number",
 
 
 		a_b1: "Wallet Management",
