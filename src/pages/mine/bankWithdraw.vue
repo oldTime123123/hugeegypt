@@ -18,12 +18,13 @@
 
 				<view class="topBox  flex-col" style="border-radius: 30rpx;">
 					<view class="topBoxTab">
-						<view class="tabItem" @click="tabChange(1)" :class="[tabClick==1?'active1':'gray1']">
-							{{ $t('add2.a_a7') }}
-						</view>
 						<view class="tabItem" @click="tabChange(2)" :class="[tabClick==2?'active2':'gray2']">
 							{{ $t('add2.a_a8') }}
 						</view>
+						<view class="tabItem" @click="tabChange(1)" :class="[tabClick==1?'active1':'gray1']">
+							{{ $t('add2.a_a7') }}
+						</view>
+						
 					</view>
 					<view class="topBoxItem">
 						<view style="display: flex;align-items: center;">
@@ -247,7 +248,7 @@
 			url: url
 		})
 	}
-	const tabClick = ref(1)
+	const tabClick = ref(2)
 	const tabText = ref('')
 
 	const currency = ref("")
@@ -259,8 +260,8 @@
 	}
 	// 终于可以用了
 	onShow(() => {
-		tabText.value = t('mine.m_t4');
-		getData();
+		tabText.value = t('add2.a_a14');
+		getData(2);
 		currency.value = uni.getStorageSync('currency')
 	})
 </script>
