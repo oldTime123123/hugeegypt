@@ -10,12 +10,12 @@
 								{{ pageData.phoneNew }}
 							</view>
 
-							<image class="ml20" src="../../static/themeNum1/index/biyan.png"
+							<image class="ml20" src="../../static/themeNum1/index/close.png"
 								style="width: 49rpx; height: 35rpx" @click="showEye = !showEye"></image>
 						</view>
 						<view class="f32 text_bold flex col_center" v-else>
 							{{ pageData.phone }}
-							<image class="ml20" src="../../static/themeNum1/index/zhengyan.png"
+							<image class="ml20" src="../../static/themeNum1/index/open.png"
 								style="width: 49rpx; height: 35rpx" @click="showEye = !showEye"></image>
 						</view>
 						<!-- <view class="f22 mt10">

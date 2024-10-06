@@ -74,8 +74,11 @@
 		<!-- 客服列表 -->
 		<nut-drag :boundary="{ top:50, left: 30, bottom:50, right: 15 }" :attract="true" v-if="showService"
 			:style="{ top: '170rpx', right: '30rpx' }">
-			<image :src="COUNTRY.kefu?COUNTRY.kefu:store.$state.imgObj.kefuIcon" mode="widthFix"
+			<!-- <image :src="COUNTRY.kefu?COUNTRY.kefu:store.$state.imgObj.kefuIcon" mode="widthFix"
 				style="width: 70rpx;height: 70rpx;margin-top: 0;" @click="methods.changePage('../mine/service')">
+			</image> -->
+			<image src="../../static/service/kefu2.jpg" mode="widthFix"
+				style="width: 50px;height: 50px;margin-top: 0;border-radius: 50%;" @click="methods.changePage('../mine/service')">
 			</image>
 		</nut-drag>
 

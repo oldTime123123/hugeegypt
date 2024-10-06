@@ -3,7 +3,7 @@ const themeNum1 = {
 	contentColor: 'linear-gradient(0deg, #DFB857 0%, #FFEAB1 100%)',
 	secondColor: "#fff",
 	imgObj: {
-		kefuIcon:"/static/service/kefu1.png",
+		kefuIcon:"/static/service/kefu2.jpg",
 		loginBg: {
 			background: "url('/static/themeNum1/loginBg.png') repeat-y 100%/150%",
 			minHeight: "calc(100vh)",
