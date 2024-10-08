@@ -40,7 +40,9 @@
 				</view>
 			</view>
 			<view class="banner" @click="jumpPage('../mine/share')">
-				<image class="bannerImg" src="../../static/themeNum1/index/banner.png"></image>
+				<!-- <image class="bannerImg" src="../../static/themeNum1/index/banner.png"></image>
+				<image class="bannerImg" src="../../static/themeNum1/index/banner.png"></image> -->
+				<image class="bannerImg" src="../../static/2.jpg"></image>
 			</view>
 			<view class="task">
 				<view class="secondClo f40 btn">
