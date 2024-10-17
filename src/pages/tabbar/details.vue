@@ -44,11 +44,11 @@
 								style="width: 35rpx;height: 35rpx;"></image>
 							{{rating?rating+'/10':t('movie.m_d1')}}
 						</view>
-						<view class="tatol_Rate">
-							<!-- 							评分 -->
+						<!-- 评分 -->
+						<!-- <view class="tatol_Rate">
 							{{t('movie.m_c8')}}
 							{{result}}
-						</view>
+						</view> -->
 					</view>
 					<!-- <view class="tim_2">
 						<view style='font-weight: 600;'>
