@@ -124,7 +124,7 @@ export default {
 		a_d5: "Recharge List",
 		a_d6: "recharge success",
 		a_d7: "Salary description",
-		a_d8: "Fixed account",
+		a_d8: "Task management fee",
 		a_d9: "Cash deposit",
 
 		a_c1: 'Home',
