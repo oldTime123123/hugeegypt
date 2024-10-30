@@ -51,8 +51,8 @@ const messages = {
 let cur_lang = uni.getStorageSync('lang')
 
 if (cur_lang == 'ar') {
-	let eles = document.querySelector("html")
-	document.querySelector("html").setAttribute("dir", 'rtl')
+	// let eles = document.querySelector("html")
+	// document.querySelector("html").setAttribute("dir", 'rtl')
 }
 
 
