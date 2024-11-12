@@ -208,9 +208,9 @@
 	
 	const methods = {
 		back() {
-			uni.switchTab({
-				url: '../tabbar/index'
-			})
+			// uni.switchTab({
+			// 	url: '../tabbar/index'
+			// })
 		},
 		changePage(url) {
 			uni.navigateTo({

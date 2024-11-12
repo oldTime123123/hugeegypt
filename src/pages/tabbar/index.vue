@@ -748,12 +748,12 @@
 			})
 			return false
 		}
-		// if(!uni.getStorageSync('token')){
+		if(!uni.getStorageSync('token')){
 
-		// 	uni.navigateTo({
-		// 		url:'../login/beforeLogin'
-		// 	})
-		// }
+			uni.navigateTo({
+				url:'../login/beforeLogin'
+			})
+		}
 
 
 	})
