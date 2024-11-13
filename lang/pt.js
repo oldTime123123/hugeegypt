@@ -460,7 +460,8 @@ export default {
 		m_d4:'Operação bem sucedida',
 		m_d5:'Sobre nós',
 		m_d6:'Enviar tarefa concluída',
-		m_d7:'Você concluiu todas as tarefas, entre em contato com o gerente da área'
+		m_d7:'Você concluiu todas as tarefas, entre em contato com o gerente da área',
+		m_d8: 'Informações da empresa',
 	}
 
 }

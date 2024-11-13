@@ -461,7 +461,8 @@ export default {
 		m_d4:'Udana operacja',
 		m_d5:'O nas',
 		m_d6:'Wyślij ukończone zadanie',
-		m_d7:'Wykonałeś wszystkie zadania, skontaktuj się z kierownikiem obszaru'
+		m_d7:'Wykonałeś wszystkie zadania, skontaktuj się z kierownikiem obszaru',
+		m_d8: 'Informacje o firmie',
 	}
 
 }

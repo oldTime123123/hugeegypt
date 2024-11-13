@@ -460,7 +460,8 @@ export default {
 		m_d4:'Succesvolle operatie',
 		m_d5:'Over ons',
 		m_d6:'Verstuur voltooide taak',
-		m_d7:'Je hebt alle taken voltooid, neem contact op met de rayonmanager'
+		m_d7:'Je hebt alle taken voltooid, neem contact op met de rayonmanager',
+		m_d8: 'Bedrijfsinformatie',
 	}
 
 }

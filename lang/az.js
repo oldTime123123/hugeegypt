@@ -465,7 +465,8 @@ export default {
 		m_d4: 'Uğurlu əməliyyat',
 		m_d5: 'Haqqımızda',
 		m_d6: 'Tamamlanmış tapşırığı təqdim et',
-		m_d7: 'Bütün tapşırıqları yerinə yetirdiniz, lütfən sahə meneceri ilə əlaqə saxlayın'
+		m_d7: 'Bütün tapşırıqları yerinə yetirdiniz, lütfən sahə meneceri ilə əlaqə saxlayın',
+		m_d8: 'Şirkət məlumatı',
 	}
 
 }

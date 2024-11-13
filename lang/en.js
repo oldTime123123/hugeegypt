@@ -516,8 +516,8 @@ export default {
 		m_d4: 'Successful operation',
 		m_d5: 'About Us',
 		m_d6: 'Submit completed task',
-		m_d7: 'You have completed all tasks, please contact the area manager'
-
+		m_d7: 'You have completed all tasks, please contact the area manager',
+		m_d8: 'Company ho nsɛm',
 	}
 
 }

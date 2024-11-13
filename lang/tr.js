@@ -460,7 +460,8 @@ export default {
 		m_d4:'Başarılı işlem',
 		m_d5:'Hakkımızda',
 		m_d6:'Tamamlanan görevi gönder',
-		m_d7:'Tüm görevleri tamamladınız, lütfen bölge yöneticisiyle iletişime geçin'
+		m_d7:'Tüm görevleri tamamladınız, lütfen bölge yöneticisiyle iletişime geçin',
+		m_d8: 'Şirket bilgileri',
 	}
 
 }

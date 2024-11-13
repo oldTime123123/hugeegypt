@@ -21,6 +21,9 @@
 			</view>
 		</view> -->
 		<view class="pdlr30 pt33">
+			<video src="https://api.hugeegypt.com/3.mp4" style="width: 100%;">
+
+			</video>
 				<view class="newsItem mb30 " v-for="item in recordsList" @click="jumpPage('../mine/artcle?pos='+item.id)">
 					<view>
 						

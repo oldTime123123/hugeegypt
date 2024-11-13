@@ -469,7 +469,8 @@ export default {
 		m_d4: 'Éxito de operación',
 		m_d5: 'Sobre nosotros',
 		m_d6: 'Presentación de tareas completadas',
-		m_d7: 'Has completado todas las tareas. Contacta con el gerente de área'
+		m_d7: 'Has completado todas las tareas. Contacta con el gerente de área',
+		m_d8: 'Información de la empresa',
 
 	}
 

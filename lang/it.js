@@ -466,6 +466,7 @@ export default {
 		m_d5: 'Chi siamo',
 		m_d6: 'Invia attività completata',
 		m_d7: "Hai completato tutte le attività, contatta il responsabile dell'area'",
+		m_d8: "Informazioni aziendali",
 	}
 
 }

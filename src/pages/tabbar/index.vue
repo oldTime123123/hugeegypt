@@ -417,7 +417,7 @@
 			url: "./company"
 		},
 		{
-			name: t('index.i_a14'),
+			name: t('movie.m_d8'),
 			img: '../../static/themeNum1/index/VideoTutoriaHome.png',
 			openLink: true,
 			url: "./turoriaHome"

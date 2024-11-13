@@ -464,7 +464,8 @@ export default {
 		m_d4: 'Erfolgreicher Vorgang',
 		m_d5: 'Über uns',
 		m_d6: 'Abgeschlossene Aufgabe senden',
-		m_d7: 'Sie haben alle Aufgaben erledigt, bitte wenden Sie sich an den Bereichsleiter'
+		m_d7: 'Sie haben alle Aufgaben erledigt, bitte wenden Sie sich an den Bereichsleiter',
+		m_d8: 'Firmeninformationen',
 	}
 
 }
