@@ -28,27 +28,27 @@
 					{{t('inp.i_a10')}}
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" maxlength="11" :placeholder="t('inp.i_a11')" 
+					<input class="inp" placeholder-class="plo" maxlength="11" :placeholder="t('inp.i_a11')"
 						v-model="formData.bank_num">
 				</view>
 			</view>
-			
+
 			<view class="mt38" v-if="showIn">
 				<view class="pl14">
 					{{t('add1.b_b5')}} ifsc_code
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" :placeholder="t('add1.b_b5') +'ifsc_code'" 
+					<input class="inp" placeholder-class="plo" :placeholder="t('add1.b_b5') +'ifsc_code'"
 						v-model="formData.other_param_1">
 				</view>
 			</view>
-			
+
 			<view class="mt38">
 				<view class="pl14">
 					{{t('inp.i_a6')}}
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a7')" 
+					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a7')"
 						v-model="formData.account_holder">
 				</view>
 			</view>
@@ -58,8 +58,7 @@
 					{{t('inp.i_a8')}}
 				</view>
 				<view class="mt34">
-					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a9')" 
-						v-model="formData.phone">
+					<input class="inp" placeholder-class="plo" :placeholder="t('inp.i_a9')" v-model="formData.phone">
 				</view>
 			</view>
 
@@ -67,13 +66,12 @@
 
 			<!-- 登录按钮 -->
 			<view style="height: 120rpx;">
-				<view class="btns f36"
-					:style="showTag?{background:'#fff'}:{background:store.$state.btnDis}"
+				<view class="btns f36" :style="showTag?{background:'#fff'}:{background:store.$state.btnDis}"
 					@click="methods.saveHandle">
 					{{ t('inp.i_s1')}}
 				</view>
 			</view>
-			
+
 
 			<view style="height: 50rpx;"></view>
 			<Loading ref="showLoading"></Loading>
@@ -102,8 +100,8 @@
 	const {
 		t
 	} = useI18n();
-	
-	const showIn =ref(false)
+
+	const showIn = ref(false)
 	const methods = {
 		back() {
 			history.back()
@@ -171,7 +169,7 @@
 		bank_num: '',
 		account_holder: '',
 		phone: '',
-		other_param_1:""
+		other_param_1: ""
 	})
 	const showTag = ref(false)
 	// 监听
@@ -226,9 +224,9 @@
 				formData.value.phone = res.bankcard.phone
 				formData.value.bank_num = res.bankcard.bank_num
 				formData.value.bankId = res.bankcard.bankId
-				try{
+				try {
 					formData.value.other_param_1 = res.bankcard.other_param_1
-				}catch(e){
+				} catch (e) {
 					//TODO handle the exception
 				}
 				for (let i in columns.value) {
@@ -238,30 +236,31 @@
 				}
 			}
 		})
-		
+
 		request({
 			url: '/user/index',
 			methods: 'get',
 		}).then(res => {
-			if(res.country_code == '+91'){
+			if (res.country_code == '+91') {
 				showIn.value = true
 			}
 		})
-		
+
 	}
 	// 终于可以用了
 	onShow(() => {
 		getData();
-		
+
 	})
 </script>
 
 <style lang="scss">
-	.setting1{
+	.setting1 {
 		min-height: 100vh;
 		background: url(../../static/themeNum1/index/loginBack.png);
 
 	}
+
 	.colorC {
 		color: #AFAFAF !important;
 	}
@@ -274,7 +273,8 @@
 		border-radius: 35rpx;
 		margin-top: 76rpx;
 	}
-	.inp{
+
+	.inp {
 		background: #Fff;
 		color: #000;
 	}
