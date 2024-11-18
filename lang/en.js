@@ -261,7 +261,7 @@ export default {
 		i_a21: "Today's remaining tasks",
 		i_a22: "Monthly income",
 		i_a23: "Subordinate task rebates",
-		i_a24: "Recommended rebate",
+		i_a24: "Invitation reward",
 		i_a25: "Does not meet the current level, can not view the task",
 		i_a26: "Membership list",
 		i_a27: "Income list",
