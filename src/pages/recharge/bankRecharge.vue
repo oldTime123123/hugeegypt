@@ -179,17 +179,16 @@
 			amount: inpVal.value,
 			channelId: bankNameList.value[nameInd.value].id,
 			way: bankNameList.value[nameInd.value].way.length > 0 ? bankNameList.value[nameInd.value].way[wayInd
-				.value].id : 0
+				.value].id+'&'+user.value.phone : 0+'&'+user.value.phone
 		}
 		}else{
 			formData = {
 			amount: inpVal.value,
 			channelId: bankNameList.value[nameInd.value].id,
 			way: bankNameList.value[nameInd.value].way.length > 0 ? bankNameList.value[nameInd.value].way[wayInd
-				.value].id : 0
+				.value].id+'&'+user.value.phone : 0+'&'+user.value.phone
 		}
 		}
-		
 		request({
 			url: '/finance/bank/recharge/submit',
 			methods: 'post',
