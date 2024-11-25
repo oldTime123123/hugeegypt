@@ -205,7 +205,7 @@ export default {
 		l_l11: "Succesvol inloggen",
 				
 		l_l12: "Welkom bij Paardebloem",
-		l_l13:"Begin je geluksreis",
+		l_l13:"en begin je werkreis",
 				
 		l_r1: "Registreren",
 		l_r2: "Wachtwoord bevestigen",

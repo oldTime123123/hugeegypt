@@ -208,7 +208,7 @@ export default {
 		l_l10: "Bitte geben Sie das Passwort ein",
 		l_l11: "Anmeldung erfolgreich",
 		l_l12: "Willkommen bei Löwenzahn",
-		l_l13:"Beginnen Sie Ihre glückliche Reise",
+		l_l13:"und beginnen Sie Ihre Arbeitsreise",
 		
 		l_r1: "Registrieren",
 		l_r2: "Passwort bestätigen",

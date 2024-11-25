@@ -212,7 +212,7 @@ export default {
 		l_l10: "Por favor complete la contraseña",
 		l_l11: "Iniciar sesión con éxito",
 		l_l12: "Bienvenido a diente de leon",
-		l_l13: "Comienza tu viaje de suerte",
+		l_l13: "y comienza tu viaje laboral",
 
 
 		l_r1: "Registrarse",

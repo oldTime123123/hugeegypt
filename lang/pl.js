@@ -204,7 +204,7 @@ export default {
 		l_l10: "Proszę podać hasło",
 		l_l11: "Zaloguj się pomyślnie",
 		l_l12: "Witamy w Dandelionie",
-		l_l13:"Rozpocznij swoją szczęśliwą podróż",
+		l_l13:"i rozpocznij swoją podróż zawodową",
 		
 		
 		l_r1: "Zarejestruj się",

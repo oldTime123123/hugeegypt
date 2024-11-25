@@ -203,7 +203,7 @@ export default {
 		l_l10: "Por favor, preencha a senha",
 		l_l11: "Login com sucesso",
 		l_l12: "Bem-vindo ao Dente de Leão",
-		l_l13:"Comece sua jornada de sorte",
+		l_l13:"e inicie a sua jornada de trabalho",
 		
 		
 		

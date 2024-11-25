@@ -220,7 +220,7 @@ export default {
 		l_l10: "Please fill in the password",
 		l_l11: "Login successfully",
 		l_l12: "Welcome to HUGE",
-		l_l13: "Start your lucky journey",
+		l_l13: "and start your work journey",
 
 		l_r1: "Register",
 		l_r2: "Confirm password",

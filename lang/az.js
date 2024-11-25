@@ -209,7 +209,7 @@ export default {
 		l_l10: "Zəhmət olmasa parolu daxil edin",
 		l_l11: "Uğurla daxil olun",
 		l_l12: "Dandelion-a xoş gəlmisiniz",
-		l_l13:"Uğurlu səyahətinizə başlayın",
+		l_l13:"və iş səyahətinizə başlayın",
 		
 		l_r1: "Qeydiyyatdan keçin",
 		l_r2: "Şifrəni təsdiqləyin",

@@ -203,7 +203,7 @@ export default {
 		l_l10: "Lütfen şifreyi giriniz",
 		l_l11: "Giriş başarıyla yapıldı",
 		l_l12: "Dandelion'a hoş geldiniz",
-		l_l13:"Şanslı yolculuğunuza başlayın",
+		l_l13:"ve iş yolculuğunuza başlayın",
 		
 		
 		l_r1: "Kayıt Ol",

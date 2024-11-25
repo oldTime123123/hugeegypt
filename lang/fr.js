@@ -211,7 +211,7 @@ export default {
 		l_l10: "Veuillez renseigner le mot de passe",
 		l_l11: "Connexion réussie",
 		l_l12: "Bienvenue chez Pissenlit",
-		l_l13: "Commencez votre voyage chanceux",
+		l_l13: "et commencez votre parcours professionnel",
 
 
 		l_r1: "S'inscrire",
