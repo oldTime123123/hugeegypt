@@ -54,7 +54,7 @@
 						<view class="between borderB">
 							<view>{{t('team.t4')}}</view>
 							<!-- <view>{{t('team.t4')}} {{teamData?.list[0].module==2?(teamData?.list[0].rate/100)*100+'%':teamData?.list[0].rate+'%'}}</view> -->
-							<view>{{teamData?.level1vip}}/{{ teamData?.level1 - teamData?.level1vip }}</view>
+							<view>{{teamData?.list[0].levelvip}}/{{ teamData?.list[0].level }}</view>
 							<!-- <view>{{teamData?.list[0].firstRechange}}</view> -->
 						</view>
 						<view class="between borderB">
@@ -86,7 +86,7 @@
 						<view class="between borderB">
 							<view>{{t('team.t4')}} </view>
 							<!-- <view>{{t('team.t4')}} {{teamData?.list[1].module==2?(teamData?.list[1].rate/100)*100+'%':teamData?.list[1].rate+'%'}}</view> -->
-							<view>{{teamData?.level2vip}}/{{ teamData?.level2 - teamData?.level2vip }}</view>
+							<view>{{teamData?.list[1].levelvip}}/{{ teamData?.list[1].level }}</view>
 							<!-- <view>{{teamData?.list[1].firstRechange}}</view> -->
 						</view>
 						<view class="between borderB">
@@ -119,7 +119,7 @@
 									<view class="between borderB">
 										<view>{{t('team.t4')}} </view>
 									<!-- <view>{{t('team.t4')}} {{teamData?.list[2].module==2?(teamData?.list[2].rate/100)*100+'%':teamData?.list[2].rate+'%'}}</view> -->
-									<view>{{teamData?.level3vip}}/{{  teamData?.level3 - teamData?.level3vip }}</view>
+									<view>{{teamData?.list[2].levelvip}}/{{ teamData?.list[2].level }}</view>
 									<!-- <view>{{teamData?.list[2].team_income47}}</view> -->
 									</view>
 									<view class="between borderB">
