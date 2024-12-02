@@ -2,7 +2,7 @@
 	<view :style="store.$state.imgObj.loginBg">
 	<view class="pdlr35 pt33">
 		<view class="flex between">
-			<image :src="store.$state.imgObj.backIcon" mode="widthFix" style="width: 48rpx;height: 36rpx;"
+			<image src="../../static/themeNum1/icon/bback.png" mode="widthFix" style="width: 48rpx;height: 36rpx;"
 				@click="methods.back"></image>
 		</view>
 		<view class="f50 mt60  text_bold" :style="{color:store.$state.thirdColor}">{{t('team.t15')}}</view>

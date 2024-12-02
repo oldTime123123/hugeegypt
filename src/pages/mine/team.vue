@@ -12,11 +12,11 @@
 			
 			<view class="topGrid">
 				<view class="item">
-					<view>{{teamData?.teamNewNum}}</view>
+					<view>{{teamData?.teamAll}}/{{teamData?.teamAllVip}}</view>
 					<view>{{t('team.t1')}}</view>
 				</view>
 				<view class="item">
-					<view>{{teamData?.member_cate_commission}}</view>
+					<view>{{teamData?.teamIncome}}</view>
 					<view>{{t('team.t2')}}</view>
 				</view>
 			</view>
@@ -52,20 +52,23 @@
 					</view>
 					<view class="teamBot">
 						<view class="between borderB">
-							<view>{{t('team.t4')}} {{teamData?.list[0].module==2?(teamData?.list[0].rate/100)*100+'%':teamData?.list[0].rate+'%'}}</view>
-							<view>{{teamData?.list[0].firstRechange}}</view>
+							<view>{{t('team.t4')}}</view>
+							<!-- <view>{{t('team.t4')}} {{teamData?.list[0].module==2?(teamData?.list[0].rate/100)*100+'%':teamData?.list[0].rate+'%'}}</view> -->
+							<view>{{teamData?.level1vip}}/{{ teamData?.level1 - teamData?.level1vip }}</view>
+							<!-- <view>{{teamData?.list[0].firstRechange}}</view> -->
 						</view>
 						<view class="between borderB">
 							<view>{{t('team.t5')}}</view>
-							<view>{{teamData?.list[0].orderNum}}</view>
+							<view>{{teamData?.list[0].team_income47}}</view>
 						</view>
 						<view class="between borderB">
 							<view>{{t('team.t6')}}</view>
-							<view>{{teamData?.list[0].questMoney}}</view>
+							<view>{{teamData?.list[0].team_income61}}</view>
 						</view>
 						<view class="between borderB">
-							<view>{{t('team.t7')}} {{teamData?.list[0].module==2?(teamData?.list[0].questRate/100)*100+'%':teamData?.list[0].questRate+'%'}}</view>
-							<view>{{teamData?.list[0].money}}</view>
+							<!-- {{teamData?.list[0].module==2?(teamData?.list[0].questRate/100)*100+'%':teamData?.list[0].questRate+'%'}} -->
+							<view>{{t('team.t7')}} </view>
+							<view>{{teamData?.list[0].team_income63}}</view>
 						</view>
 						<view class="between">
 							<view>{{t('team.t8')}}</view>
@@ -81,20 +84,23 @@
 					</view>
 					<view class="teamBot">
 						<view class="between borderB">
-							<view>{{t('team.t4')}} {{teamData?.list[1].module==2?(teamData?.list[1].rate/100)*100+'%':teamData?.list[1].rate+'%'}}</view>
-							<view>{{teamData?.list[1].firstRechange}}</view>
+							<view>{{t('team.t4')}} </view>
+							<!-- <view>{{t('team.t4')}} {{teamData?.list[1].module==2?(teamData?.list[1].rate/100)*100+'%':teamData?.list[1].rate+'%'}}</view> -->
+							<view>{{teamData?.level2vip}}/{{ teamData?.level2 - teamData?.level2vip }}</view>
+							<!-- <view>{{teamData?.list[1].firstRechange}}</view> -->
 						</view>
 						<view class="between borderB">
 							<view>{{t('team.t5')}}</view>
-							<view>{{teamData?.list[1].orderNum}}</view>
+							<view>{{teamData?.list[1].team_income47}}</view>
 						</view>
 						<view class="between borderB">
 							<view>{{t('team.t6')}}</view>
-							<view>{{teamData?.list[1].questMoney}}</view>
+							<view>{{teamData?.list[1].team_income61}}</view>
 						</view>
 						<view class="between borderB">
-							<view>{{t('team.t7')}} {{teamData?.list[1].module==2?(teamData?.list[1].questRate/100)*100+'%':teamData?.list[1].questRate+'%'}}</view>
-							<view>{{teamData?.list[1].money}}</view>
+							<!--{{teamData?.list[1].module==2?(teamData?.list[1].questRate/100)*100+'%':teamData?.list[1].questRate+'%'}}  -->
+							<view>{{t('team.t7')}} </view>
+							<view>{{teamData?.list[1].team_income63}}</view>
 						</view>
 						<view class="between">
 							<view>{{t('team.t8')}}</view>
@@ -111,8 +117,10 @@
 								</view>
 								<view class="teamBot">
 									<view class="between borderB">
-									<view>{{t('team.t4')}} {{teamData?.list[2].module==2?(teamData?.list[2].rate/100)*100+'%':teamData?.list[2].rate+'%'}}</view>
-										<view>{{teamData?.list[2].firstRechange}}</view>
+										<view>{{t('team.t4')}} </view>
+									<!-- <view>{{t('team.t4')}} {{teamData?.list[2].module==2?(teamData?.list[2].rate/100)*100+'%':teamData?.list[2].rate+'%'}}</view> -->
+									<view>{{teamData?.level3vip}}/{{  teamData?.level3 - teamData?.level3vip }}</view>
+									<!-- <view>{{teamData?.list[2].team_income47}}</view> -->
 									</view>
 									<view class="between borderB">
 										<view>{{t('team.t5')}}</view>
@@ -120,11 +128,12 @@
 									</view>
 									<view class="between borderB">
 										<view>{{t('team.t6')}}</view>
-										<view>{{teamData?.list[2].questMoney}}</view>
+										<view>{{teamData?.list[2].team_income61}}</view>
 									</view>
 									<view class="between borderB">
-										<view>{{t('team.t7')}} {{teamData?.list[2].module==2?(teamData?.list[2].questRate/100)*100+'%':teamData?.list[2].questRate+'%'}}</view>
-										<view>{{teamData?.list[2].money}}</view>
+										<!-- {{teamData?.list[2].module==2?(teamData?.list[2].questRate/100)*100+'%':teamData?.list[2].questRate+'%'}} -->
+										<view>{{t('team.t7')}} </view>
+										<view>{{teamData?.list[2].team_income63}}</view>
 									</view>
 									<view class="between">
 										<view>{{t('team.t8')}}</view>

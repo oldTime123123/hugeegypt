@@ -43,13 +43,13 @@ export default {
 		l_l19: "Rückgabeversicherungsbetrag"
 	},
 	team: {
-		t1: 'Teamgröße',
+		t1: 'Gesamtzahl der Teammitglieder',
 		t2: "Teamvorteile",
 		t3: 'Team A',
-		t4: 'Belohnungen für Beförderungspositionen',
-		t5: 'Gesamt abgeschlossene Bestellungen',
-		t6: 'Team-Umsatzprovision',
-		t7: 'Teamprovision',
+		t4: 'Offizieller Mitarbeiter/Praktikant auf VIP-Ebene',
+		t5: "Gesamteinladungsbelohnung",
+		t6: "Gesamtbonus für die Aufgabenverwaltung",
+		t7: 'Teamfonds-Rabatt',
 		t8: 'Teamgröße',
 		t9: 'Team B',
 		t10: 'Team C',

@@ -43,13 +43,13 @@ export default {
 		l_l19: "Return insurance amount"
 	},
 	team: {
-		t1: 'Komanda ölçüsü',
+		t1: 'Komanda üzvlərinin ümumi sayı',
 		t2: "Komanda üstünlükləri",
 		t3: 'A Komandası',
-		t4: 'Təqdimat mövqeyi mükafatları',
-		t5: 'Cəmi tamamlanmış sifarişlər',
-		t6: 'Komanda gəlir komissiyası',
-		t7: 'Komanda komissiyası',
+		t4: 'Rəsmi VIP səviyyəli işçi/stajyer',
+		t5: 'Ümumi dəvət mükafatı',
+		t6: 'Ümumi tapşırıqların idarə edilməsi bonusu',
+		t7: 'Komanda fondunun güzəşti',
 		t8: 'Komanda ölçüsü',
 		t9: 'Komanda B',
 		t10: 'C komandası',

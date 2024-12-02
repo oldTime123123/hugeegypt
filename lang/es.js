@@ -47,13 +47,13 @@ export default {
 
 	},
 	team: {
-		t1: 'Tamaño del equipo',
+		t1: 'Número total de miembros del equipo',
 		t2: "Beneficios del equipo",
 		t3: 'Equipo A',
-		t4: 'Recompensas de posición de promoción',
-		t5: 'Total de pedidos completados',
-		t6: 'Comisión de ingresos del equipo',
-		t7: 'Comisión de equipo',
+		t4: 'Empleado/pasante oficial nivel VIP',
+		t5: 'Recompensa total por invitación',
+		t6: 'Bonificación total por gestión de tareas',
+		t7: 'Reembolso del fondo del equipo',
 		t8: 'Tamaño del equipo',
 		t9: 'Equipo B',
 		t10: 'Equipo C',

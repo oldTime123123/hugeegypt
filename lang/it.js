@@ -43,13 +43,13 @@ export default {
 		l_l19: "Importo dell'assicurazione sulla restituzione"
 	},
 	team: {
-		t1: 'Dimensione della squadra',
+		t1: 'Numero totale di membri del team',
 		t2: "Vantaggi per la squadra",
 		t3: 'Squadra A',
-		t4: 'Premi per posizione promozionale',
-		t5: 'Ordini completati totali',
-		t6: 'Commissione sulle entrate del team',
-		t7: 'Commissione di squadra',
+		t4: 'Dipendente/stagista ufficiale di livello VIP',
+		t5: "Ricompensa totale per l'invito",
+		t6: "Bonus totale gestione attività",
+		t7: "Rimborso fondo squadra",
 		t8: 'Dimensione della squadra',
 		t9: 'Squadra B',
 		t10: 'Squadra C',

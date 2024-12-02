@@ -50,13 +50,13 @@ export default {
 
 	},
 	team: {
-		t1: 'Team size',
+		t1: 'Total team size',
 		t2: "Team Benefits",
 		t3: 'Team A',
-		t4: 'Promotional position rewards',
-		t5: 'Total completed orders',
-		t6: 'Team revenue commission',
-		t7: 'Team commission',
+		t4: 'Official VIP-level staff/intern',
+		t5: 'Total invitation reward',
+		t6: 'Total task management bonus',
+		t7: 'Team fund rebate',
 		t8: 'Team size',
 		t9: 'Team B',
 		t10: 'Team C',

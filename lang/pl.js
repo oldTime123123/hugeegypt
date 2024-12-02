@@ -37,13 +37,13 @@ export default {
 		l_l12:'Gratuluję zdobycia'
 	},
 	team:{
-		t1:'Wielkość zespołu',
+		t1:'Łączna liczba członków zespołu',
 		t2:"Korzyści zespołowe",
 		t3: "Drużyna A",
-		t4:'Nagrody za stanowisko promocyjne',
-		t5:'Suma zrealizowanych zamówień',
-		t6:'Prowizja od przychodów zespołu',
-		t7:'Prowizja zespołowa',
+		t4:'Oficjalny pracownik/stażysta na poziomie VIP',
+		t5: "Całkowita nagroda za zaproszenie",
+		t6: 'Całkowita premia za zarządzanie zadaniami',
+		t7: "Zniżka na fundusz zespołu",
 		t8:'Wielkość zespołu',
 		t9: "Drużyna B",
 		t10: "Drużyna C",

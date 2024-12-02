@@ -36,13 +36,13 @@ export default {
 		l_l12:'Parabéns por conseguir'
 	},
 	team:{
-		t1:'Tamanho da equipe',
+		t1:'Número total de membros da equipa',
 		t2:"Benefícios da equipe",
 		t3:'Equipe A',
-		t4:'Recompensas de posição promocional',
-		t5:'Total de pedidos concluídos',
-		t6:'Comissão de receita da equipe',
-		t7:'Comissão da equipe',
+		t4:'Funcionário/estagiário oficial de nível VIP',
+		t5: 'Recompensa total do convite',
+		t6: 'Bónus total de gestão de tarefas',
+		t7: 'Desconto de fundos da equipa',
 		t8:'Tamanho da equipe',
 		t9:'Equipe B',
 		t10:'Equipe C',

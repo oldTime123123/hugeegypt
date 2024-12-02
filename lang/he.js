@@ -36,13 +36,13 @@ export default {
 		l_l12:'Gefeliciteerd met het behalen'
 	},
 	team:{
-		t1:'Teamgrootte',
+		t1:'Totaal aantal teamleden',
 		t2:"Teamvoordelen",
 		t3:'Team A',
-		t4:'Promotiepositiebeloningen',
-		t5:'Totaal voltooide bestellingen',
-		t6:'Provisie teaminkomsten',
-		t7:'Teamcommissie',
+		t4:'Officieel VIP-niveau medewerker/stagiair',
+		t5: 'Totale uitnodigingsbeloning',
+		t6: 'Totale taakbeheerbonus',
+		t7: 'Teamfondskorting',
 		t8:'Teamgrootte',
 		t9:'Team B',
 		t10:'Team C',

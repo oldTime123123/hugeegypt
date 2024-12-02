@@ -44,13 +44,13 @@ export default {
 		l_l19: "Montant de l'assurance retour"
 	},
 	team: {
-		t1: "Taille de l'équipe",
+		t1: "Nombre total de membres de l'équipe",
 		t2: "Avantages pour l'équipe",
 		t3: "Équipe A ",
-		t4: 'Récompenses de position promotionnelle',
-		t5: 'Total des commandes terminées',
-		t6: "Commission sur les revenus de l'équipe'",
-		t7: "Commission d'équipe",
+		t4: 'Employé/stagiaire officiel de niveau VIP',
+		t5: "Récompense totale de l'invitation",
+		t6 : 'Bonus total de gestion des tâches',
+		t7: "Remise sur les fonds d'équipe",
 		t8: "Taille de l'équipe'",
 		t9: " Équipe B ",
 		t10: 'Équipe C',

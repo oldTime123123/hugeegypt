@@ -37,13 +37,13 @@ export default {
 		l_l12:'Aldığınız için tebrikler'
 	},
 	team:{
-		t1:'Takım büyüklüğü',
+		t1:'Toplam ekip üyesi sayısı',
 		t2:"Takım Avantajları",
 		t3:'A Takımı',
-		t4:'Promosyon konumu ödülleri',
-		t5:'Toplam tamamlanan siparişler',
-		t6:'Takım gelir komisyonu',
-		t7:'Takım komisyonu',
+		t4:'Resmi VIP düzeyinde çalışan/stajyer',
+		t5: 'Toplam davet ödülü',
+		t6: 'Toplam görev yönetimi bonusu',
+		t7: 'Takım fonu iadesi',
 		t8:'Takım büyüklüğü',
 		t9:'B Takımı',
 		t10:'C Takımı',
