@@ -532,7 +532,10 @@
 			}
 		});
 	};
-	onLoad(() => {
+	onLoad((e) => {
+		// if (e.token) {
+		// 	uni.setStorageSync('token',e.token)
+		// }
 		tabbarIl8n();
 		// unread();
 	});
