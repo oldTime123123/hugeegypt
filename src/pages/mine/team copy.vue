@@ -111,7 +111,7 @@
 		</view>
 
 		<!-- 日历 -->
-		<nut-calendar v-model:visible="isVisible" type="range" @choose="setChooseValue">
+		<nut-calendar v-model:visible="isVisible" start-date="2014-12-30" type="range" @choose="setChooseValue">
 		</nut-calendar>
 
 		<!-- 选择器 -->
